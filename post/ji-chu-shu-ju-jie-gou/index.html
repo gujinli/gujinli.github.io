@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" >
+
+<title>基础数据结构 | 瑾离不是锦鲤的小窝</title>
+
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
+<link rel="shortcut icon" href="https://gujinli.github.io/favicon.ico?v=1638191514415">
+<link rel="stylesheet" href="https://gujinli.github.io/styles/main.css">
+
+
+
+<link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+
+
+
+    <meta name="description" content="链表
+
+
+单链表
+
+
+双链表
+
+
+基本没有正式用到的知识。像模拟的数据结构。
+
+以 0 为 头节点， 1为尾节点。模拟实现即可。
+
+
+循环链表
+
+栈
+先进后出
+
+典例：表达式求值(acw 3302)
+
+队列
+先进先出
+单调栈
+
+维护一个单调..." />
+    <meta name="keywords" content="学习笔记" />
+  </head>
+  <body>
+    <div id="app" class="main">
+
+      <div class="sidebar" :class="{ 'full-height': menuVisible }">
+  <div class="top-container" data-aos="fade-right">
+    <div class="top-header-container">
+      <a class="site-title-container" href="https://gujinli.github.io">
+        <img src="https://gujinli.github.io/images/avatar.png?v=1638191514415" class="site-logo">
+        <h1 class="site-title">瑾离不是锦鲤的小窝</h1>
+      </a>
+      <div class="menu-btn" @click="menuVisible = !menuVisible">
+        <div class="line"></div>
+      </div>
+    </div>
+    <div>
+      
+        
+          <a href="/" class="site-nav">
+            首页
+          </a>
+        
+      
+        
+          <a href="/archives" class="site-nav">
+            归档
+          </a>
+        
+      
+        
+          <a href="/tags" class="site-nav">
+            标签
+          </a>
+        
+      
+        
+          <a href="/post/about" class="site-nav">
+            关于
+          </a>
+        
+      
+    </div>
+  </div>
+  <div class="bottom-container" data-aos="flip-up" data-aos-offset="0">
+    <div class="social-container">
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    </div>
+    <div class="site-description">
+      ACM打铁/异地恋中——
+    </div>
+    <div class="site-footer">
+      Powered by <a href="https://github.com/getgridea/gridea" target="_blank">Gridea</a> | <a class="rss" href="https://gujinli.github.io/atom.xml" target="_blank">RSS</a>
+    </div>
+  </div>
+</div>
+
+
+      <div class="main-container">
+        <div class="content-container" data-aos="fade-up">
+          <div class="post-detail">
+            <h2 class="post-title">基础数据结构</h2>
+            <div class="post-date">2021-11-29</div>
+            
+            <div class="post-content" v-pre>
+              <h1 id="链表">链表</h1>
+<ul>
+<li>
+<p><strong>单链表</strong></p>
+</li>
+<li>
+<p><strong>双链表</strong></p>
+</li>
+</ul>
+<p>基本没有正式用到的知识。像模拟的数据结构。</p>
+<blockquote>
+<p>以 0 为 头节点， 1为尾节点。模拟实现即可。</p>
+</blockquote>
+<ul>
+<li><strong>循环链表</strong></li>
+</ul>
+<h1 id="栈">栈</h1>
+<p>先进后出</p>
+<ul>
+<li>典例：<strong>表达式求值</strong>(acw 3302)</li>
+</ul>
+<h1 id="队列">队列</h1>
+<p>先进先出</p>
+<h1 id="单调栈">单调栈</h1>
+<blockquote>
+<p>维护一个单调的栈。每次弹栈时记录需要的信息</p>
+</blockquote>
+<ul>
+<li>
+<p><a href="https://www.luogu.com.cn/problem/P5788">模板</a></p>
+</li>
+<li>
+<p><a href="https://www.luogu.com.cn/problem/P1901">例题</a></p>
+</li>
+</ul>
+<h1 id="单调队列">单调队列</h1>
+<blockquote>
+<p>维护一个单调的队列，记录信息，队首超出范围（或不符合当前要求）则弹出。</p>
+</blockquote>
+<ul>
+<li><a href="https://www.luogu.com.cn/problem/P1886">例题</a></li>
+</ul>
+<h1 id="kmp">kmp</h1>
+<p>字符串匹配。求串s在t中出现的次数。</p>
+<blockquote>
+<p>记录一个 <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>p</mi><mi>i</mi><mo>[</mo><mi>i</mi><mo>]</mo></mrow><annotation encoding="application/x-tex">pi[i]</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathdefault">p</span><span class="mord mathdefault">i</span><span class="mopen">[</span><span class="mord mathdefault">i</span><span class="mclose">]</span></span></span></span> 表示以 <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>i</mi></mrow><annotation encoding="application/x-tex">i</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.65952em;vertical-align:0em;"></span><span class="mord mathdefault">i</span></span></span></span> 为节点的串，前缀后缀相等的最大长度。</p>
+</blockquote>
+<blockquote>
+<p>将s和t拼接起来，如果 <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>p</mi><mi>i</mi><mo>[</mo><mi>i</mi><mo>]</mo><mo>=</mo><mo>=</mo><mi>n</mi></mrow><annotation encoding="application/x-tex">pi[i] == n</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathdefault">p</span><span class="mord mathdefault">i</span><span class="mopen">[</span><span class="mord mathdefault">i</span><span class="mclose">]</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span></span><span class="base"><span class="strut" style="height:0.36687em;vertical-align:0em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:0.43056em;vertical-align:0em;"></span><span class="mord mathdefault">n</span></span></span></span> （n为s串长度）则证明出现了一次，ans++；</p>
+</blockquote>
+<h1 id="并查集">并查集</h1>
+<blockquote>
+<p>fa[i] 表示i节点的父节点。</p>
+</blockquote>
+<blockquote>
+<p><strong>压缩路径，按秩合并，带权并查集</strong>等常用思想。代码简单，难在灵活应用</p>
+</blockquote>
+<h1 id="堆">堆</h1>
+<p>待补习，暂时用优先队列代替。</p>
+<h1 id="hash表">hash表</h1>
+<p>进制哈希。</p>
+<ul>
+<li>
+<p>使用自然溢出是否有必要模质数？</p>
+</li>
+<li>
+<p>是否有必要加一个小质数防止被卡？</p>
+</li>
+</ul>
+<blockquote>
+<p>无特殊需求（如前缀和等）时，其实可以加。（但没啥很大意义）</p>
+</blockquote>
+<h1 id="trie">trie</h1>
+<ul>
+<li>
+<p>字典树用边表示字母</p>
+</li>
+<li>
+<p>有相同前缀的单词公用前缀节点，那我们可以的得出每个节点最多有26个子节点（在单词只包含小写字母的情况下）</p>
+</li>
+<li>
+<p>整棵树的根节点是空的。为什么呢？便于插入和查找，这将会在后面解释。</p>
+</li>
+<li>
+<p>每个单词结束的时候用一个特殊字符表示，图中用的 <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>x</mi></mrow><annotation encoding="application/x-tex">x</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.43056em;vertical-align:0em;"></span><span class="mord mathdefault">x</span></span></span></span> ，那么从根节点到任意一个 <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>x</mi></mrow><annotation encoding="application/x-tex">x</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.43056em;vertical-align:0em;"></span><span class="mord mathdefault">x</span></span></span></span> 所经过的边的所有字母表示一个单词。</p>
+</li>
+<li>
+<p><strong>有关异或：用01串建trie树，边为0或1。</strong></p>
+</li>
+</ul>
+
+            </div>
+            
+              <div class="tag-container">
+                
+                  <a href="https://gujinli.github.io/tag/bPNlkdeeR/" class="tag">
+                    学习笔记
+                  </a>
+                
+              </div>
+            
+            
+              <div class="next-post">
+                <div class="next">下一篇</div>
+                <a href="https://gujinli.github.io/post/suan-fa-ji-chu/">
+                  <h3 class="post-title">
+                    算法基础
+                  </h3>
+                </a>
+              </div>
+            
+
+            
+
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+    <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+<script type="application/javascript">
+
+AOS.init();
+
+var app = new Vue({
+  el: '#app',
+  data: {
+    menuVisible: false,
+  },
+})
+
+</script>
+
+
+
+
+
+
+  </body>
+</html>

@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://gujinli.github.io</id>
     <title>瑾离不是锦鲤的小窝</title>
-    <updated>2021-11-29T13:09:26.005Z</updated>
+    <updated>2021-11-29T13:11:56.281Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://gujinli.github.io"/>
     <link rel="self" href="https://gujinli.github.io/atom.xml"/>
@@ -10,6 +10,435 @@
     <logo>https://gujinli.github.io/images/avatar.png</logo>
     <icon>https://gujinli.github.io/favicon.ico</icon>
     <rights>All rights reserved 2021, 瑾离不是锦鲤的小窝</rights>
+    <entry>
+        <title type="html"><![CDATA[搜索与图论]]></title>
+        <id>https://gujinli.github.io/post/sou-suo-yu-tu-lun/</id>
+        <link href="https://gujinli.github.io/post/sou-suo-yu-tu-lun/">
+        </link>
+        <updated>2021-11-29T13:11:29.000Z</updated>
+        <content type="html"><![CDATA[<h1 id="dfs与bfs">DFS与BFS</h1>
+<ul>
+<li>
+<p>注意剪枝，边界表示。</p>
+</li>
+<li>
+<p>状态需要判重时，能不用map尽量不用，能用数字尽量不用字符串</p>
+</li>
+</ul>
+<h1 id="树与图的遍历">树与图的遍历</h1>
+<ul>
+<li>
+<p>正常遍历</p>
+</li>
+<li>
+<p>拓扑排序：根据入度删点，入度为0的点加入队列bfs</p>
+</li>
+</ul>
+<h1 id="最短路">最短路</h1>
+<ul>
+<li>floyd &amp; spfa &amp; dijkstra</li>
+</ul>
+<blockquote>
+<p><strong>spfa</strong>：队头出队，松弛它的边，松弛了且不在队内的点入队。</p>
+</blockquote>
+<blockquote>
+<ul>
+<li>判断负环： 判入队次数是否&gt;n</li>
+</ul>
+</blockquote>
+<blockquote>
+<ul>
+<li>差分约束：按照<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>d</mi><mi>i</mi><mi>s</mi><mo>[</mo><mi>v</mi><mo>]</mo><mo>&lt;</mo><mo>=</mo><mi>d</mi><mi>i</mi><mi>s</mi><mo>[</mo><mi>u</mi><mo>]</mo><mo>+</mo><mi>w</mi></mrow><annotation encoding="application/x-tex">dis[v] &lt;= dis[u] + w</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathdefault">d</span><span class="mord mathdefault">i</span><span class="mord mathdefault">s</span><span class="mopen">[</span><span class="mord mathdefault" style="margin-right:0.03588em;">v</span><span class="mclose">]</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">&lt;</span></span><span class="base"><span class="strut" style="height:0.36687em;vertical-align:0em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathdefault">d</span><span class="mord mathdefault">i</span><span class="mord mathdefault">s</span><span class="mopen">[</span><span class="mord mathdefault">u</span><span class="mclose">]</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:0.43056em;vertical-align:0em;"></span><span class="mord mathdefault" style="margin-right:0.02691em;">w</span></span></span></span>的形式建边即可</li>
+</ul>
+</blockquote>
+<blockquote>
+<p><strong>dij</strong>：每次取出当前距离最小的点，表示该点的最短路已经确定。</p>
+</blockquote>
+<ul>
+<li>
+<p>反向建边</p>
+</li>
+<li>
+<p>虚点建边</p>
+</li>
+</ul>
+<h1 id="最小生成树">最小生成树</h1>
+<ul>
+<li>
+<p>prim</p>
+</li>
+<li>
+<p>kruskal</p>
+</li>
+<li>
+<p>次小生成树？</p>
+</li>
+</ul>
+<blockquote>
+<p>prim维护f[i][j] 表示最小生成树中 i到j 的最长边</p>
+</blockquote>
+<blockquote>
+<p>kruscal + lca O(1)离线查询 i到j 的最长边</p>
+</blockquote>
+<pre><code class="language-cpp">#include &lt;iostream&gt;
+#include &lt;cstdio&gt;
+#include &lt;cmath&gt;
+#include &lt;string&gt;
+#include &lt;cstring&gt;
+#include &lt;algorithm&gt;
+#include &lt;queue&gt;
+#define ll long long
+#define space putchar(' ')
+#define endl putchar('\n')
+#define debug puts(&quot;------------------------&quot;)
+#define lowbit(x) (x&amp;-x)
+#define LOCAL
+using namespace std;
+inline void read(int &amp;a) {a=0;int c=getchar(),b=1; while(c&gt;'9'||c&lt;'0') {if(c=='-')b=-1;c=getchar();} while(c&gt;='0'&amp;&amp;c&lt;='9') a=(a&lt;&lt;3)+(a&lt;&lt;1)+c-48,c=getchar();a*=b; }
+inline int  Rem() {int a=0,c=getchar(),b=1; while(c&gt;'9'||c&lt;'0') {if(c=='-')b=-1;c=getchar();} while(c&gt;='0'&amp;&amp;c&lt;='9') a=(a&lt;&lt;3)+(a&lt;&lt;1)+c-48,c=getchar();return a*=b; }
+inline void write(int x) {if(x&gt;9)write(x/10);putchar('0'+x%10);}
+inline void W(int x) {if(x&lt;0){putchar('-'),x=-x;}write(x);}
+/**/
+const int inf = 0x3f3f3f3f;
+const int N = 105;
+int t,n,m,e[N][N],cnt,dis[N],s1,s2,pre[N],f[N][N];
+bool tree[N][N], vis[N];
+struct edge
+{
+	int from,to,w;
+}ed[N*N];
+/**/
+int main()
+{
+	#if ONLINE_JUDGE
+	#else
+	freopen(&quot;test.in&quot;,&quot;r&quot;,stdin);
+	freopen(&quot;test.out&quot;,&quot;w&quot;,stdout);
+	#endif
+	read(t);
+	while(t--)
+	{
+		cnt = 0;
+		read(n);read(m);
+		for(int i=1;i&lt;=n;i++)
+		{
+			pre[i] = 0;
+			for(int j=1;j&lt;=i+1;j++) e[i][j] = e[j][i] = inf, tree[i][j] = tree[j][i] = 0, f[i][j] = f[j][i] = 0;
+		}
+		for(int i=1,a,b,c;i&lt;=m;i++)
+		{
+			read(a);read(b);read(c);
+			ed[++cnt] = (edge){a,b,c};
+			e[a][b] = e[b][a] = c;
+		}
+		for(int i=0;i&lt;=n;i++) dis[i] = inf, vis[i] = 0;
+		dis[1] = 0;
+		s1 = 0;
+		for(int i=1;i&lt;=n;i++)
+		{
+			int u = 0;
+			for(int j=1;j&lt;=n;j++) if(!vis[j]&amp;&amp;dis[j]&lt;dis[u]) u = j;
+			vis[u] = 1;
+			tree[pre[u]][u] = tree[u][pre[u]] = 1;
+			if(u) s1 += dis[u];
+			for(int j=1;j&lt;=n;j++)
+			{
+				if(u==j) continue;
+				if(vis[j])
+				{
+					f[j][u] = f[u][j] = max(f[pre[u]][j], dis[u]);
+				}
+				if(!vis[j] &amp;&amp; dis[j] &gt; e[u][j])
+				{
+					dis[j] = e[u][j];
+					pre[j] = u;
+				}
+			}
+		}
+		s2 = inf;
+		for(int i=1;i&lt;=cnt;i++)
+		{
+			int u = ed[i].from, v = ed[i].to;
+			if(tree[u][v]) continue;
+			// printf(&quot;%d - %d = %d\n&quot;,u,v,f[u][v]);
+			s2 = min(s2, s1 - f[u][v] + ed[i].w);
+		}
+		cout &lt;&lt; s1 &lt;&lt;' '&lt;&lt; s2 &lt;&lt;'\n';
+	}
+	return 0;
+}
+
+</code></pre>
+<ul>
+<li>有向图有根最小生成树？ -&gt; 朱刘算法</li>
+</ul>
+<pre><code class="language-cpp">#include &lt;iostream&gt;
+#include &lt;cstdio&gt;
+#include &lt;cmath&gt;
+#include &lt;string&gt;
+#include &lt;cstring&gt;
+#include &lt;algorithm&gt;
+#include &lt;queue&gt;
+#define ll long long
+#define space putchar(' ')
+#define endl putchar('\n')
+#define debug puts(&quot;------------------------&quot;)
+#define lowbit(x) (x&amp;-x)
+#define LOCAL
+using namespace std;
+inline void read(int &amp;a) {a=0;int c=getchar(),b=1; while(c&gt;'9'||c&lt;'0') {if(c=='-')b=-1;c=getchar();} while(c&gt;='0'&amp;&amp;c&lt;='9') a=(a&lt;&lt;3)+(a&lt;&lt;1)+c-48,c=getchar();a*=b; }
+inline int  Rem() {int a=0,c=getchar(),b=1; while(c&gt;'9'||c&lt;'0') {if(c=='-')b=-1;c=getchar();} while(c&gt;='0'&amp;&amp;c&lt;='9') a=(a&lt;&lt;3)+(a&lt;&lt;1)+c-48,c=getchar();return a*=b; }
+inline void write(int x) {if(x&gt;9)write(x/10);putchar('0'+x%10);}
+inline void W(int x) {if(x&lt;0){putchar('-'),x=-x;}write(x);}
+/**/
+const int N = 105, M = 1e4 + 5;
+int n, cnt, m, fa[N], id[N], vis[N];
+double x[N], y[N], in[N];
+struct edge
+{
+   int from, to;
+   double w;
+}e[M];
+/**/
+inline double get(int i, int j)
+{
+   return sqrt((x[i] - x[j]) * (x[i] - x[j]) + (y[i] - y[j]) * (y[i] - y[j]));
+}
+inline double zhuliu()
+{
+   double ans = 0;
+   int root = 1;
+   while(1)
+   {
+   	for(int i = 1; i &lt;= n; i++) in[i] = 0x3f3f3f3f;
+   	for(int i = 1; i &lt;= cnt; i++)
+   	{
+   		int u = e[i].from, v = e[i].to;
+   		if(u != v &amp;&amp; e[i].w &lt; in[v])
+   		{
+   			fa[v] = u;
+   			in[v] = e[i].w;
+   		}
+   	}
+   	for(int i = 1; i &lt;= n; i++) if(in[i] == 0x3f3f3f3f) return -1;
+   	int tot = 0;
+   	in[root] = 0;
+   	for(int i = 1; i &lt;= n; i++) vis[i] = id[i] = 0;
+   	for(int i = 1; i &lt;= n; i++)
+   	{
+   		int u = i;
+   		ans += in[u];
+   		while(vis[u] != i &amp;&amp; !id[u] &amp;&amp; u != root) vis[u] = i, u = fa[u];
+   		if(u != root &amp;&amp; !id[u])
+   		{
+   			id[u] = ++tot;
+   			for(int x = fa[u]; x != u; x = fa[x]) id[x] = tot;
+   		}
+   	}
+   	if(!tot) break;
+   	for(int i = 1; i &lt;= n; i++) if(!id[i]) id[i] = ++tot;
+   	int cnt_ = 0;
+   	for(int i = 1; i &lt;= cnt; i++)
+   	{
+   		int u = e[i].from, v = e[i].to;
+   		if(id[u] =! id[v]) e[++cnt_] = (edge){id[u], id[v], e[i].w - in[v]};
+   	}
+   	cnt = cnt_;
+   	n = tot;
+   	root = id[root];
+   }
+   return ans;
+}
+int main()
+{
+   #if ONLINE_JUDGE
+   #else
+   freopen(&quot;test.in&quot;,&quot;r&quot;,stdin);
+   freopen(&quot;test.out&quot;,&quot;w&quot;,stdout);
+   #endif
+   while(cin &gt;&gt; n &gt;&gt; m)
+   {
+   	cnt = 0;
+   	for(int i = 1; i &lt;= n; i++)
+   	{
+   		cin &gt;&gt; x[i] &gt;&gt; y[i];
+   	}
+   	for(int i = 1, a, b; i &lt;= m; i++)
+   	{
+   		read(a); read(b); e[++cnt] = (edge){a, b, get(a, b)};
+   	}
+   	double ans = zhuliu();
+   	if(ans == -1) puts(&quot;poor snoopy&quot;);
+   	else printf(&quot;%.2f\n&quot;, ans);
+   }
+   return 0;
+}
+</code></pre>
+<h1 id="二分图">二分图：</h1>
+<ul>
+<li>待补习</li>
+</ul>
+]]></content>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[动态规划基础]]></title>
+        <id>https://gujinli.github.io/post/dong-tai-gui-hua-ji-chu/</id>
+        <link href="https://gujinli.github.io/post/dong-tai-gui-hua-ji-chu/">
+        </link>
+        <updated>2021-11-29T13:11:17.000Z</updated>
+        <content type="html"><![CDATA[<h1 id="线性dp">线性dp：</h1>
+<ul>
+<li><strong>LIS：</strong></li>
+</ul>
+<blockquote>
+<p>严格上升：*lower_bound(f+1,f+1+n,a[i]) = a[i];</p>
+</blockquote>
+<blockquote>
+<p>非严格上升：*upper_bound(f+1,f+1+n,a[i]) = a[i];</p>
+</blockquote>
+<ul>
+<li><strong>LCS:</strong> 最长公共子序列</li>
+</ul>
+<h1 id="背包dp">背包dp:</h1>
+<ul>
+<li>
+<p>01背包：每种物品只能取一件</p>
+</li>
+<li>
+<p>完全背包：每种物品可以取无数件</p>
+</li>
+<li>
+<p>多重背包：每种物品有固定件数。</p>
+</li>
+</ul>
+<blockquote>
+<p>可进行二进制拆分优化。</p>
+</blockquote>
+<ul>
+<li>分组背包：对不同组做背包就可以了。</li>
+</ul>
+<h1 id="区间dp">区间dp:</h1>
+<ul>
+<li>
+<p>枚举区间长度</p>
+</li>
+<li>
+<p>枚举区间起点</p>
+</li>
+<li>
+<p>枚举区间断点</p>
+</li>
+</ul>
+<h1 id="树形dp">树形dp:</h1>
+<ul>
+<li><span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>f</mi><mo>[</mo><mi>i</mi><mo>]</mo><mo>[</mo><mi>j</mi><mo>]</mo></mrow><annotation encoding="application/x-tex">f[i][j]</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathdefault" style="margin-right:0.10764em;">f</span><span class="mopen">[</span><span class="mord mathdefault">i</span><span class="mclose">]</span><span class="mopen">[</span><span class="mord mathdefault" style="margin-right:0.05724em;">j</span><span class="mclose">]</span></span></span></span> 中的 i 用来表示结点， j 用来表示状态信息。</li>
+</ul>
+<h1 id="状压dp">状压dp：</h1>
+<h1 id="数位dp">数位dp：</h1>
+<h1 id="记忆化搜索">记忆化搜索</h1>
+<blockquote>
+<p>类似dp。先写出dp方程然后在搜索中利用记忆化数组记录最优解。（剪枝？）</p>
+</blockquote>
+]]></content>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[基础数据结构]]></title>
+        <id>https://gujinli.github.io/post/ji-chu-shu-ju-jie-gou/</id>
+        <link href="https://gujinli.github.io/post/ji-chu-shu-ju-jie-gou/">
+        </link>
+        <updated>2021-11-29T13:10:21.000Z</updated>
+        <content type="html"><![CDATA[<h1 id="链表">链表</h1>
+<ul>
+<li>
+<p><strong>单链表</strong></p>
+</li>
+<li>
+<p><strong>双链表</strong></p>
+</li>
+</ul>
+<p>基本没有正式用到的知识。像模拟的数据结构。</p>
+<blockquote>
+<p>以 0 为 头节点， 1为尾节点。模拟实现即可。</p>
+</blockquote>
+<ul>
+<li><strong>循环链表</strong></li>
+</ul>
+<h1 id="栈">栈</h1>
+<p>先进后出</p>
+<ul>
+<li>典例：<strong>表达式求值</strong>(acw 3302)</li>
+</ul>
+<h1 id="队列">队列</h1>
+<p>先进先出</p>
+<h1 id="单调栈">单调栈</h1>
+<blockquote>
+<p>维护一个单调的栈。每次弹栈时记录需要的信息</p>
+</blockquote>
+<ul>
+<li>
+<p><a href="https://www.luogu.com.cn/problem/P5788">模板</a></p>
+</li>
+<li>
+<p><a href="https://www.luogu.com.cn/problem/P1901">例题</a></p>
+</li>
+</ul>
+<h1 id="单调队列">单调队列</h1>
+<blockquote>
+<p>维护一个单调的队列，记录信息，队首超出范围（或不符合当前要求）则弹出。</p>
+</blockquote>
+<ul>
+<li><a href="https://www.luogu.com.cn/problem/P1886">例题</a></li>
+</ul>
+<h1 id="kmp">kmp</h1>
+<p>字符串匹配。求串s在t中出现的次数。</p>
+<blockquote>
+<p>记录一个 <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>p</mi><mi>i</mi><mo>[</mo><mi>i</mi><mo>]</mo></mrow><annotation encoding="application/x-tex">pi[i]</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathdefault">p</span><span class="mord mathdefault">i</span><span class="mopen">[</span><span class="mord mathdefault">i</span><span class="mclose">]</span></span></span></span> 表示以 <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>i</mi></mrow><annotation encoding="application/x-tex">i</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.65952em;vertical-align:0em;"></span><span class="mord mathdefault">i</span></span></span></span> 为节点的串，前缀后缀相等的最大长度。</p>
+</blockquote>
+<blockquote>
+<p>将s和t拼接起来，如果 <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>p</mi><mi>i</mi><mo>[</mo><mi>i</mi><mo>]</mo><mo>=</mo><mo>=</mo><mi>n</mi></mrow><annotation encoding="application/x-tex">pi[i] == n</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathdefault">p</span><span class="mord mathdefault">i</span><span class="mopen">[</span><span class="mord mathdefault">i</span><span class="mclose">]</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span></span><span class="base"><span class="strut" style="height:0.36687em;vertical-align:0em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:0.43056em;vertical-align:0em;"></span><span class="mord mathdefault">n</span></span></span></span> （n为s串长度）则证明出现了一次，ans++；</p>
+</blockquote>
+<h1 id="并查集">并查集</h1>
+<blockquote>
+<p>fa[i] 表示i节点的父节点。</p>
+</blockquote>
+<blockquote>
+<p><strong>压缩路径，按秩合并，带权并查集</strong>等常用思想。代码简单，难在灵活应用</p>
+</blockquote>
+<h1 id="堆">堆</h1>
+<p>待补习，暂时用优先队列代替。</p>
+<h1 id="hash表">hash表</h1>
+<p>进制哈希。</p>
+<ul>
+<li>
+<p>使用自然溢出是否有必要模质数？</p>
+</li>
+<li>
+<p>是否有必要加一个小质数防止被卡？</p>
+</li>
+</ul>
+<blockquote>
+<p>无特殊需求（如前缀和等）时，其实可以加。（但没啥很大意义）</p>
+</blockquote>
+<h1 id="trie">trie</h1>
+<ul>
+<li>
+<p>字典树用边表示字母</p>
+</li>
+<li>
+<p>有相同前缀的单词公用前缀节点，那我们可以的得出每个节点最多有26个子节点（在单词只包含小写字母的情况下）</p>
+</li>
+<li>
+<p>整棵树的根节点是空的。为什么呢？便于插入和查找，这将会在后面解释。</p>
+</li>
+<li>
+<p>每个单词结束的时候用一个特殊字符表示，图中用的 <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>x</mi></mrow><annotation encoding="application/x-tex">x</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.43056em;vertical-align:0em;"></span><span class="mord mathdefault">x</span></span></span></span> ，那么从根节点到任意一个 <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>x</mi></mrow><annotation encoding="application/x-tex">x</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.43056em;vertical-align:0em;"></span><span class="mord mathdefault">x</span></span></span></span> 所经过的边的所有字母表示一个单词。</p>
+</li>
+<li>
+<p><strong>有关异或：用01串建trie树，边为0或1。</strong></p>
+</li>
+</ul>
+]]></content>
+    </entry>
     <entry>
         <title type="html"><![CDATA[算法基础]]></title>
         <id>https://gujinli.github.io/post/suan-fa-ji-chu/</id>
