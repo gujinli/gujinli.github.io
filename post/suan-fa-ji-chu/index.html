@@ -1,120 +1,187 @@
-<html>
-<head>
-    <meta charset="utf-8" />
-<meta name="description" content="" />
-<meta name="viewport" content="width=device-width, initial-scale=1" />
+<!doctype html>
+<html amp lang="">
 
+<head>
+  <meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="基础算法整理❗️
+排序
+
+
+冒泡排序 O(n2)O(n^2)O(n2)
+n次遍历每次从1到n判断相邻的数字是否左小右大否则swap
+
+
+选择排序 O(n2)O(n^2)O(n2)
+n次遍历每次找出最小数添加到一个新数组
+
+
+插入排序 O(n..." />
+<link rel="preload" as="script" href="https://cdn.ampproject.org/v0.js">
+<link rel="preconnect dns-prefetch" href="https://cdn.jsdelivr.net/" crossorigin>
+<script async src="https://cdn.ampproject.org/v0.js"></script>
 <title>算法基础 | 瑾离不是锦鲤的小窝</title>
 
-<link rel="shortcut icon" href="https://gujinli.github.io/favicon.ico?v=1638231810734">
 
-<link href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css" rel="stylesheet">
-<link rel="stylesheet" href="https://gujinli.github.io/styles/main.css">
-<!-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.0/dist/css/bootstrap.min.css"> -->
+  
 
-<script src="https://cdn.jsdelivr.net/npm/@highlightjs/cdn-assets/highlight.min.js"></script>
-<script src="https://cdn.bootcss.com/highlight.js/9.15.10/languages/dockerfile.min.js"></script>
-<script src="https://cdn.bootcss.com/highlight.js/9.15.10/languages/dart.min.js"></script>
-
-<!-- <script src="https://cdn.jsdelivr.net/npm/moment@2.27.0/moment.min.js"></script> -->
-<!-- <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js"></script> -->
-<!-- <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script> -->
-<!-- <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.0/dist/js/bootstrap.min.js"></script> -->
-<!-- DEMO JS -->
-<!--<script src="media/scripts/index.js"></script>-->
+    
 
 
+<style amp-boilerplate>body{-webkit-animation:-amp-start 8s steps(1,end) 0s 1 normal both;-moz-animation:-amp-start 8s steps(1,end) 0s 1 normal both;-ms-animation:-amp-start 8s steps(1,end) 0s 1 normal both;animation:-amp-start 8s steps(1,end) 0s 1 normal both}@-webkit-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-moz-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-ms-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-o-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}</style>
+<noscript><style amp-boilerplate>body{-webkit-animation:none;-moz-animation:none;-ms-animation:none;animation:none}</style></noscript>
+<link rel="canonical" href="https://gujinli.github.io/post/suan-fa-ji-chu/" />
+<link rel="shortcut icon" href="https://gujinli.github.io/favicon.ico?v=1638231872588">
 
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.css">
+<meta name="author" content="">
+
+<meta itemprop="name" content="算法基础 | 瑾离不是锦鲤的小窝">
+<meta itemprop="description" content="基础算法整理❗️
+排序
+
+
+冒泡排序 O(n2)O(n^2)O(n2)
+n次遍历每次从1到n判断相邻的数字是否左小右大否则swap
+
+
+选择排序 O(n2)O(n^2)O(n2)
+n次遍历每次找出最小数添加到一个新数组
+
+
+插入排序 O(n...">
+<meta itemprop="image" content="https://gujinli.github.io/post-images/suan-fa-ji-chu.jpg">
+
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="算法基础 | 瑾离不是锦鲤的小窝">
+<meta name="twitter:description" content="基础算法整理❗️
+排序
+
+
+冒泡排序 O(n2)O(n^2)O(n2)
+n次遍历每次从1到n判断相邻的数字是否左小右大否则swap
+
+
+选择排序 O(n2)O(n^2)O(n2)
+n次遍历每次找出最小数添加到一个新数组
+
+
+插入排序 O(n...">
+<meta name="twitter:image" content="https://gujinli.github.io/post-images/suan-fa-ji-chu.jpg" />
+<meta name="twitter:image:alt" content="算法基础 | 瑾离不是锦鲤的小窝" />
+
+
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://gujinli.github.io/post/suan-fa-ji-chu/">
+<meta property="og:title" content="算法基础 | 瑾离不是锦鲤的小窝">
+<meta property="og:description" content="基础算法整理❗️
+排序
+
+
+冒泡排序 O(n2)O(n^2)O(n2)
+n次遍历每次从1到n判断相邻的数字是否左小右大否则swap
+
+
+选择排序 O(n2)O(n^2)O(n2)
+n次遍历每次找出最小数添加到一个新数组
+
+
+插入排序 O(n...">
+<meta property="og:image" content="https://gujinli.github.io/post-images/suan-fa-ji-chu.jpg">
+<meta property="og:image:alt" content="算法基础 | 瑾离不是锦鲤的小窝" />
+<meta property="og:site_name" content="瑾离不是锦鲤的小窝">
+<meta property="og:locale" content="zh_CN">
+<meta property="tag" content="算法基础 | 瑾离不是锦鲤的小窝" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<link rel="alternate" type="application/atom+xml" title="算法基础 | 瑾离不是锦鲤的小窝 - Atom Feed" href="https://gujinli.github.io/atom.xml">
+
+
+
+  
+
+
+
+  
+
+
 </head>
-<body>
-<div class="main gt-bg-theme-color-first">
-    <nav class="navbar navbar-expand-lg">
-    <a class="navbar-brand" href="/">
-        <img class="user-avatar" src="/images/avatar.png" alt="头像">
-        <div class="site-name gt-c-content-color-first">
-            瑾离不是锦鲤的小窝
-        </div>
-    </a>
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
-        aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation" id="changeNavbar">
-        <i class="fas fa-bars gt-c-content-color-first" style="font-size: 18px"></i>
-    </button>
-    <div class="collapse navbar-collapse" id="navbarSupportedContent">
-        <div class="navbar-nav mr-auto" style="text-align: center">
-            
-            <div class="nav-item">
-                
-                <a href="/" class="menu gt-a-link">
-                    首页
-                </a>
-                
-            </div>
-            
-            <div class="nav-item">
-                
-                <a href="/archives" class="menu gt-a-link">
-                    归档
-                </a>
-                
-            </div>
-            
-            <div class="nav-item">
-                
-                <a href="/tags" class="menu gt-a-link">
-                    标签
-                </a>
-                
-            </div>
-            
-            <div class="nav-item">
-                
-                <a href="/post/about" class="menu gt-a-link">
-                    关于
-                </a>
-                
-            </div>
-            
-        </div>
-        <div style="text-align: center">
-            <form id="gridea-search-form" style="position: relative" data-update="1638231810734"
-                action="/search/">
-                <input class="search-input" autocomplete="off" spellcheck="false" name="q" placeholder="搜索文章" />
-                <i class="fas fa-search gt-c-content-color-first" style="position: absolute; top: 9px; left: 10px;"></i>
-            </form>
-        </div>
-    </div>
-</nav>
-<script>
-    /* 移动端导航栏展开/收起切换 */
-    document.getElementById('changeNavbar').onclick = () => {
-        var element = document.getElementById('navbarSupportedContent');
-        if (element.style.display === 'none' || element.style.display === '') {
-            element.style.display = 'block';
-        } else {
-            element.style.display = 'none';
-        }
-    }
-</script>
 
-    <div class="post-container">
-        <div class="post-detail gt-bg-theme-color-second">
-            <article class="gt-post-content">
-                <h2 class="post-title">
-                    算法基础
-                </h2>
-                <div class="post-info">
-                    <time class="post-time gt-c-content-color-first">
-                        · 2021-11-29 ·
-                    </time>
-                    
-                        <a href="https://gujinli.github.io/tag/bPNlkdeeR/" class="post-tags">
-                            # 学习笔记
-                        </a>
-                    
-                </div>
-                <div class="post-content">
-                    <h1 id="基础算法整理️">基础算法整理❗️</h1>
+<body>
+  <input type="checkbox" id="header-menu-button">
+  <header id="commonTop">
+  <div class="top-container">
+    <div class="title-menus-area">
+      <a class="blog-title" href="https://gujinli.github.io">瑾离不是锦鲤的小窝</a>
+      <label for="header-menu-button" class="top-menus">
+        <nav class="menu-menu-1-container">
+          <ul id="menu-menu-1" class="menu">
+            
+            
+            <li>
+              <a href="/" aria-current="page">首页</a></li>
+            
+            
+            
+            <li>
+              <a href="/archives" aria-current="page">归档</a></li>
+            
+            
+            
+            <li>
+              <a href="/tags" aria-current="page">标签</a></li>
+            
+            
+            
+            <li>
+              <a href="/post/about" aria-current="page">关于</a></li>
+            
+            
+          </ul>
+        </nav>
+      </label>
+    </div>
+    
+  </div>
+</header>
+  <main>
+    <div class="main-container">
+
+      <div class="article-info">
+        
+          <div class="flex-box meta-category">
+            <a class="post-cate" href="https://gujinli.github.io/tag/bPNlkdeeR/">学习笔记</a></div>
+          
+        <h2 class="article-title">
+          <a href="https://gujinli.github.io/post/suan-fa-ji-chu/">算法基础</a>
+        </h2>
+        <div class="flex-box">
+          <div class="flex-box post-meta-box">
+            <a class="post-meta" href="https://gujinli.github.io"><span
+                class="iconfont icon-mr-postmeta"></span></a>
+            <span class="post-meta"><span class="iconfont icon-mr-postmeta"></span>2021 年 11	月 29日</span>
+            
+
+
+          </div>
+        </div>
+      </div>
+      <div class="content">
+        <h1 id="基础算法整理️">基础算法整理❗️</h1>
 <h2 id="排序">排序</h2>
 <ul>
 <li>
@@ -223,81 +290,77 @@ ID(x) = lower_bound(lsh+1,lsh+1+cnt,x) - lsh;
 <p>按左端点排序，贪心从左向右依次合并。</p>
 </blockquote>
 
-                </div>
-            </article>
+      </div>
+
+      
+
+      
+      
+
+      <div class="post-tags">
+        
+        <a href="https://gujinli.github.io/tag/bPNlkdeeR/" rel="tag">学习笔记</a>        
+               
+      </div>
+
+
+        
+
+    </div>
+
+    <div class="sidebar">
+  <aside id="profile-2" class="widget widget_profile">
+    <div class="profile-box">
+      <div class="profile-avatar">
+        <amp-img src="https://gujinli.github.io/images/avatar.png?v=1638231872588" alt="avatar"
+          layout="fill"></amp-img>
+      </div>
+      <div class="profile-content">
+        <div class="amp-wp-681d4ff">
+          ACM打铁/异地恋中——
         </div>
 
-        
-
-        
-            <span id="/post/suan-fa-ji-chu/" class="leancloud_visitors" data-flag-title="算法基础">
-                <em class="post-meta-item-text">阅读量 </em>
-                <i class="leancloud-visitors-count">0</i>
-            </span>
-        
-
-        
-
-        
-            <script src='https://cdn.jsdelivr.net/npm/valine/dist/Valine.min.js'></script>
-
-<style>
-	div#vcomments{
-		width:100%;
-		max-width: 1000px;
-		padding: 2.5%
-	}
-</style>
-
-
-	<div id="vcomments"></div>
-
-<script>
-	new Valine({
-		el: '#vcomments',
-		appId: '',
-		appKey: '',
-		avatar: '',
-		pageSize: 5,
-		recordIp: true,
-		placeholder: 'Just Go Go',
-		visitor: true,
-	});
-</script>
-
-        
-
-        <div class="site-footer gt-c-content-color-first">
-    <div class="slogan gt-c-content-color-first">ACM打铁/异地恋中——</div>
-    <div class="social-container">
-        
-            
-        
-            
-        
-            
-        
-            
-        
-            
-        
-            
-        
+      </div>
     </div>
-    <div class="footer-info">
-        Powered by <a href="https://github.com/getgridea/gridea" target="_blank">Gridea</a>
-    </div>
-    <div>
-        Theme by <a href="https://imhanjie.com/" target="_blank">imhanjie</a>, Powered by <a
-                href="https://github.com/getgridea/gridea" target="_blank">Gridea | <a href="https://gujinli.github.io/atom.xml" target="_blank">RSS</a></a>
-    </div>
+  </aside>
+  
+    
+  
+     
+
+
+  <aside id="linkcat-2" class="widget widget_links">
+  <h4 class="widget-title">友链</h4>
+  <ul class="xoxo blogroll">
+    
+  </ul>
+</aside>
+
+
 </div>
-
-<script>
-  hljs.highlightAll()
-</script>
+    <div class="scrolltop-wrap">
+  <span tabindex="0" role="button" class="go-top" on="tap:commonTop.scrollTo(duration=500, position=top)">
+    <span class="iconfont"></span>
+  </span>
+</div>
+  </main>
+  <footer>
+  <div class="footer-container">
+    <div class="footer-menus">
+    </div>
+    <div class="footer-copyright">
+      Powered by <a href="https://github.com/getgridea/gridea" target="_blank">Gridea</a>
+      
+      
 
     </div>
-</div>
+  </div>
+</footer>
+
+
+  
+
+
 </body>
+
 </html>
