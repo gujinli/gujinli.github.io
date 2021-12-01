@@ -6,7 +6,7 @@
 
 <title>ICPC2021上海 部分题解 | 瑾离不是锦鲤的小窝</title>
 
-<link rel="shortcut icon" href="https://gujinli.github.io/favicon.ico?v=1638341383956">
+<link rel="shortcut icon" href="https://gujinli.github.io/favicon.ico?v=1638344963633">
 
 <link href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css" rel="stylesheet">
 <link rel="stylesheet" href="https://gujinli.github.io/styles/main.css">
@@ -85,7 +85,7 @@
             
         </div>
         <div style="text-align: center">
-            <form id="gridea-search-form" style="position: relative" data-update="1638341383956"
+            <form id="gridea-search-form" style="position: relative" data-update="1638344963633"
                 action="/search/">
                 <input class="search-input" autocomplete="off" spellcheck="false" name="q" placeholder="搜索文章" />
                 <i class="fas fa-search gt-c-content-color-first" style="position: absolute; top: 9px; left: 10px;"></i>
@@ -130,9 +130,9 @@
 <p>场外一共做了六道题，罚时大概是银末的位置、场上的话估计只能铜。<br>
 题目质量还是挺高的很有意思。</p>
 </blockquote>
-<h1 id="e-strange-integers">E Strange Integers</h1>
+<h1 id="e-strange-integers签到题">E Strange Integers（签到题）</h1>
 <p><strong>题意：</strong> 一段长度为n的序列。从中选出尽可能多的数，使任意两个数之间的绝对值相差大于k。</p>
-<p><strong>Solution：</strong> 签到题。对序列排序后从小到大。最小的数一定选，之后的从小到大能选就选。</p>
+<p><strong>Solution：</strong> 对序列排序后从小到大。最小的数一定选，之后的从小到大能选就选。</p>
 <pre><code class="language-c++">#include &lt;bits/stdc++.h&gt;
 using namespace std;
 inline void read(int &amp;a) {a=0;int c=getchar(),b=1; while(c&gt;'9'||c&lt;'0') {if(c=='-')b=-1;c=getchar();} while(c&gt;='0'&amp;&amp;c&lt;='9') a=(a&lt;&lt;3)+(a&lt;&lt;1)+c-48,c=getchar();a*=b; }
@@ -155,11 +155,11 @@ int main()
 	return 0;
 }
 </code></pre>
-<h1 id="d-strange-fractions">D Strange Fractions</h1>
+<h1 id="d-strange-fractions签到题">D Strange Fractions（签到题）</h1>
 <p><strong>题意：</strong> 给定p和q。求一组合法的a和b满足：</p>
 <p class='katex-block'><span class="katex-display"><span class="katex"><span class="katex-mathml"><math><semantics><mrow><mfrac><mi>p</mi><mi>q</mi></mfrac><mo>=</mo><mfrac><mi>a</mi><mi>b</mi></mfrac><mo>+</mo><mfrac><mi>b</mi><mi>a</mi></mfrac></mrow><annotation encoding="application/x-tex">\frac{p}{q} = \frac{a}{b} + \frac{b}{a}
 </annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1.988em;vertical-align:-0.8804400000000001em;"></span><span class="mord"><span class="mopen nulldelimiter"></span><span class="mfrac"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:1.1075599999999999em;"><span style="top:-2.314em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord mathdefault" style="margin-right:0.03588em;">q</span></span></span><span style="top:-3.23em;"><span class="pstrut" style="height:3em;"></span><span class="frac-line" style="border-bottom-width:0.04em;"></span></span><span style="top:-3.677em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord mathdefault">p</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.8804400000000001em;"><span></span></span></span></span></span><span class="mclose nulldelimiter"></span></span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:1.7935600000000003em;vertical-align:-0.686em;"></span><span class="mord"><span class="mopen nulldelimiter"></span><span class="mfrac"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:1.10756em;"><span style="top:-2.314em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord mathdefault">b</span></span></span><span style="top:-3.23em;"><span class="pstrut" style="height:3em;"></span><span class="frac-line" style="border-bottom-width:0.04em;"></span></span><span style="top:-3.677em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord mathdefault">a</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.686em;"><span></span></span></span></span></span><span class="mclose nulldelimiter"></span></span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:2.05744em;vertical-align:-0.686em;"></span><span class="mord"><span class="mopen nulldelimiter"></span><span class="mfrac"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:1.37144em;"><span style="top:-2.314em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord mathdefault">a</span></span></span><span style="top:-3.23em;"><span class="pstrut" style="height:3em;"></span><span class="frac-line" style="border-bottom-width:0.04em;"></span></span><span style="top:-3.677em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord mathdefault">b</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.686em;"><span></span></span></span></span></span><span class="mclose nulldelimiter"></span></span></span></span></span></span></p>
-<p><strong>Solution：</strong> 签到题。</p>
+<p><strong>Solution：</strong></p>
 <p>先推式子：</p>
 <p class='katex-block'><span class="katex-display"><span class="katex"><span class="katex-mathml"><math><semantics><mrow><mfrac><mi>p</mi><mi>q</mi></mfrac><mo>=</mo><mfrac><mrow><msup><mi>a</mi><mn>2</mn></msup><mo>+</mo><msup><mi>b</mi><mn>2</mn></msup></mrow><mrow><mi>a</mi><mi>b</mi></mrow></mfrac><mspace linebreak="newline"></mspace><mfrac><mrow><mi>p</mi><mo>+</mo><mn>2</mn><mi>q</mi></mrow><mi>q</mi></mfrac><mo>=</mo><mfrac><mrow><mo>(</mo><mi>a</mi><mo>+</mo><mi>b</mi><msup><mo>)</mo><mn>2</mn></msup></mrow><mrow><mi>a</mi><mi>b</mi></mrow></mfrac><mspace linebreak="newline"></mspace><mfrac><mrow><mo>(</mo><mi>p</mi><mo>+</mo><mn>2</mn><mi>q</mi><msup><mo>)</mo><mn>2</mn></msup></mrow><mrow><mi>q</mi><mo>(</mo><mi>p</mi><mo>+</mo><mn>2</mn><mi>q</mi><mo>)</mo></mrow></mfrac><mo>=</mo><mfrac><mrow><mo>(</mo><mi>a</mi><mo>+</mo><mi>b</mi><msup><mo>)</mo><mn>2</mn></msup></mrow><mrow><mi>a</mi><mi>b</mi></mrow></mfrac><mspace linebreak="newline"></mspace></mrow><annotation encoding="application/x-tex">\frac{p}{q} = \frac{a^2+b^2}{ab}\\
 \frac{p+2q}{q} = \frac{(a+b)^2}{ab}\\
@@ -197,18 +197,63 @@ signed main()
 	return 0;
 }
 </code></pre>
-<h1 id="g-edge-groups">G Edge Groups</h1>
-<p><strong>题意：</strong></p>
-<p><strong>Solution：</strong></p>
+<h1 id="g-edge-groups树形dp">G Edge Groups（树形dp）</h1>
+<p><strong>题意：</strong> n（奇数）个点的树，n-1条边分成 <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mfrac><mrow><mi>n</mi><mo>−</mo><mn>1</mn></mrow><mn>2</mn></mfrac></mrow><annotation encoding="application/x-tex">\frac{n-1}{2}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1.190108em;vertical-align:-0.345em;"></span><span class="mord"><span class="mopen nulldelimiter"></span><span class="mfrac"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.845108em;"><span style="top:-2.6550000000000002em;"><span class="pstrut" style="height:3em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">2</span></span></span></span><span style="top:-3.23em;"><span class="pstrut" style="height:3em;"></span><span class="frac-line" style="border-bottom-width:0.04em;"></span></span><span style="top:-3.394em;"><span class="pstrut" style="height:3em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathdefault mtight">n</span><span class="mbin mtight">−</span><span class="mord mtight">1</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.345em;"><span></span></span></span></span></span><span class="mclose nulldelimiter"></span></span></span></span></span>组，每组两条边并且两条边要有一个公共点。求分组的方案数。</p>
+<p><strong>Solution：</strong> 首先。n个元素两两分组的方案数是 <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>f</mi><mo>[</mo><mi>n</mi><mo>]</mo></mrow><annotation encoding="application/x-tex">f[n]</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathdefault" style="margin-right:0.10764em;">f</span><span class="mopen">[</span><span class="mord mathdefault">n</span><span class="mclose">]</span></span></span></span> ，则有递推式 <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>f</mi><mo>[</mo><mi>n</mi><mo>]</mo><mo>=</mo><mi>f</mi><mo>[</mo><mi>n</mi><mo>−</mo><mn>2</mn><mo>]</mo><mo>∗</mo><mo>(</mo><mi>n</mi><mo>−</mo><mn>1</mn><mo>)</mo></mrow><annotation encoding="application/x-tex">f[n] = f[n- 2] * (n - 1)</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathdefault" style="margin-right:0.10764em;">f</span><span class="mopen">[</span><span class="mord mathdefault">n</span><span class="mclose">]</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathdefault" style="margin-right:0.10764em;">f</span><span class="mopen">[</span><span class="mord mathdefault">n</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">−</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord">2</span><span class="mclose">]</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">∗</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mopen">(</span><span class="mord mathdefault">n</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">−</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord">1</span><span class="mclose">)</span></span></span></span></p>
+<p>设<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>d</mi><mi>p</mi><mo>[</mo><mi>u</mi><mo>]</mo></mrow><annotation encoding="application/x-tex">dp[u]</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathdefault">d</span><span class="mord mathdefault">p</span><span class="mopen">[</span><span class="mord mathdefault">u</span><span class="mclose">]</span></span></span></span>为<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>u</mi></mrow><annotation encoding="application/x-tex">u</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.43056em;vertical-align:0em;"></span><span class="mord mathdefault">u</span></span></span></span>子树的方案数。<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>b</mi></mrow><annotation encoding="application/x-tex">b</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.69444em;vertical-align:0em;"></span><span class="mord mathdefault">b</span></span></span></span> 表示<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>u</mi></mrow><annotation encoding="application/x-tex">u</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.43056em;vertical-align:0em;"></span><span class="mord mathdefault">u</span></span></span></span>子树中点数为奇数的个数。</p>
+<p class='katex-block'><span class="katex-display"><span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>d</mi><mi>p</mi><mo>[</mo><mi>u</mi><mo>]</mo><mo>=</mo><mrow><mo fence="true">{</mo><mtable><mtr><mtd><mstyle scriptlevel="0" displaystyle="false"><mrow><mi>f</mi><mo>[</mo><mi>b</mi><mo>]</mo><mo>∗</mo><mo>∏</mo><mi>f</mi><mo>[</mo><mi>v</mi><mo>]</mo><mspace width="1em"/><mspace width="1em"/><mtext>  </mtext><mtext>  </mtext><mtext>b is even</mtext></mrow></mstyle></mtd></mtr><mtr><mtd><mstyle scriptlevel="0" displaystyle="false"><mrow><mi>f</mi><mo>[</mo><mi>b</mi><mo>+</mo><mn>1</mn><mo>]</mo><mo>∗</mo><mo>∏</mo><mi>f</mi><mo>[</mo><mi>v</mi><mo>]</mo><mspace width="1em"/><mtext>b is odd</mtext></mrow></mstyle></mtd></mtr></mtable></mrow></mrow><annotation encoding="application/x-tex">dp[u] = \begin{cases}
+f[b]*\prod f[v] \quad\quad\;\; \text{b is even} \\
+f[b+1]*\prod f[v] \quad \text{b is odd}
+\end{cases}
+</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathdefault">d</span><span class="mord mathdefault">p</span><span class="mopen">[</span><span class="mord mathdefault">u</span><span class="mclose">]</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:3.0000299999999998em;vertical-align:-1.25003em;"></span><span class="minner"><span class="mopen delimcenter" style="top:0em;"><span class="delimsizing size4">{</span></span><span class="mord"><span class="mtable"><span class="col-align-l"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:1.69em;"><span style="top:-3.69em;"><span class="pstrut" style="height:3.008em;"></span><span class="mord"><span class="mord mathdefault" style="margin-right:0.10764em;">f</span><span class="mopen">[</span><span class="mord mathdefault">b</span><span class="mclose">]</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">∗</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mop op-symbol small-op" style="position:relative;top:-0.0000050000000000050004em;">∏</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord mathdefault" style="margin-right:0.10764em;">f</span><span class="mopen">[</span><span class="mord mathdefault" style="margin-right:0.03588em;">v</span><span class="mclose">]</span><span class="mspace" style="margin-right:1em;"></span><span class="mspace" style="margin-right:1em;"></span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mord text"><span class="mord">b is even</span></span></span></span><span style="top:-2.25em;"><span class="pstrut" style="height:3.008em;"></span><span class="mord"><span class="mord mathdefault" style="margin-right:0.10764em;">f</span><span class="mopen">[</span><span class="mord mathdefault">b</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mord">1</span><span class="mclose">]</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">∗</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mop op-symbol small-op" style="position:relative;top:-0.0000050000000000050004em;">∏</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord mathdefault" style="margin-right:0.10764em;">f</span><span class="mopen">[</span><span class="mord mathdefault" style="margin-right:0.03588em;">v</span><span class="mclose">]</span><span class="mspace" style="margin-right:1em;"></span><span class="mord text"><span class="mord">b is odd</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:1.19em;"><span></span></span></span></span></span></span></span><span class="mclose nulldelimiter"></span></span></span></span></span></span></p>
 <pre><code class="language-c++">#include &lt;bits/stdc++.h&gt;
+#define ll long long
 using namespace std;
 inline void read(int &amp;a) {a=0;int c=getchar(),b=1; while(c&gt;'9'||c&lt;'0') {if(c=='-')b=-1;c=getchar();} while(c&gt;='0'&amp;&amp;c&lt;='9') a=(a&lt;&lt;3)+(a&lt;&lt;1)+c-48,c=getchar();a*=b; }
+/**/
+const int N = 1e5 + 5, mod = 998244353;
+int n, sz[N];
+ll f[N], dp[N];
+vector&lt;int&gt;g[N];
+/**/
+void dfs(int u, int fa)
+{
+	sz[u] = 1; dp[u] = 1;
+	int cnt = 0;
+	for(auto &amp;v : g[u])
+	{
+		if(v == fa) continue;
+		dfs(v, u);
+		sz[u] += sz[v];
+		dp[u] = dp[u] * dp[v] % mod;
+		if(sz[v] &amp; 1) cnt++;
+	}
+	if(cnt &amp; 1) cnt++;
+	dp[u] = dp[u] * f[cnt] % mod;
+}
+signed main()
+{
+	read(n);
+	for(int i = 1, x, y; i &lt; n; i++)
+	{
+		read(x); read(y);
+		g[x].push_back(y);
+		g[y].push_back(x);
+	}
+	f[0] = 1;
+	for(int i = 2; i &lt;= n; i += 2)
+	{
+		f[i] = f[i - 2] * (i - 1) % mod;
+	}
+	dfs(1, 0);
+	cout &lt;&lt; dp[1];
+	return 0;
+}
 </code></pre>
-<h1 id="i-steadily-growing-steam">I Steadily Growing Steam</h1>
+<h1 id="i-steadily-growing-steam签到题背包">I Steadily Growing Steam（签到题/背包）</h1>
 <p><strong>题意：</strong> n 个物品。每个物品有价值w[i] 和 体积 v[i]，求从中选出两个无交集的集合，两个集合的体积和相等，价值和最大。</p>
 <p>注：可以将这n个物品中至多k个物品的体积翻倍。</p>
-<p><strong>Solution：</strong> 签到题。背包dp。</p>
-<p>对选入两个集合分别用正负进行表示即可，注意边界问题的处理正常背包即可。</p>
+<p><strong>Solution：</strong> 对选入两个集合分别用正负进行表示即可，注意边界问题的处理正常背包即可。</p>
 <pre><code class="language-c++">#include &lt;bits/stdc++.h&gt;
 using namespace std;
 #define ll long long
@@ -243,7 +288,7 @@ int main()
 	return 0;
 }
 </code></pre>
-<h1 id="k-circle-of-life">K Circle of Life</h1>
+<h1 id="k-circle-of-life银牌题构造">K Circle of Life（银牌题/构造）</h1>
 <p><strong>题意：</strong> 一个n位的由0和1组成的串。对每秒，1（星星）变成0向两边发射1，两个扩散的星星相撞则变成0。</p>
 <p><strong>Solution：</strong> 暴力打表找规律。找出某一循环的特殊性质后输出。</p>
 <pre><code class="language-c++">#include &lt;bits/stdc++.h&gt;
@@ -270,13 +315,24 @@ int main()
     return 0;
 }
 </code></pre>
-<h1 id="m-harmony-in-harmony">M Harmony in Harmony</h1>
+<h1 id="m-harmony-in-harmony银牌题构造">M Harmony in Harmony(银牌题/构造)</h1>
 <p><strong>题意：</strong> 待补。</p>
-<p><strong>Solution：</strong> 银牌题。神仙构造。（猜）</p>
+<p><strong>Solution：</strong> 瞎猜的。待补。</p>
 <pre><code class="language-c++">#include &lt;bits/stdc++.h&gt;
 using namespace std;
 inline void read(int &amp;a) {a=0;int c=getchar(),b=1; while(c&gt;'9'||c&lt;'0') {if(c=='-')b=-1;c=getchar();} while(c&gt;='0'&amp;&amp;c&lt;='9') a=(a&lt;&lt;3)+(a&lt;&lt;1)+c-48,c=getchar();a*=b; }
+int n,m;
+signed main()
+{
+	read(n);
+	for(int i=1;i&lt;=n;i++)
+	{
+		m=max(m,(n*(i)*(n-i+1)));
+	}
+	printf(&quot;%.9f&quot;,1.0/m);
+}
 </code></pre>
+<h1 id=""></h1>
 
                 </div>
             </article>
