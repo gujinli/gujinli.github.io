@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://gujinli.github.io</id>
     <title>瑾离不是锦鲤的小窝</title>
-    <updated>2021-12-01T06:47:24.196Z</updated>
+    <updated>2021-12-01T06:49:46.715Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://gujinli.github.io"/>
     <link rel="self" href="https://gujinli.github.io/atom.xml"/>
@@ -30,8 +30,8 @@
 题目质量还是挺高的很有意思。</p>
 </blockquote>
 <h1 id="e-strange-integers">E Strange Integers</h1>
-<p>**题意：**一段长度为n的序列。从中选出尽可能多的数，使任意两个数之间的绝对值相差大于k。</p>
-<p>**Solution：**签到题。对序列排序后从小到大。最小的数一定选，之后的从小到大能选就选。</p>
+<p><strong>题意：</strong> 一段长度为n的序列。从中选出尽可能多的数，使任意两个数之间的绝对值相差大于k。</p>
+<p><strong>Solution：</strong> 签到题。对序列排序后从小到大。最小的数一定选，之后的从小到大能选就选。</p>
 <pre><code class="language-c++">#include &lt;bits/stdc++.h&gt;
 using namespace std;
 inline void read(int &amp;a) {a=0;int c=getchar(),b=1; while(c&gt;'9'||c&lt;'0') {if(c=='-')b=-1;c=getchar();} while(c&gt;='0'&amp;&amp;c&lt;='9') a=(a&lt;&lt;3)+(a&lt;&lt;1)+c-48,c=getchar();a*=b; }
@@ -55,10 +55,10 @@ int main()
 }
 </code></pre>
 <h1 id="d-strange-fractions">D Strange Fractions</h1>
-<p>**题意：**给定p和q。求一组合法的a和b满足：</p>
+<p><strong>题意：</strong> 给定p和q。求一组合法的a和b满足：</p>
 <p class='katex-block'><span class="katex-display"><span class="katex"><span class="katex-mathml"><math><semantics><mrow><mfrac><mi>p</mi><mi>q</mi></mfrac><mo>=</mo><mfrac><mi>a</mi><mi>b</mi></mfrac><mo>+</mo><mfrac><mi>b</mi><mi>a</mi></mfrac></mrow><annotation encoding="application/x-tex">\frac{p}{q} = \frac{a}{b} + \frac{b}{a}
 </annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1.988em;vertical-align:-0.8804400000000001em;"></span><span class="mord"><span class="mopen nulldelimiter"></span><span class="mfrac"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:1.1075599999999999em;"><span style="top:-2.314em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord mathdefault" style="margin-right:0.03588em;">q</span></span></span><span style="top:-3.23em;"><span class="pstrut" style="height:3em;"></span><span class="frac-line" style="border-bottom-width:0.04em;"></span></span><span style="top:-3.677em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord mathdefault">p</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.8804400000000001em;"><span></span></span></span></span></span><span class="mclose nulldelimiter"></span></span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:1.7935600000000003em;vertical-align:-0.686em;"></span><span class="mord"><span class="mopen nulldelimiter"></span><span class="mfrac"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:1.10756em;"><span style="top:-2.314em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord mathdefault">b</span></span></span><span style="top:-3.23em;"><span class="pstrut" style="height:3em;"></span><span class="frac-line" style="border-bottom-width:0.04em;"></span></span><span style="top:-3.677em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord mathdefault">a</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.686em;"><span></span></span></span></span></span><span class="mclose nulldelimiter"></span></span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:2.05744em;vertical-align:-0.686em;"></span><span class="mord"><span class="mopen nulldelimiter"></span><span class="mfrac"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:1.37144em;"><span style="top:-2.314em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord mathdefault">a</span></span></span><span style="top:-3.23em;"><span class="pstrut" style="height:3em;"></span><span class="frac-line" style="border-bottom-width:0.04em;"></span></span><span style="top:-3.677em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord mathdefault">b</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.686em;"><span></span></span></span></span></span><span class="mclose nulldelimiter"></span></span></span></span></span></span></p>
-<p>**Solution：**签到题。</p>
+<p><strong>Solution：</strong> 签到题。</p>
 <p>先推式子：</p>
 <p class='katex-block'><span class="katex-display"><span class="katex"><span class="katex-mathml"><math><semantics><mrow><mfrac><mi>p</mi><mi>q</mi></mfrac><mo>=</mo><mfrac><mrow><msup><mi>a</mi><mn>2</mn></msup><mo>+</mo><msup><mi>b</mi><mn>2</mn></msup></mrow><mrow><mi>a</mi><mi>b</mi></mrow></mfrac><mspace linebreak="newline"></mspace><mfrac><mrow><mi>p</mi><mo>+</mo><mn>2</mn><mi>q</mi></mrow><mi>q</mi></mfrac><mo>=</mo><mfrac><mrow><mo>(</mo><mi>a</mi><mo>+</mo><mi>b</mi><msup><mo>)</mo><mn>2</mn></msup></mrow><mrow><mi>a</mi><mi>b</mi></mrow></mfrac><mspace linebreak="newline"></mspace><mfrac><mrow><mo>(</mo><mi>p</mi><mo>+</mo><mn>2</mn><mi>q</mi><msup><mo>)</mo><mn>2</mn></msup></mrow><mrow><mi>q</mi><mo>(</mo><mi>p</mi><mo>+</mo><mn>2</mn><mi>q</mi><mo>)</mo></mrow></mfrac><mo>=</mo><mfrac><mrow><mo>(</mo><mi>a</mi><mo>+</mo><mi>b</mi><msup><mo>)</mo><mn>2</mn></msup></mrow><mrow><mi>a</mi><mi>b</mi></mrow></mfrac><mspace linebreak="newline"></mspace></mrow><annotation encoding="application/x-tex">\frac{p}{q} = \frac{a^2+b^2}{ab}\\
 \frac{p+2q}{q} = \frac{(a+b)^2}{ab}\\
@@ -104,9 +104,9 @@ using namespace std;
 inline void read(int &amp;a) {a=0;int c=getchar(),b=1; while(c&gt;'9'||c&lt;'0') {if(c=='-')b=-1;c=getchar();} while(c&gt;='0'&amp;&amp;c&lt;='9') a=(a&lt;&lt;3)+(a&lt;&lt;1)+c-48,c=getchar();a*=b; }
 </code></pre>
 <h1 id="i-steadily-growing-steam">I Steadily Growing Steam</h1>
-<p>**题意：**n 个物品。每个物品有价值w[i] 和 体积 v[i]，求从中选出两个无交集的集合，两个集合的体积和相等，价值和最大。</p>
+<p><strong>题意：</strong> n 个物品。每个物品有价值w[i] 和 体积 v[i]，求从中选出两个无交集的集合，两个集合的体积和相等，价值和最大。</p>
 <p>注：可以将这n个物品中至多k个物品的体积翻倍。</p>
-<p>**Solution：**签到题。背包dp。</p>
+<p><strong>Solution：</strong> 签到题。背包dp。</p>
 <p>对选入两个集合分别用正负进行表示即可，注意边界问题的处理正常背包即可。</p>
 <pre><code class="language-c++">#include &lt;bits/stdc++.h&gt;
 using namespace std;
@@ -143,8 +143,8 @@ int main()
 }
 </code></pre>
 <h1 id="k-circle-of-life">K Circle of Life</h1>
-<p>**题意：**一个n位的由0和1组成的串。对每秒，1（星星）变成0向两边发射1，两个扩散的星星相撞则变成0。</p>
-<p>**Solution：**暴力打表找规律。找出某一循环的特殊性质后输出。</p>
+<p><strong>题意：</strong> 一个n位的由0和1组成的串。对每秒，1（星星）变成0向两边发射1，两个扩散的星星相撞则变成0。</p>
+<p><strong>Solution：</strong> 暴力打表找规律。找出某一循环的特殊性质后输出。</p>
 <pre><code class="language-c++">#include &lt;bits/stdc++.h&gt;
 using namespace std;
 inline void read(int &amp;a) {a=0;int c=getchar(),b=1; while(c&gt;'9'||c&lt;'0') {if(c=='-')b=-1;c=getchar();} while(c&gt;='0'&amp;&amp;c&lt;='9') a=(a&lt;&lt;3)+(a&lt;&lt;1)+c-48,c=getchar();a*=b; }
@@ -170,8 +170,8 @@ int main()
 }
 </code></pre>
 <h1 id="m-harmony-in-harmony">M Harmony in Harmony</h1>
-<p>**题意：**待补。</p>
-<p>**Solution：**银牌题。神仙构造。（猜）</p>
+<p><strong>题意：</strong> 待补。</p>
+<p><strong>Solution：</strong> 银牌题。神仙构造。（猜）</p>
 <pre><code class="language-c++">#include &lt;bits/stdc++.h&gt;
 using namespace std;
 inline void read(int &amp;a) {a=0;int c=getchar(),b=1; while(c&gt;'9'||c&lt;'0') {if(c=='-')b=-1;c=getchar();} while(c&gt;='0'&amp;&amp;c&lt;='9') a=(a&lt;&lt;3)+(a&lt;&lt;1)+c-48,c=getchar();a*=b; }
