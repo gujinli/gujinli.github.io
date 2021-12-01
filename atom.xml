@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://gujinli.github.io</id>
     <title>瑾离不是锦鲤的小窝</title>
-    <updated>2021-12-01T08:50:18.509Z</updated>
+    <updated>2021-12-01T10:59:59.147Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://gujinli.github.io"/>
     <link rel="self" href="https://gujinli.github.io/atom.xml"/>
@@ -10,6 +10,44 @@
     <logo>https://gujinli.github.io/images/avatar.png</logo>
     <icon>https://gujinli.github.io/favicon.ico</icon>
     <rights>All rights reserved 2021, 瑾离不是锦鲤的小窝</rights>
+    <entry>
+        <title type="html"><![CDATA[杂记]]></title>
+        <id>https://gujinli.github.io/post/za-ji/</id>
+        <link href="https://gujinli.github.io/post/za-ji/">
+        </link>
+        <updated>2021-12-01T10:59:15.000Z</updated>
+        <content type="html"><![CDATA[<h1 id="bitset">bitset</h1>
+<p>bitset是像bool数组一样的东西。但每个位置只占1bit。<br>
+一定程度上节省了空间和时间，一般来说会让算法复杂度/32。</p>
+<p><strong>定义与初始化：</strong></p>
+<ul>
+<li>头文件：<code>#include&lt;bitset&gt;</code></li>
+<li>定义时需指明所占用的空间（类数组）：<code>bitset&lt;114514&gt;bit;</code></li>
+<li>初始化可以用<strong>string</strong>或<strong>int</strong>（整数类型）：</li>
+</ul>
+<pre><code class="language-c++">bitset&lt;23&gt;bit (string(&quot;11101001&quot;));
+bitset&lt;23&gt;bit = 233;
+</code></pre>
+<p><strong>常用函数：</strong></p>
+<blockquote>
+<pre><code>bit.size()      返回大小（位数）
+bit.count()     返回1的个数
+bit.any()       返回是否有1
+bit.none()      返回是否没有1
+bit.set()       全都变成1
+bit.set(p)      将第p + 1位变成1（bitset是从第0位开始的！） 
+bit.set(p, x)   将第p + 1位变成x
+bit.reset()     全都变成0
+bit.reset(p)    将第p + 1位变成0
+bit.flip()      全都取反
+bit.flip(p)     将第p + 1位取反
+bit.to_ulong()  返回它转换为unsigned long的结果，如果超出范围则报错
+bit.to_ullong() 返回它转换为unsigned long long的结果，如果超出范围则报错
+bit.to_string() 返回它转换为string的结果
+</code></pre>
+</blockquote>
+]]></content>
+    </entry>
     <entry>
         <title type="html"><![CDATA[ICPC2021沈阳 部分题解]]></title>
         <id>https://gujinli.github.io/post/icpc2021-shen-yang-bu-fen-ti-jie/</id>
