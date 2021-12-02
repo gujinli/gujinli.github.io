@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://gujinli.github.io</id>
     <title>瑾离不是锦鲤的小窝</title>
-    <updated>2021-12-02T10:47:10.846Z</updated>
+    <updated>2021-12-02T11:34:19.792Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://gujinli.github.io"/>
     <link rel="self" href="https://gujinli.github.io/atom.xml"/>
@@ -54,7 +54,364 @@ bit.to_string() 返回它转换为string的结果
         <link href="https://gujinli.github.io/post/icpc2021-shen-yang-bu-fen-ti-jie/">
         </link>
         <updated>2021-12-01T06:01:49.000Z</updated>
-        <content type="html"><![CDATA[<p>待补</p>
+        <content type="html"><![CDATA[<h1 id="e-edward-gaming-the-champion签到题">E. Edward Gaming, the Champion(签到题)</h1>
+<p><strong>题意：</strong> 求一个字符串s中有多少个&quot;edgnb&quot;</p>
+<p><strong>Solution：</strong> <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>E</mi><mi>D</mi><mi>G</mi><mi>N</mi><mi>B</mi></mrow><annotation encoding="application/x-tex">EDGNB</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.68333em;vertical-align:0em;"></span><span class="mord mathdefault" style="margin-right:0.05764em;">E</span><span class="mord mathdefault" style="margin-right:0.02778em;">D</span><span class="mord mathdefault">G</span><span class="mord mathdefault" style="margin-right:0.10903em;">N</span><span class="mord mathdefault" style="margin-right:0.05017em;">B</span></span></span></span></p>
+<pre><code class="language-c++">#include &lt;bits/stdc++.h&gt;
+using namespace std;
+/**/
+const int N = 2e5 + 5;
+char s[N];
+/**/
+int main()
+{
+	scanf(&quot;%s&quot;, s);
+	int len = strlen(s), ans = 0;
+	for(int i = 0; i &lt; len; i++)
+	{
+		if(i+4&gt;=len) break;
+		if(s[i]=='e'&amp;&amp;s[i+1]=='d'&amp;&amp;s[i+2]=='g'&amp;&amp;s[i+3]=='n'&amp;&amp;s[i+4]=='b') ans++, i = i + 4;
+	}
+	cout&lt;&lt;ans;
+	return 0;
+}
+
+</code></pre>
+<h1 id="f-encoded-strings-i签到题模拟">F. Encoded Strings I（签到题/模拟）</h1>
+<p><strong>题意：</strong> 队友A的，待补。</p>
+<p><strong>Solution：</strong> 队友A的，待补。</p>
+<pre><code class="language-c++">#include &lt;bits/stdc++.h&gt;
+#define il inline
+#define ll long long
+#define Max 1005
+#define int ll
+using namespace std;
+il ll read()
+{
+	char c=getchar();
+	ll x=0,f=1;
+	while(c&gt;'9'||c&lt;'0')
+	{
+		if(c=='-') f=-1;
+		c=getchar();
+	}
+	while(c&gt;='0'&amp;&amp;c&lt;='9')
+	{
+		x=x*10+c-'0';
+		c=getchar();
+	}
+	return x*f;
+}
+int n,a[Max],c[Max],id[Max];
+char s[Max],t[Max][Max];
+il bool cmp(int x,int y)
+{
+	int l=min(strlen(t[x]+1),strlen(t[y]+1));
+	for(int i=1;i&lt;=l;i++)
+	{
+		if(t[x][i]&lt;t[y][i]) return 0;
+		if(t[x][i]&gt;t[y][i]) return 1;
+	}
+	return strlen(t[x]+1)&gt;strlen(t[y]+1);
+}
+signed main()
+{
+	n=read();
+	scanf(&quot;%s&quot;,s+1);
+	for(int i=1;i&lt;=n;i++)
+	{
+		for(int j=1;j&lt;=26;j++) c[j]=0;
+		int tot=0;
+		for(int j=i;j&gt;=1;j--)
+		{
+			if(!c[s[j]-'a'+1]) t[i][j]=tot+'a',c[s[j]-'a'+1]=++tot;
+			else t[i][j]=c[s[j]-'a'+1]+'a'-1;
+			//cout&lt;&lt;j&lt;&lt;' '&lt;&lt;c[s[j]-'a'+1]&lt;&lt;' '&lt;&lt;s[j]&lt;&lt;' '&lt;&lt;tot&lt;&lt;&quot; qwq\n&quot;;
+		}
+	}
+	//for(int i=1;i&lt;=n;i++) puts(t[i]+1);
+	for(int i=1;i&lt;=n;i++) id[i]=i;
+	sort(id+1,id+1+n,cmp);
+	puts(t[id[1]]+1);
+}
+
+</code></pre>
+<h1 id="j-luggage-lockbfs">J. Luggage Lock（bfs）</h1>
+<p><strong>题意：</strong> 一个四位数密码。给定起始状态 <strong>A</strong> 和终止状态 <strong>B</strong> 。每次可以选择一段区间<strong>向上拧或向下拧</strong>（即<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mo>+</mo><mn>1</mn><mi mathvariant="normal">/</mi><mo>−</mo><mn>1</mn></mrow><annotation encoding="application/x-tex">+1/-1</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord">+</span><span class="mord">1</span><span class="mord">/</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">−</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:0.64444em;vertical-align:0em;"></span><span class="mord">1</span></span></span></span>）。</p>
+<p>求由A变为B的最小操作次数。</p>
+<p><strong>Solution：</strong> 因为所有的两组状态都可以转化成 <strong>起始状态为 0000</strong>。因此对于 <strong>0000</strong> 开始，其实只有 <strong>10000</strong> 种状态。</p>
+<p>预处理：利用 <strong>bfs</strong> 求最少步数。同时对已经得到的状态进行标记即可。</p>
+<p>然后即可对每组询问 <strong>O(1)</strong> 输出。</p>
+<pre><code class="language-c++">#include &lt;bits/stdc++.h&gt;
+#define PII pair&lt;string,int&gt;
+using namespace std;
+inline void read(int &amp;a) {a=0;int c=getchar(),b=1; while(c&gt;'9'||c&lt;'0') {if(c=='-')b=-1;c=getchar();} while(c&gt;='0'&amp;&amp;c&lt;='9') a=(a&lt;&lt;3)+(a&lt;&lt;1)+c-48,c=getchar();a*=b; }
+/**/
+const string opt[15] = {&quot;0001&quot;,&quot;0011&quot;,&quot;0111&quot;,&quot;1111&quot;,&quot;0010&quot;,&quot;0110&quot;,&quot;1110&quot;,&quot;0100&quot;,&quot;1100&quot;,&quot;1000&quot;};
+int vis[10005], ans[10005];
+/**/
+inline int get(string s)
+{
+	int ret = 0;
+	for(int i=0;i&lt;4;i++) ret=(ret&lt;&lt;3)+(ret&lt;&lt;1)+s[i]-'0';
+	return ret;
+}
+inline string work(string s,int p,int flag)
+{
+	string ret = s;
+	for(int i=0;i&lt;4;i++)
+	{
+		if(opt[p][i]=='0') continue;
+		ret[i]=(ret[i]-'0'+flag+10)%10+'0';
+	}
+	return ret;
+}
+int main()
+{
+	queue&lt;PII&gt;q;
+	q.push(PII(&quot;0000&quot;,0));
+	vis[0] = 1;
+	while(!q.empty())
+	{
+		PII t = q.front(); q.pop();
+		string u = t.first;
+		int step = t.second;
+		for (int i = 0; i &lt; 10; i++)
+		{
+
+			string s1 = work(u,i,1);
+			string s2 = work(u,i,-1);
+			int num1 = get(s1), num2 = get(s2);
+			if(!vis[num1])
+			{
+				vis[num1]=1;
+				ans[num1]=step + 1;
+				q.push(PII(s1, step + 1));
+			}
+			if(!vis[num2]) vis[num2] = 1, ans[num2] = step + 1, q.push(PII(s2, step + 1));
+		}
+	}
+	int t;
+	read(t);
+	string S1, S2, T;
+	while(t--)
+	{
+		cin &gt;&gt; S1 &gt;&gt; S2;
+		int ret = 0;
+		for(int i=0;i&lt;4;i++)
+		{
+			ret = ret * 10 + (S2[i]-S1[i]+10)%10;
+		}
+		cout &lt;&lt; ans[ret] &lt;&lt; '\n';
+	}
+	return 0;
+}
+</code></pre>
+<h1 id="b-bitwise-exclusive-or-sequence铜牌题">B. Bitwise Exclusive-OR Sequence（铜牌题）</h1>
+<p><strong>题意：</strong> 一段长度为 <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>n</mi></mrow><annotation encoding="application/x-tex">n</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.43056em;vertical-align:0em;"></span><span class="mord mathdefault">n</span></span></span></span> 的数。给定 <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>m</mi></mrow><annotation encoding="application/x-tex">m</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.43056em;vertical-align:0em;"></span><span class="mord mathdefault">m</span></span></span></span> 组关系。每组关系 <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mo>(</mo><mi>u</mi><mo separator="true">,</mo><mi>v</mi><mo separator="true">,</mo><mi>w</mi><mo>)</mo></mrow><annotation encoding="application/x-tex">(u,v,w)</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mopen">(</span><span class="mord mathdefault">u</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord mathdefault" style="margin-right:0.03588em;">v</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord mathdefault" style="margin-right:0.02691em;">w</span><span class="mclose">)</span></span></span></span> 描述了：<span class="katex"><span class="katex-mathml"><math><semantics><mrow><msub><mi>a</mi><mi>u</mi></msub><mo>⊕</mo><msub><mi>a</mi><mi>v</mi></msub><mo>=</mo><mi>w</mi></mrow><annotation encoding="application/x-tex">a_u \oplus a_v=w</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.73333em;vertical-align:-0.15em;"></span><span class="mord"><span class="mord mathdefault">a</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.151392em;"><span style="top:-2.5500000000000003em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathdefault mtight">u</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">⊕</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:0.58056em;vertical-align:-0.15em;"></span><span class="mord"><span class="mord mathdefault">a</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.151392em;"><span style="top:-2.5500000000000003em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathdefault mtight" style="margin-right:0.03588em;">v</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:0.43056em;vertical-align:0em;"></span><span class="mord mathdefault" style="margin-right:0.02691em;">w</span></span></span></span></p>
+<p>求这组数 各元素和 的最小值。</p>
+<p><strong>Solution：</strong> 可以根据每组关系建边，随意以一个有出边的点为树根进行遍历。</p>
+<p>定义 <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>d</mi><mi>i</mi><mi>s</mi><mo>[</mo><mi>u</mi><mo>]</mo></mrow><annotation encoding="application/x-tex">dis[u]</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathdefault">d</span><span class="mord mathdefault">i</span><span class="mord mathdefault">s</span><span class="mopen">[</span><span class="mord mathdefault">u</span><span class="mclose">]</span></span></span></span> 为 从根节点到 <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>u</mi></mrow><annotation encoding="application/x-tex">u</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.43056em;vertical-align:0em;"></span><span class="mord mathdefault">u</span></span></span></span> 的边权异或和。根据异或性质易知：<span class="katex"><span class="katex-mathml"><math><semantics><mrow><msub><mi>a</mi><mrow><mi>r</mi><mi>t</mi></mrow></msub><mo>⊕</mo><msub><mi>a</mi><mi>u</mi></msub><mo>=</mo><mi>d</mi><mi>i</mi><msub><mi>s</mi><mi>u</mi></msub></mrow><annotation encoding="application/x-tex">a_{rt} \oplus a_u = dis_u</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.73333em;vertical-align:-0.15em;"></span><span class="mord"><span class="mord mathdefault">a</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.2805559999999999em;"><span style="top:-2.5500000000000003em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathdefault mtight" style="margin-right:0.02778em;">r</span><span class="mord mathdefault mtight">t</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">⊕</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:0.58056em;vertical-align:-0.15em;"></span><span class="mord"><span class="mord mathdefault">a</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.151392em;"><span style="top:-2.5500000000000003em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathdefault mtight">u</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:0.84444em;vertical-align:-0.15em;"></span><span class="mord mathdefault">d</span><span class="mord mathdefault">i</span><span class="mord"><span class="mord mathdefault">s</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.151392em;"><span style="top:-2.5500000000000003em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathdefault mtight">u</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span></span></span></span></p>
+<p>如果出现两个不同值的 <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>d</mi><mi>i</mi><mi>s</mi><mo>[</mo><mi>u</mi><mo>]</mo></mrow><annotation encoding="application/x-tex">dis[u]</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathdefault">d</span><span class="mord mathdefault">i</span><span class="mord mathdefault">s</span><span class="mopen">[</span><span class="mord mathdefault">u</span><span class="mclose">]</span></span></span></span> 则数据出现矛盾输出 <strong>-1</strong>。</p>
+<p>对该森林的其中一个树，<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>t</mi><mi>o</mi><mi>t</mi><mo>[</mo><mi>i</mi><mo>]</mo></mrow><annotation encoding="application/x-tex">tot[i]</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathdefault">t</span><span class="mord mathdefault">o</span><span class="mord mathdefault">t</span><span class="mopen">[</span><span class="mord mathdefault">i</span><span class="mclose">]</span></span></span></span> 表示所有 <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>d</mi><mi>i</mi><mi>s</mi><mo>[</mo><mi>u</mi><mo>]</mo></mrow><annotation encoding="application/x-tex">dis[u]</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathdefault">d</span><span class="mord mathdefault">i</span><span class="mord mathdefault">s</span><span class="mopen">[</span><span class="mord mathdefault">u</span><span class="mclose">]</span></span></span></span> 的第 <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>i</mi></mrow><annotation encoding="application/x-tex">i</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.65952em;vertical-align:0em;"></span><span class="mord mathdefault">i</span></span></span></span> 位为1的数量。超过一半则让根该位为<strong>1</strong>更优，否则让根该位为<strong>0</strong>。</p>
+<pre><code class="language-c++">#include &lt;bits/stdc++.h&gt;
+#define ll long long
+using namespace std;
+inline void read(int &amp;a) {a=0;int c=getchar(),b=1; while(c&gt;'9'||c&lt;'0') {if(c=='-')b=-1;c=getchar();} while(c&gt;='0'&amp;&amp;c&lt;='9') a=(a&lt;&lt;3)+(a&lt;&lt;1)+c-48,c=getchar();a*=b; }
+/**/
+const int N = 1e5 + 5, M = 4e5 + 5;
+int n, m, head[N], cnt, dis[N], tot[N], vis[N], sum;
+bool err;
+ll ans;
+struct edge
+{
+	int nxt, to, w;
+}e[M];
+/**/
+inline void add(int u, int v, int w)
+{
+	e[++cnt] = (edge){head[u], v, w};
+	head[u] = cnt;
+}
+void dfs(int u, int fa, int ti)
+{
+	if(err) return;
+	for(int i = head[u]; i; i = e[i].nxt)
+	{
+		int v = e[i].to;
+		if(v == fa) continue;
+		if(vis[v])
+		{
+			if((dis[u] ^ e[i].w) == dis[v]) continue;
+			else {err = 1; return;}
+		}
+		vis[v] = ti;
+		dis[v] = (dis[u] ^ e[i].w);
+		sum++;
+		for(int j = 0; j &lt;= 30; j++)
+		{
+			if(dis[v] &amp; (1&lt;&lt;j)) tot[j]++;
+		}
+		dfs(v, u, ti);
+		if(err) return;
+	}
+}
+int main()
+{
+	read(n); read(m);
+	for(int i = 1, u, v, w; i &lt;= m; i++)
+	{
+		read(u); read(v); read(w);
+		if(u==v)
+		{
+			if(w) err = 1;
+			continue;
+		}
+		add(u, v, w);
+		add(v, u, w);
+	}
+	if(err) {puts(&quot;-1&quot;);return 0;}
+	for(int i = 1; i &lt;= n; i++)
+	{
+		if(!head[i]) continue;
+		if(vis[i]) continue;
+		vis[i] = i;
+		dfs(i, 0, i); sum++;
+		for(int j = 0; j &lt;= 30; j++)
+		{
+			ans += 1ll * min(tot[j], sum - tot[j]) * (1 &lt;&lt; j);
+			tot[j] = 0;
+		}
+		sum = 0;
+		if(err) {puts(&quot;-1&quot;); return 0;}	
+	}
+	if(err) {puts(&quot;-1&quot;); return 0;}
+	cout &lt;&lt; ans &lt;&lt; '\n';
+	return 0;
+}
+</code></pre>
+<h1 id="l-perfect-matchings树形dp容斥">L. Perfect Matchings（树形dp+容斥）</h1>
+<p><strong>题意：</strong> 队友A的，待补。</p>
+<p><strong>Solution：</strong> 队友A的，待补。</p>
+<pre><code class="language-c++">#include &lt;bits/stdc++.h&gt;
+#define il inline
+#define ll long long
+#define Max 4010
+#define Mod 998244353
+#define int ll
+using namespace std;
+il ll read()
+{
+	char c=getchar();
+	ll x=0,f=1;
+	while(c&gt;'9'||c&lt;'0')
+	{
+		if(c=='-') f=-1;
+		c=getchar();
+	}
+	while(c&gt;='0'&amp;&amp;c&lt;='9')
+	{
+		x=x*10+c-'0';
+		c=getchar();
+	}
+	return x*f;
+}
+struct node
+{
+	int t,nt;
+}e[Max&lt;&lt;1];
+int n,head[Max],tot,f[Max][Max][2],g[Max],sz[Max],ans;
+il void add(int u,int v)
+{
+	e[++tot].t=v;
+	e[tot].nt=head[u];
+	head[u]=tot;
+}
+il void dfs(int u,int fa)
+{
+	sz[u]=1;
+	for(int i=head[u];i;i=e[i].nt)
+	{
+		int v=e[i].t;
+		if(v==fa) continue;
+		dfs(v,u);
+		sz[u]+=sz[v];
+	}
+	int s=1;
+	//f[u][0][0]=1;
+	f[u][0][0]=1;
+	for(int i=head[u];i;i=e[i].nt)
+	{
+		int v=e[i].t;
+		if(v==fa) continue;
+		for(int j=s/2+1;j&gt;=0;j--)
+		{
+			for(int k=1;k&lt;=sz[v]/2+1;k++)
+			{
+				//if(j==0&amp;&amp;k==0) continue;
+				f[u][j+k][0]=(f[u][j+k][0]+f[u][j][0]*f[v][k][0]+f[u][j][0]*f[v][k][1])%Mod;
+				//f[u][0][0]=1;
+				f[u][j+k][1]=(f[u][j+k][1]+f[u][j][0]*f[v][k-1][0]+f[u][j][1]*(f[v][k][0]+f[v][k][1]))%Mod;
+				//cout&lt;&lt;u&lt;&lt;' '&lt;&lt;v&lt;&lt;' '&lt;&lt;j&lt;&lt;' '&lt;&lt;k&lt;&lt;' '&lt;&lt;f[1][1][1]&lt;&lt;&quot; qwq\n&quot;;
+			}
+		}
+		s+=sz[v];
+	}
+}
+signed main()
+{
+	n=read()*2;
+	for(int i=1;i&lt;n;i++)
+	{
+		int u=read(),v=read();
+		add(u,v),add(v,u);
+	}
+	g[0]=1;
+	for(int i=2;i&lt;=n;i+=2) g[i]=(i-1)*g[i-2]%Mod;
+	dfs(1,0);
+	//for(int i=0;i&lt;=n/2;i++) cout&lt;&lt;f[1][i][1]&lt;&lt;' '&lt;&lt;f[1][i][0]&lt;&lt;endl;
+	for(int i=0;i&lt;=n/2;i++)
+	{
+		ans=ans+(g[n-i*2]*(f[1][i][1]+f[1][i][0])%Mod*(i&amp;1?-1:1)+Mod);
+		ans=(ans+Mod)%Mod;
+	}
+	cout&lt;&lt;ans&lt;&lt;endl;
+}
+
+</code></pre>
+<h1 id="m-string-problemkmp">M. String Problem（KMP）</h1>
+<p><strong>题意：</strong> 给定一个长度为 <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>n</mi></mrow><annotation encoding="application/x-tex">n</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.43056em;vertical-align:0em;"></span><span class="mord mathdefault">n</span></span></span></span> 的字符串s。输出 <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>n</mi></mrow><annotation encoding="application/x-tex">n</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.43056em;vertical-align:0em;"></span><span class="mord mathdefault">n</span></span></span></span> 行 <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mo>(</mo><msub><mi>l</mi><mi>i</mi></msub><mo separator="true">,</mo><msub><mi>r</mi><mi>i</mi></msub><mo>)</mo></mrow><annotation encoding="application/x-tex">(l_i, r_i)</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mopen">(</span><span class="mord"><span class="mord mathdefault" style="margin-right:0.01968em;">l</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.31166399999999994em;"><span style="top:-2.5500000000000003em;margin-left:-0.01968em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathdefault mtight">i</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord"><span class="mord mathdefault" style="margin-right:0.02778em;">r</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.31166399999999994em;"><span style="top:-2.5500000000000003em;margin-left:-0.02778em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathdefault mtight">i</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mclose">)</span></span></span></span> 表示：</p>
+<p>对 s 的前缀 <span class="katex"><span class="katex-mathml"><math><semantics><mrow><msub><mi>s</mi><mrow><mn>1...</mn><mi>i</mi></mrow></msub></mrow><annotation encoding="application/x-tex">s_{1...i}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.58056em;vertical-align:-0.15em;"></span><span class="mord"><span class="mord mathdefault">s</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.31166399999999994em;"><span style="top:-2.5500000000000003em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">1</span><span class="mord mtight">.</span><span class="mord mtight">.</span><span class="mord mtight">.</span><span class="mord mathdefault mtight">i</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span></span></span></span> 中字典序最大的子串。</p>
+<p><strong>Solution：</strong> 首先容易得到 <span class="katex"><span class="katex-mathml"><math><semantics><mrow><msub><mi>r</mi><mi>i</mi></msub><mo>=</mo><mi>i</mi></mrow><annotation encoding="application/x-tex">r_i = i</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.58056em;vertical-align:-0.15em;"></span><span class="mord"><span class="mord mathdefault" style="margin-right:0.02778em;">r</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.31166399999999994em;"><span style="top:-2.5500000000000003em;margin-left:-0.02778em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathdefault mtight">i</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:0.65952em;vertical-align:0em;"></span><span class="mord mathdefault">i</span></span></span></span>。然后做了一个神奇的 <strong>KMP</strong> 。</p>
+<pre><code class="language-c++">#include &lt;bits/stdc++.h&gt;
+using namespace std;
+const int N = 1e6 + 5;
+char s[N];
+int nxt[N];
+int main()
+{
+	scanf(&quot;%s&quot;, s + 1);
+	int len = strlen(s + 1);
+	puts(&quot;1 1&quot;);
+	int pos = 1, j = 1;
+	for(int i = 2; i &lt;= len; i++)
+	{
+		while(j &amp;&amp; s[i] &gt; s[pos + nxt[j]])
+		{
+			pos += (j - nxt[j]);
+			j = nxt[j];
+		}
+		if(j &amp;&amp; s[i] == s[pos + nxt[j]])
+		{
+			j++;
+			nxt[j] = nxt[j - 1] + 1;
+		}
+		else nxt[++j] = 0;
+		printf(&quot;%d %d\n&quot;, pos, i);
+	}
+	return 0;
+}
+</code></pre>
 ]]></content>
     </entry>
     <entry>
