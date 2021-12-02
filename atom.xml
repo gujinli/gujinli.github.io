@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://gujinli.github.io</id>
     <title>瑾离不是锦鲤的小窝</title>
-    <updated>2021-12-01T11:01:02.478Z</updated>
+    <updated>2021-12-02T09:06:56.364Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://gujinli.github.io"/>
     <link rel="self" href="https://gujinli.github.io/atom.xml"/>
@@ -274,7 +274,7 @@ signed main()
 <p><strong>Solution：</strong> 对边按边权从小到大排序。询问离线，用n个堆维护每个点的询问（按k从小到大维护）。</p>
 <p>枚举边，对边（无向）的两个端点，分别取出能力值不能通过这条边的询问，记录答案。</p>
 <p>对于剩下的结点（全部能够通过这条边），利用并查集合并这两个节点，同时将堆按并查集的思路 启发式合并（小堆并大堆）。</p>
-<p>枚举完边后对于剩余没有得到答案的询问，单独取出并记录答案。</p>
+<p>枚举完边后对于剩余没有得到答案的询问（即合并完成的询问），单独取出并记录答案。</p>
 <pre><code class="language-c++">#include &lt;bits/stdc++.h&gt;
 #define PII pair&lt;int, int&gt;
 using namespace std;
@@ -330,9 +330,52 @@ int main()
 	return 0;
 }
 </code></pre>
-<h1 id="j-two-binary-strings-problem银牌题">J Two Binary Strings Problem（银牌题）</h1>
-<p><strong>题意：</strong></p>
+<h1 id="j-two-binary-strings-problem银牌题bitset">J Two Binary Strings Problem（银牌题/bitset）</h1>
+<p><strong>题意：</strong> 给定长度为n的两个01串A和B。<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>f</mi><mo>(</mo><mi>l</mi><mo separator="true">,</mo><mi>r</mi><mo>)</mo></mrow><annotation encoding="application/x-tex">f(l,r)</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathdefault" style="margin-right:0.10764em;">f</span><span class="mopen">(</span><span class="mord mathdefault" style="margin-right:0.01968em;">l</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord mathdefault" style="margin-right:0.02778em;">r</span><span class="mclose">)</span></span></span></span>表示区间<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>l</mi></mrow><annotation encoding="application/x-tex">l</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.69444em;vertical-align:0em;"></span><span class="mord mathdefault" style="margin-right:0.01968em;">l</span></span></span></span>到<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>r</mi></mrow><annotation encoding="application/x-tex">r</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.43056em;vertical-align:0em;"></span><span class="mord mathdefault" style="margin-right:0.02778em;">r</span></span></span></span>的众数。（01数量相等时为0）</p>
+<p>求一个长度同样为n的01串<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>a</mi><mi>n</mi><mi>s</mi></mrow><annotation encoding="application/x-tex">ans</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.43056em;vertical-align:0em;"></span><span class="mord mathdefault">a</span><span class="mord mathdefault">n</span><span class="mord mathdefault">s</span></span></span></span>，<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>a</mi><mi>n</mi><msub><mi>s</mi><mi>k</mi></msub></mrow><annotation encoding="application/x-tex">ans_k</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.58056em;vertical-align:-0.15em;"></span><span class="mord mathdefault">a</span><span class="mord mathdefault">n</span><span class="mord"><span class="mord mathdefault">s</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.33610799999999996em;"><span style="top:-2.5500000000000003em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathdefault mtight" style="margin-right:0.03148em;">k</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span></span></span></span>为 <strong>1</strong> 时当且仅当：对所有<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mn>1</mn><mo>≤</mo><mi>i</mi><mo>≤</mo><mi>n</mi><mspace width="1em"/><mi mathvariant="normal">有</mi><mi>f</mi><mo>(</mo><mi>m</mi><mi>a</mi><mi>x</mi><mo>(</mo><mi>i</mi><mo>−</mo><mi>k</mi><mo>+</mo><mn>1</mn><mo separator="true">,</mo><mn>1</mn><mo>)</mo><mo separator="true">,</mo><mi>i</mi><mo>)</mo><mo>=</mo><msub><mi>B</mi><mi>i</mi></msub></mrow><annotation encoding="application/x-tex">1\le i\le n\quad{有}f(max(i-k+1, 1), i) = B_i</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.78041em;vertical-align:-0.13597em;"></span><span class="mord">1</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">≤</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:0.79549em;vertical-align:-0.13597em;"></span><span class="mord mathdefault">i</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">≤</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathdefault">n</span><span class="mspace" style="margin-right:1em;"></span><span class="mord"><span class="mord cjk_fallback">有</span></span><span class="mord mathdefault" style="margin-right:0.10764em;">f</span><span class="mopen">(</span><span class="mord mathdefault">m</span><span class="mord mathdefault">a</span><span class="mord mathdefault">x</span><span class="mopen">(</span><span class="mord mathdefault">i</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">−</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:0.77777em;vertical-align:-0.08333em;"></span><span class="mord mathdefault" style="margin-right:0.03148em;">k</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord">1</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord">1</span><span class="mclose">)</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord mathdefault">i</span><span class="mclose">)</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:0.83333em;vertical-align:-0.15em;"></span><span class="mord"><span class="mord mathdefault" style="margin-right:0.05017em;">B</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.31166399999999994em;"><span style="top:-2.5500000000000003em;margin-left:-0.05017em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathdefault mtight">i</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span></span></span></span> 成立</p>
 <p><strong>Solution：</strong></p>
+<figure data-type="image" tabindex="1"><img src="https://gujinli.github.io/post-images/1638436006668.png" alt="" loading="lazy"></figure>
+<pre><code class="language-c++">#include &lt;bits/stdc++.h&gt;
+using namespace std;
+inline void read(int &amp;a) {a=0;int c=getchar(),b=1; while(c&gt;'9'||c&lt;'0') {if(c=='-')b=-1;c=getchar();} while(c&gt;='0'&amp;&amp;c&lt;='9') a=(a&lt;&lt;3)+(a&lt;&lt;1)+c-48,c=getchar();a*=b; }
+/**/
+const int N = 5e4 + 5;
+int t, n, tot[N*2];
+char A[N], B[N];
+bitset&lt;N&gt;C[N], ans, all1;
+/**/
+int main()
+{
+	read(t);
+	while(t--)
+	{
+		read(n);
+		scanf(&quot;%s%s&quot;, A, B);
+		for(int i = 0; i &lt; n; i++) all1[i] = 1, C[i] = 0; ans = all1;
+		for(int i = 0; i &lt;= 2*n; i++) tot[i] = -2; tot[n] = -1;
+		int rec = n;
+		for(int i = 0; i &lt; n; i++)
+		{
+			A[i] == '1' ? ++rec : --rec;
+			int j = tot[rec];
+			// printf(&quot;i = %d, j = %d\n&quot;, i + 1, j);
+			if(j == -2) A[i] == '1' ? C[i] = all1 : C[i] = 0;
+			else
+			{
+				//1 -&gt; (i - j - 1) 位 = A[i] , 第 i - j 位 = 0 ( 0和1 恰好 相等) , 剩下的由之前的递推而来
+				if(A[i] == '1') C[i] |= all1 &gt;&gt; (n - (i - j - 1) ); //原来n位，变成(i-j-1)位
+				if(j != -1) C[i] |=  C[j] &lt;&lt; (i - j);
+				else if(C[i][i]) C[i] |= all1 &lt;&lt; i; // K &gt; (i - j);
+			}
+			// for(int k = 0; k &lt; n; k++) cout &lt;&lt; C[i][k]; puts(&quot;&quot;);
+			tot[rec] = i;
+			ans &amp;= (B[i]=='1' ? C[i] : ~C[i]);
+		}
+		for(int i = 0; i &lt; n; i++) cout &lt;&lt; ans[i]; putchar('\n');
+	}
+	return 0;
+}
+</code></pre>
 ]]></content>
     </entry>
     <entry>
