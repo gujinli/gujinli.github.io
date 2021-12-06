@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://gujinli.github.io</id>
     <title>瑾离不是锦鲤的小窝</title>
-    <updated>2021-12-02T11:35:39.206Z</updated>
+    <updated>2021-12-06T07:52:26.044Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://gujinli.github.io"/>
     <link rel="self" href="https://gujinli.github.io/atom.xml"/>
@@ -10,6 +10,96 @@
     <logo>https://gujinli.github.io/images/avatar.png</logo>
     <icon>https://gujinli.github.io/favicon.ico</icon>
     <rights>All rights reserved 2021, 瑾离不是锦鲤的小窝</rights>
+    <entry>
+        <title type="html"><![CDATA[漫漫ACM之路]]></title>
+        <id>https://gujinli.github.io/post/man-man-acm-zhi-lu/</id>
+        <link href="https://gujinli.github.io/post/man-man-acm-zhi-lu/">
+        </link>
+        <updated>2021-12-06T07:52:02.000Z</updated>
+        <content type="html"><![CDATA[<h1 id="图论">图论：</h1>
+<p>**生成树问题： **</p>
+<ul>
+<li>最小生成树
+<ul>
+<li>次小生成树(非严格/严格)</li>
+<li>瓶颈生成树</li>
+<li>kruscal重构树</li>
+</ul>
+</li>
+<li>最小树形图</li>
+<li>最小直径生成树</li>
+</ul>
+<p><strong>树上问题:</strong></p>
+<ul>
+<li><strong>基础性质</strong> (直径,重心)</li>
+<li>最近公共祖先(LCA)</li>
+<li>树上启发式合并(dsu on tree)</li>
+<li>虚树</li>
+<li>树链剖分
+<ul>
+<li>重链剖分</li>
+<li>长链剖分</li>
+</ul>
+</li>
+<li>树分治:
+<ul>
+<li>点分治</li>
+<li>边分治</li>
+<li>点分树</li>
+<li>动态树分治</li>
+</ul>
+</li>
+<li>树同构:
+<ul>
+<li>AHU</li>
+<li>树哈希</li>
+</ul>
+</li>
+</ul>
+<p><strong>最短路问题：</strong></p>
+<ul>
+<li>Johnson 全源最短路径算法</li>
+<li>分层图最短路</li>
+<li>k短路</li>
+<li>同余最短路</li>
+<li>差分约束</li>
+</ul>
+<p><strong>连通问题:</strong></p>
+<ul>
+<li>
+<p>强连通分量</p>
+</li>
+<li>
+<p>双连通分量</p>
+</li>
+<li>
+<p>割点和桥</p>
+</li>
+<li>
+<p>圆方树</p>
+</li>
+<li>
+<p><strong>2-SAT</strong></p>
+</li>
+</ul>
+<p><strong>特殊图问题:</strong></p>
+<ul>
+<li>欧拉图</li>
+<li>哈密顿图</li>
+<li><strong>二分图</strong>
+<ul>
+<li>图的着色</li>
+</ul>
+</li>
+<li>平面图</li>
+</ul>
+<p><strong>特殊应用:</strong></p>
+<ul>
+<li>斯坦纳树</li>
+<li>矩阵树定理</li>
+</ul>
+]]></content>
+    </entry>
     <entry>
         <title type="html"><![CDATA[杂记]]></title>
         <id>https://gujinli.github.io/post/za-ji/</id>
