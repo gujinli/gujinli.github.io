@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://gujinli.github.io</id>
     <title>瑾离不是锦鲤的小窝</title>
-    <updated>2021-12-06T07:52:59.914Z</updated>
+    <updated>2021-12-21T12:01:31.311Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://gujinli.github.io"/>
     <link rel="self" href="https://gujinli.github.io/atom.xml"/>
@@ -10,6 +10,224 @@
     <logo>https://gujinli.github.io/images/avatar.png</logo>
     <icon>https://gujinli.github.io/favicon.ico</icon>
     <rights>All rights reserved 2021, 瑾离不是锦鲤的小窝</rights>
+    <entry>
+        <title type="html"><![CDATA[CF #762 (Div.3) 赛后题解]]></title>
+        <id>https://gujinli.github.io/post/cf-762-div3-sai-hou-ti-jie/</id>
+        <link href="https://gujinli.github.io/post/cf-762-div3-sai-hou-ti-jie/">
+        </link>
+        <updated>2021-12-21T12:00:47.000Z</updated>
+        <content type="html"><![CDATA[<h1 id="a-square-string">A Square String?</h1>
+<p><strong>题意：</strong> 判断一个串是否可以由两个串拼接而成。</p>
+<pre><code class="language-c++">#include &lt;bits/stdc++.h&gt;
+using namespace std;
+inline void read(int &amp;a) {a=0;int c=getchar(),b=1; while(c&gt;'9'||c&lt;'0') {if(c=='-')b=-1;c=getchar();} while(c&gt;='0'&amp;&amp;c&lt;='9') a=(a&lt;&lt;3)+(a&lt;&lt;1)+c-48,c=getchar();a*=b; }
+int t;
+string s;
+/**/
+int main()
+{
+    read(t);
+    while(t--)
+    {
+        cin &gt;&gt; s;
+        int n = s.length();
+        if(n &amp; 1) {puts(&quot;NO&quot;); continue;}
+        if(s.substr(0, n/2) == s.substr(n/2, n/2)) puts(&quot;YES&quot;);
+        else puts(&quot;NO&quot;);
+    }
+    return 0;
+}
+</code></pre>
+<h1 id="b-squares-and-cubes">B Squares and Cubes</h1>
+<p><strong>题意：</strong> 判断n以内有多少正整数是平方/立方数。</p>
+<pre><code class="language-c++">#include &lt;bits/stdc++.h&gt;
+#define int long long
+using namespace std;
+inline void read(int &amp;a) {a=0;int c=getchar(),b=1; while(c&gt;'9'||c&lt;'0') {if(c=='-')b=-1;c=getchar();} while(c&gt;='0'&amp;&amp;c&lt;='9') a=(a&lt;&lt;3)+(a&lt;&lt;1)+c-48,c=getchar();a*=b; }
+/**/
+int t, n, ans;
+/**/
+signed main()
+{
+    read(t);
+    while(t--)
+    {
+        read(n); ans = 0;
+        for(int i = 1; i * i &lt;= n; i++)
+        {
+            ans++;
+            int num = i * i * i;
+            if(num &gt; n) continue;
+            int x = sqrt(num);
+            if(x * x == num) continue;
+            ans++;
+        }
+        cout &lt;&lt; ans &lt;&lt; '\n';
+    }
+    return 0;
+}
+</code></pre>
+<h1 id="c-wrong-addition">C Wrong Addition</h1>
+<p><strong>题意：</strong> 定义傻子加法为：按位相加后把结果直接写在答案里。即：17236 + 03465 = 1106911</p>
+<p><strong>Solution：</strong> 注意细节简单模拟即可。</p>
+<pre><code class="language-c++">#include &lt;bits/stdc++.h&gt;
+#define PII pair&lt;int, int&gt;
+using namespace std;
+inline void read(int &amp;a) {a=0;int c=getchar(),b=1; while(c&gt;'9'||c&lt;'0') {if(c=='-')b=-1;c=getchar();} while(c&gt;='0'&amp;&amp;c&lt;='9') a=(a&lt;&lt;3)+(a&lt;&lt;1)+c-48,c=getchar();a*=b; }
+/**/
+const int N = 50;
+int t;
+char a[N], s[N];
+/**/
+int main()
+{
+    read(t);
+    while(t--)
+    {
+        scanf(&quot;%s%s&quot;,a+1,s+1);
+        int l1 = strlen(a + 1), l2 = strlen(s + 1);
+        vector&lt;int&gt;ans;
+        int i, j;
+        for(i = l2, j = l1; i; i--)
+        {
+            int num1, num2;
+            if(j) num1 = a[j--] - '0';
+            else num1 = 0;
+            num2 = s[i] - '0';
+            if(num1 &gt; num2 &amp;&amp; i == 1) break;
+            if(num1 &gt; num2) num2 = num2 + 10 * (s[--i] - '0');
+            if(num2 - num1 &gt; 9 || num2 - num1 &lt; 0) break;
+            ans.push_back(num2 - num1);
+        }
+        if(j != 0 || i != 0) {puts(&quot;-1&quot;);continue;}
+        int sz = ans.size();
+        bool flag = 0;
+        for(int k = sz-1; k &gt;= 0; k--)
+        {
+            if(!flag &amp;&amp; !ans[k]) continue;
+            flag = 1;
+            cout &lt;&lt; ans[k];
+        }
+        puts(&quot;&quot;);
+    }
+    return 0;
+}
+</code></pre>
+<h1 id="d-new-years-problem">D New Year's Problem</h1>
+<p><strong>题意：</strong></p>
+<p>n个人。m个商店。</p>
+<p>每个商店有对应n个人的n个礼物，每个礼物有一个满意度<span class="katex"><span class="katex-mathml"><math><semantics><mrow><msub><mi>a</mi><mrow><mi>i</mi><mo separator="true">,</mo><mi>j</mi></mrow></msub></mrow><annotation encoding="application/x-tex">a_{i,j}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.716668em;vertical-align:-0.286108em;"></span><span class="mord"><span class="mord mathdefault">a</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.311664em;"><span style="top:-2.5500000000000003em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathdefault mtight">i</span><span class="mpunct mtight">,</span><span class="mord mathdefault mtight" style="margin-right:0.05724em;">j</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.286108em;"><span></span></span></span></span></span></span></span></span></span> ，选择 <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>n</mi><mo>−</mo><mn>1</mn></mrow><annotation encoding="application/x-tex">n-1</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.66666em;vertical-align:-0.08333em;"></span><span class="mord mathdefault">n</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">−</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:0.64444em;vertical-align:0em;"></span><span class="mord">1</span></span></span></span> 个商店使得：所有人能/获得的最大满意度的最小值最大。</p>
+<p><strong>Solution：</strong></p>
+<p>定义<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>l</mi><mi>i</mi><mi>e</mi><mo>[</mo><mi>i</mi><mo>]</mo></mrow><annotation encoding="application/x-tex">lie[i]</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathdefault" style="margin-right:0.01968em;">l</span><span class="mord mathdefault">i</span><span class="mord mathdefault">e</span><span class="mopen">[</span><span class="mord mathdefault">i</span><span class="mclose">]</span></span></span></span> 表示第<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>i</mi></mrow><annotation encoding="application/x-tex">i</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.65952em;vertical-align:0em;"></span><span class="mord mathdefault">i</span></span></span></span> 个人的最大满意度。</p>
+<p>显然，n个人选择n个商店的话，只需要把n个人最大满意度所在的商店选择即可。</p>
+<p>根据鸽巢原理，n个人选择n-1的话，必然有两列的最优值在同一行。</p>
+<p>我们枚举商店，选择一个商店记录其最大和次大，除去这两个人后，剩下的全部选择最大值即可。</p>
+<p>复杂度<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>O</mi><mo>(</mo><mi>n</mi><mi>m</mi><mo>)</mo></mrow><annotation encoding="application/x-tex">O(nm)</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathdefault" style="margin-right:0.02778em;">O</span><span class="mopen">(</span><span class="mord mathdefault">n</span><span class="mord mathdefault">m</span><span class="mclose">)</span></span></span></span></p>
+<pre><code class="language-c++">#include &lt;bits/stdc++.h&gt;
+using namespace std;
+inline void read(int &amp;a) {a=0;int c=getchar(),b=1; while(c&gt;'9'||c&lt;'0') {if(c=='-')b=-1;c=getchar();} while(c&gt;='0'&amp;&amp;c&lt;='9') a=(a&lt;&lt;3)+(a&lt;&lt;1)+c-48,c=getchar();a*=b; }
+const int N = 1e5 + 5;
+int t, n, m, ans, lie[N], pos1, pos2;
+int main()
+{
+    read(t);
+    while(t--)
+    {
+        read(m); read(n); ans = 0;
+        vector&lt;int&gt;v[m+2];
+        for(int i = 1; i &lt;= m; i++)
+        {
+            v[i].push_back(0);
+            for(int j = 1, x; j &lt;= n; j++)
+            {
+                lie[j] = 0;
+                read(x);
+                v[i].push_back(x);
+            }
+        }
+        for(int i = 1; i &lt;= n; i++)
+        {
+            for(int j = 1; j &lt;= m; j++)
+            {
+                lie[i] = max(lie[i], v[j][i]);
+            }
+        }
+        for(int i = 1; i &lt;= m; i++)
+        {
+            pos1 = pos2 = 0;
+            for(int j = 1; j &lt;= n; j++)
+            {
+                if(v[i][j] &gt; v[i][pos1]) pos2 = pos1, pos1 = j;
+                else if(v[i][j] &gt; v[i][pos2]) pos2 = j;
+            }
+            int maxnum = min(v[i][pos1], v[i][pos2]);
+            for(int j = 1; j &lt;= n; j++)
+            {
+                if(j == pos1 || j == pos2) continue;
+                maxnum = min(maxnum, lie[j]);
+            }
+            ans = max(ans, maxnum);
+        }
+        cout &lt;&lt; ans &lt;&lt; '\n';
+    }
+    return 0;
+}
+</code></pre>
+<h1 id="e-mex-and-increments">E MEX and Increments</h1>
+<p><strong>题意：</strong> 给定一个长度为n的数列满足每个数都&lt;=n。每次操作可以将某个数+1。求使序列mex = {0...n} 的最小操作次数。</p>
+<p><strong>Solution：</strong> 当我们求 i 时， 如果 0...i-1 所有数都有，则 <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>a</mi><mi>n</mi><mi>s</mi><mo>[</mo><mi>i</mi><mo>]</mo></mrow><annotation encoding="application/x-tex">ans[i]</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathdefault">a</span><span class="mord mathdefault">n</span><span class="mord mathdefault">s</span><span class="mopen">[</span><span class="mord mathdefault">i</span><span class="mclose">]</span></span></span></span> = 当前数列中 i 的数量。（开个桶记录即可）</p>
+<p>如果求到第 i 个，没有 i 则<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>a</mi><mi>n</mi><mi>s</mi><mo>[</mo><mi>i</mi><mo>]</mo><mo>=</mo><mn>0</mn></mrow><annotation encoding="application/x-tex">ans[i] = 0</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathdefault">a</span><span class="mord mathdefault">n</span><span class="mord mathdefault">s</span><span class="mopen">[</span><span class="mord mathdefault">i</span><span class="mclose">]</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:0.64444em;vertical-align:0em;"></span><span class="mord">0</span></span></span></span> ，同时从前面的 <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>t</mi><mi>o</mi><mi>t</mi></mrow><annotation encoding="application/x-tex">tot</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.61508em;vertical-align:0em;"></span><span class="mord mathdefault">t</span><span class="mord mathdefault">o</span><span class="mord mathdefault">t</span></span></span></span> 中找一个离得最近且 <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mo>&gt;</mo><mn>2</mn></mrow><annotation encoding="application/x-tex">&gt;2</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.5782em;vertical-align:-0.0391em;"></span><span class="mrel">&gt;</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:0.64444em;vertical-align:0em;"></span><span class="mord">2</span></span></span></span> 的数，将其变成 <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>i</mi></mrow><annotation encoding="application/x-tex">i</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.65952em;vertical-align:0em;"></span><span class="mord mathdefault">i</span></span></span></span> 。</p>
+<pre><code class="language-c++">#include &lt;bits/stdc++.h&gt;
+#define int long long
+using namespace std;
+inline void read(int &amp;a) {a=0;int c=getchar(),b=1; while(c&gt;'9'||c&lt;'0') {if(c=='-')b=-1;c=getchar();} while(c&gt;='0'&amp;&amp;c&lt;='9') a=(a&lt;&lt;3)+(a&lt;&lt;1)+c-48,c=getchar();a*=b; }
+const int N = 2e5 + 5;
+int t, n, tot[N], a[N], lst, rec, pre[N];
+signed main()
+{
+	read(t);
+	while(t--)
+	{
+		read(n);
+		memset(tot, 0, sizeof(tot));
+		for(int i = 1; i &lt;= n; i++)
+		{
+			read(a[i]);
+			tot[a[i]]++;
+			pre[i] = i - 1;
+		}
+		pre[0] = -1;
+		sort(a + 1, a + 1 + n);
+		lst = -1, rec = 0;
+		for(int i = 0; i &lt;= n; i++)
+		{
+			if(tot[i])
+			{
+				cout &lt;&lt; rec + tot[i] &lt;&lt; ' ';
+				if(tot[i] &gt; 1) pre[i] = lst, lst = i;
+			}
+			else
+			{
+				cout &lt;&lt; rec &lt;&lt; ' ';
+				if(lst == -1 || tot[lst] &lt; 2)
+				{
+					for(int j = i+1; j &lt;= n; j++) cout &lt;&lt; -1 &lt;&lt;' ';
+					break;
+				}
+				rec += i - lst;
+				tot[lst]--;
+				while(lst != -1 &amp;&amp; tot[lst] &lt; 2) lst = pre[lst];
+				pre[i] = lst;
+				tot[i]++;
+			}
+		}
+		puts(&quot;&quot;);
+	}
+	return 0;
+}
+</code></pre>
+]]></content>
+    </entry>
     <entry>
         <title type="html"><![CDATA[漫漫ACM之路]]></title>
         <id>https://gujinli.github.io/post/man-man-acm-zhi-lu/</id>
@@ -888,7 +1106,8 @@ int main()
 </blockquote>
 <blockquote>
 <ul>
-<li>差分约束：按照<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>d</mi><mi>i</mi><mi>s</mi><mo>[</mo><mi>v</mi><mo>]</mo><mo>&lt;</mo><mo>=</mo><mi>d</mi><mi>i</mi><mi>s</mi><mo>[</mo><mi>u</mi><mo>]</mo><mo>+</mo><mi>w</mi></mrow><annotation encoding="application/x-tex">dis[v] &lt;= dis[u] + w</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathdefault">d</span><span class="mord mathdefault">i</span><span class="mord mathdefault">s</span><span class="mopen">[</span><span class="mord mathdefault" style="margin-right:0.03588em;">v</span><span class="mclose">]</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">&lt;</span></span><span class="base"><span class="strut" style="height:0.36687em;vertical-align:0em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathdefault">d</span><span class="mord mathdefault">i</span><span class="mord mathdefault">s</span><span class="mopen">[</span><span class="mord mathdefault">u</span><span class="mclose">]</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:0.43056em;vertical-align:0em;"></span><span class="mord mathdefault" style="margin-right:0.02691em;">w</span></span></span></span>的形式建边即可</li>
+<li>差分约束：按照<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>d</mi><mi>i</mi><mi>s</mi><mo>[</mo><mi>v</mi><mo>]</mo><mo>&lt;</mo><mo>=</mo><mi>d</mi><mi>i</mi><mi>s</mi><mo>[</mo><mi>u</mi><mo>]</mo><mo>+</mo><mi>w</mi></mrow><annotation encoding="application/x-tex">dis[v] &lt;= dis[u] + w</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathdefault">d</span><span class="mord mathdefault">i</span><span class="mord mathdefault">s</span><span class="mopen">[</span><span class="mord mathdefault" style="margin-right:0.03588em;">v</span><span class="mclose">]</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">&lt;</span></span><span class="base"><span class="strut" style="height:0.36687em;vertical-align:0em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathdefault">d</span><span class="mord mathdefault">i</span><span class="mord mathdefault">s</span><span class="mopen">[</span><span class="mord mathdefault">u</span><span class="mclose">]</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:0.43056em;vertical-align:0em;"></span><span class="mord mathdefault" style="margin-right:0.02691em;">w</span></span></span></span>的形式建边求最短路或反之求最长路即可</li>
+<li>差分约束最优解 最大值求最短路 最小值求最长路</li>
 </ul>
 </blockquote>
 <blockquote>
