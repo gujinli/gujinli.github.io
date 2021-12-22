@@ -6,7 +6,7 @@
 
 <title>CF #762 (Div.3) 赛后题解 | 瑾离不是锦鲤的小窝</title>
 
-<link rel="shortcut icon" href="https://gujinli.github.io/favicon.ico?v=1640088087133">
+<link rel="shortcut icon" href="https://gujinli.github.io/favicon.ico?v=1640165684552">
 
 <link href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css" rel="stylesheet">
 <link rel="stylesheet" href="https://gujinli.github.io/styles/main.css">
@@ -85,7 +85,7 @@
             
         </div>
         <div style="text-align: center">
-            <form id="gridea-search-form" style="position: relative" data-update="1640088087133"
+            <form id="gridea-search-form" style="position: relative" data-update="1640165684552"
                 action="/search/">
                 <input class="search-input" autocomplete="off" spellcheck="false" name="q" placeholder="搜索文章" />
                 <i class="fas fa-search gt-c-content-color-first" style="position: absolute; top: 9px; left: 10px;"></i>
@@ -332,6 +332,121 @@ signed main()
 	return 0;
 }
 </code></pre>
+<h1 id="f-lets-play-the-hat">F. Let's Play the Hat?</h1>
+<p><strong>题意：</strong> n个人m张桌子玩k次游戏。每个人必须玩k次游戏。每个桌子的人数都是 n/m （上取整 或 下取整）。</p>
+<p>定义 <span class="katex"><span class="katex-mathml"><math><semantics><mrow><msub><mi>b</mi><mi>i</mi></msub></mrow><annotation encoding="application/x-tex">b_i</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.84444em;vertical-align:-0.15em;"></span><span class="mord"><span class="mord mathdefault">b</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.31166399999999994em;"><span style="top:-2.5500000000000003em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathdefault mtight">i</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span></span></span></span> 为第<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>i</mi></mrow><annotation encoding="application/x-tex">i</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.65952em;vertical-align:0em;"></span><span class="mord mathdefault">i</span></span></span></span> 个人在人数为 n/m(上取整) 的桌子上玩的游戏次数。对任意 $ i, j $ 满足 <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi mathvariant="normal">∣</mi><msub><mi>b</mi><mi>i</mi></msub><mo>−</mo><msub><mi>b</mi><mi>j</mi></msub><mi mathvariant="normal">∣</mi><mo>&lt;</mo><mo>=</mo><mn>1</mn></mrow><annotation encoding="application/x-tex">|b_i - b_j| &lt;= 1</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord">∣</span><span class="mord"><span class="mord mathdefault">b</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.31166399999999994em;"><span style="top:-2.5500000000000003em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathdefault mtight">i</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">−</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:1.036108em;vertical-align:-0.286108em;"></span><span class="mord"><span class="mord mathdefault">b</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.311664em;"><span style="top:-2.5500000000000003em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathdefault mtight" style="margin-right:0.05724em;">j</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.286108em;"><span></span></span></span></span></span></span><span class="mord">∣</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">&lt;</span></span><span class="base"><span class="strut" style="height:0.36687em;vertical-align:0em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:0.64444em;vertical-align:0em;"></span><span class="mord">1</span></span></span></span></p>
+<p><strong>Solution：</strong> 首先，m张桌子分给n个人，显然每张桌子的人数是确定的——</p>
+<p>大桌为n%m个，小桌为 m - n%m个。（每张桌子先坐 n/m（下取整）个人，剩下的 n%m 个人随便挑一个坐）</p>
+<p>我们要使每个人在大桌上坐的次数相差不超过1。策略是这样的：</p>
+<p>每次让坐在大桌上次数较少的人坐大桌，坐不满从较多的人补。这样显然可以保证相差不超过1。</p>
+<p>实现的话可以考虑利用vector的rotate来滚动选择的人，每次坐大桌的人都让其移动到整个序列的最后排队。</p>
+<pre><code class="language-c++">#include &lt;bits/stdc++.h&gt;
+using namespace std;
+inline void read(int &amp;a) {a=0;int c=getchar(),b=1; while(c&gt;'9'||c&lt;'0') {if(c=='-')b=-1;c=getchar();} while(c&gt;='0'&amp;&amp;c&lt;='9') a=(a&lt;&lt;3)+(a&lt;&lt;1)+c-48,c=getchar();a*=b; }
+const int N = 2e5 + 5;
+int t, n, m, k;
+int main()
+{
+    read(t);
+    while(t--)
+    {
+        read(n); read(m); read(k);
+        vector&lt;int&gt;v(n);
+        for(int i = 0; i &lt; n; i++) v[i] = i + 1;
+        int bt = n % m, bn = ceil(1.0 * n / m), sn = n / m;
+        for(int i = 1; i &lt;= k; i++)
+        {
+            int pos = 0;
+            for(int j = 1, num; j &lt;= m; j++)
+            {
+                if(j &lt;= bt) num = bn; else num = sn;
+                cout &lt;&lt; num &lt;&lt; ' ';
+                while(num--) cout &lt;&lt; v[pos++] &lt;&lt; ' ';
+                puts(&quot;&quot;);
+            }
+            rotate(v.begin(), v.begin() + bn * bt, v.end());
+        }
+        puts(&quot;&quot;);
+    }
+    return 0;
+}
+</code></pre>
+<h1 id="g-unusual-minesweeper">G. Unusual Minesweeper</h1>
+<p><strong>题意：</strong> 有n个地雷。已知地雷爆炸半径k （按十字形爆炸）和每个地雷的坐标即爆炸时间。</p>
+<p>一个地雷爆炸后会瞬间引爆 十字形 上的所有其他地雷，定义该传递的时间是瞬间完成的（即0s）。</p>
+<p>同时，我们每一秒还可以选择一个未爆炸的地雷点燃，求最快几s可以让所有的地雷爆炸。（从第0s开始，每s一个）</p>
+<p><strong>Solution：</strong> 用并查集将互相影响的所有地雷丢进一个集合，得到每个集合的最小爆炸时间。</p>
+<p>将该时间递增排序后，枚举第 <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>i</mi><mi mathvariant="normal">.</mi><mi mathvariant="normal">.</mi><mi mathvariant="normal">.</mi><mi>n</mi></mrow><annotation encoding="application/x-tex">i ... n</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.65952em;vertical-align:0em;"></span><span class="mord mathdefault">i</span><span class="mord">.</span><span class="mord">.</span><span class="mord">.</span><span class="mord mathdefault">n</span></span></span></span> 个地雷是人为引爆的 则时间为 <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>m</mi><mi>a</mi><mi>x</mi><mo>(</mo><mi>n</mi><mo>−</mo><mi>i</mi><mo separator="true">,</mo><mi>t</mi><mi>i</mi><mo>[</mo><mi>i</mi><mo>−</mo><mn>1</mn><mo>]</mo><mo>)</mo></mrow><annotation encoding="application/x-tex">max(n-i, ti[i-1])</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathdefault">m</span><span class="mord mathdefault">a</span><span class="mord mathdefault">x</span><span class="mopen">(</span><span class="mord mathdefault">n</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">−</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathdefault">i</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord mathdefault">t</span><span class="mord mathdefault">i</span><span class="mopen">[</span><span class="mord mathdefault">i</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">−</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord">1</span><span class="mclose">]</span><span class="mclose">)</span></span></span></span>。</p>
+<pre><code class="language-c++">#include &lt;bits/stdc++.h&gt;
+using namespace std;
+inline void read(int &amp;a) {a=0;int c=getchar(),b=1; while(c&gt;'9'||c&lt;'0') {if(c=='-')b=-1;c=getchar();} while(c&gt;='0'&amp;&amp;c&lt;='9') a=(a&lt;&lt;3)+(a&lt;&lt;1)+c-48,c=getchar();a*=b; }
+const int N = 2e5 + 5;
+int t, n, k, ans, tot[N], fa[N], ti[N];
+bool vis[N];
+struct node { int x, y, t, id; }a[N];
+inline bool cmp1(node i, node j)
+{
+    if(i.x == j.x) return i.y &lt; j.y;
+    return i.x &lt; j.x;
+}
+inline bool cmp2(node i, node j)
+{
+    if(i.y == j.y) return i.x &lt; j.x;
+    return i.y &lt; j.y;
+}
+inline int find(int x) {return x == fa[x] ? x : fa[x] = find(fa[x]);}
+inline void merge(int i, int j)
+{
+    int f1 = find(i), f2 = find(j);
+    if(f1 == f2) return;
+    if(ti[f1] &lt; ti[f2]) fa[f2] = f1;
+    else fa[f1] = f2;
+}
+int main()
+{
+    read(t);
+    while(t--)
+    {
+        read(n); read(k); tot[0] = 0;
+        for(int i = 1; i &lt;= n; i++)
+        {
+            read(a[i].x); read(a[i].y); read(a[i].t); a[i].id = i;
+            fa[i] = i; ti[i] = a[i].t; vis[i] = 0;
+        }
+        sort(a + 1, a + 1 + n, cmp1);
+        for(int i = 1; i &lt; n; i++) if(a[i].x == a[i + 1].x &amp;&amp; a[i + 1].y - a[i].y &lt;= k) merge(a[i].id, a[i + 1].id);
+        sort(a + 1, a + 1 + n, cmp2);
+        for(int i = 1; i &lt; n; i++) if(a[i].y == a[i + 1].y &amp;&amp; a[i + 1].x - a[i].x &lt;= k) merge(a[i].id, a[i + 1].id);
+        for(int i = 1; i &lt;= n; i++)
+        {
+            int f1 = find(i);
+            if(!vis[f1]) vis[f1] = 1, tot[++tot[0]] = ti[f1];
+        }
+        sort(tot + 1, tot + 1 + tot[0]);
+        ans = min(tot[tot[0]], tot[0] - 1);
+        for(int i = tot[0]; i &gt;= 1; i--)
+        {
+            int num = tot[0] - i + 1;
+            ans = min(ans, max(num - 1, tot[i - 1]));
+        }
+        cout &lt;&lt; ans &lt;&lt; '\n';
+    }
+    return 0;
+}
+</code></pre>
+<h1 id="h-permutation-and-queries">H. Permutation and Queries</h1>
+<p><strong>题意：</strong> 长度为 <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>n</mi></mrow><annotation encoding="application/x-tex">n</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.43056em;vertical-align:0em;"></span><span class="mord mathdefault">n</span></span></span></span> 的一个排列 <span class="katex"><span class="katex-mathml"><math><semantics><mrow><msub><mi>p</mi><mi>i</mi></msub><mo>(</mo><mn>1</mn><mo>≤</mo><mi>i</mi><mo>≤</mo><mi>n</mi><mo>)</mo></mrow><annotation encoding="application/x-tex">p_{i} (1\le i \le n)</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord"><span class="mord mathdefault">p</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.31166399999999994em;"><span style="top:-2.5500000000000003em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathdefault mtight">i</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mopen">(</span><span class="mord">1</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">≤</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:0.79549em;vertical-align:-0.13597em;"></span><span class="mord mathdefault">i</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">≤</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathdefault">n</span><span class="mclose">)</span></span></span></span> ，对其进行两种类型的  <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>q</mi></mrow><annotation encoding="application/x-tex">q</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.625em;vertical-align:-0.19444em;"></span><span class="mord mathdefault" style="margin-right:0.03588em;">q</span></span></span></span> 次 操作。</p>
+<blockquote>
+<ul>
+<li>
+<p>OPT 1 x y ： <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>s</mi><mi>w</mi><mi>a</mi><mi>p</mi><mo>(</mo><msub><mi>p</mi><mi>x</mi></msub><mo separator="true">,</mo><msub><mi>p</mi><mi>y</mi></msub><mo>)</mo></mrow><annotation encoding="application/x-tex">swap(p_x, p_y)</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1.036108em;vertical-align:-0.286108em;"></span><span class="mord mathdefault">s</span><span class="mord mathdefault" style="margin-right:0.02691em;">w</span><span class="mord mathdefault">a</span><span class="mord mathdefault">p</span><span class="mopen">(</span><span class="mord"><span class="mord mathdefault">p</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.151392em;"><span style="top:-2.5500000000000003em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathdefault mtight">x</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord"><span class="mord mathdefault">p</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.15139200000000003em;"><span style="top:-2.5500000000000003em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathdefault mtight" style="margin-right:0.03588em;">y</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.286108em;"><span></span></span></span></span></span></span><span class="mclose">)</span></span></span></span></p>
+</li>
+<li>
+<p>OPT 2 i k :  print the number that <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>i</mi></mrow><annotation encoding="application/x-tex">i</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.65952em;vertical-align:0em;"></span><span class="mord mathdefault">i</span></span></span></span> will become if we assign <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>i</mi><mo>=</mo><msub><mi>p</mi><mi>i</mi></msub></mrow><annotation encoding="application/x-tex">i=p_i</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.65952em;vertical-align:0em;"></span><span class="mord mathdefault">i</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:0.625em;vertical-align:-0.19444em;"></span><span class="mord"><span class="mord mathdefault">p</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.31166399999999994em;"><span style="top:-2.5500000000000003em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathdefault mtight">i</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span></span></span></span> for <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>k</mi></mrow><annotation encoding="application/x-tex">k</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.69444em;vertical-align:0em;"></span><span class="mord mathdefault" style="margin-right:0.03148em;">k</span></span></span></span> times.</p>
+</li>
+</ul>
+</blockquote>
+<p><strong>Solution：</strong> 待补。</p>
 
                 </div>
             </article>
