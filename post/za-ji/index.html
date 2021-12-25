@@ -6,7 +6,7 @@
 
 <title>杂记 | 瑾离不是锦鲤的小窝</title>
 
-<link rel="shortcut icon" href="https://gujinli.github.io/favicon.ico?v=1640421655279">
+<link rel="shortcut icon" href="https://gujinli.github.io/favicon.ico?v=1640429732087">
 
 <link href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css" rel="stylesheet">
 <link rel="stylesheet" href="https://gujinli.github.io/styles/main.css">
@@ -85,7 +85,7 @@
             
         </div>
         <div style="text-align: center">
-            <form id="gridea-search-form" style="position: relative" data-update="1640421655279"
+            <form id="gridea-search-form" style="position: relative" data-update="1640429732087"
                 action="/search/">
                 <input class="search-input" autocomplete="off" spellcheck="false" name="q" placeholder="搜索文章" />
                 <i class="fas fa-search gt-c-content-color-first" style="position: absolute; top: 9px; left: 10px;"></i>
@@ -152,6 +152,21 @@ bit.to_ullong() 返回它转换为unsigned long long的结果，如果超出范�
 bit.to_string() 返回它转换为string的结果
 </code></pre>
 </blockquote>
+<h1 id="杂stl">杂stl</h1>
+<ul>
+<li><strong>rotate</strong> ：用于vector</li>
+</ul>
+<blockquote>
+<p>rotate(a, b, c) 把 b ~ c 的元素放到 a 前面。 把[a ~ b) 和 [b, c) 互换</p>
+</blockquote>
+<ul>
+<li>高效位运算</li>
+</ul>
+<p>__builtin_ffs (unsigned int x)返回x的最后一位1的是从后向前第几位，比如7368（1110011001000）返回4</p>
+<p>__builtin_clz (unsigned int x)返回前导的0的个数。</p>
+<p>__builtin_ctz (unsigned int x) 返回后面的0个个数，和; builtin_clz相对。</p>
+<p>__ builtin_popcount (unsigned int x) 返回二进制表示中1的个数。</p>
+<p>__builtin_parity (unsigned int x) 返回x的奇偶校验位，也就是x的1的个数模2的结果。</p>
 
                 </div>
             </article>

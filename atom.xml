@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://gujinli.github.io</id>
     <title>瑾离不是锦鲤的小窝</title>
-    <updated>2021-12-25T08:41:02.208Z</updated>
+    <updated>2021-12-25T10:55:34.863Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://gujinli.github.io"/>
     <link rel="self" href="https://gujinli.github.io/atom.xml"/>
@@ -753,6 +753,21 @@ bit.to_ullong() 返回它转换为unsigned long long的结果，如果超出范�
 bit.to_string() 返回它转换为string的结果
 </code></pre>
 </blockquote>
+<h1 id="杂stl">杂stl</h1>
+<ul>
+<li><strong>rotate</strong> ：用于vector</li>
+</ul>
+<blockquote>
+<p>rotate(a, b, c) 把 b ~ c 的元素放到 a 前面。 把[a ~ b) 和 [b, c) 互换</p>
+</blockquote>
+<ul>
+<li>高效位运算</li>
+</ul>
+<p>__builtin_ffs (unsigned int x)返回x的最后一位1的是从后向前第几位，比如7368（1110011001000）返回4</p>
+<p>__builtin_clz (unsigned int x)返回前导的0的个数。</p>
+<p>__builtin_ctz (unsigned int x) 返回后面的0个个数，和; builtin_clz相对。</p>
+<p>__ builtin_popcount (unsigned int x) 返回二进制表示中1的个数。</p>
+<p>__builtin_parity (unsigned int x) 返回x的奇偶校验位，也就是x的1的个数模2的结果。</p>
 ]]></content>
     </entry>
     <entry>
