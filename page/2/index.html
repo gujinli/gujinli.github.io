@@ -4,7 +4,7 @@
 <meta name="description" content="" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 
-<title>动态规划基础 | 瑾离不是锦鲤的小窝</title>
+<title>瑾离不是锦鲤的小窝</title>
 
 <link rel="shortcut icon" href="https://gujinli.github.io/favicon.ico?v=1640421054292">
 
@@ -25,11 +25,11 @@
 
 
 
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.css">
 </head>
 <body>
 <div class="main gt-bg-theme-color-first">
-    <nav class="navbar navbar-expand-lg">
+    <div class="main-content">
+        <nav class="navbar navbar-expand-lg">
     <a class="navbar-brand" href="/">
         <img class="user-avatar" src="/images/avatar.png" alt="头像">
         <div class="site-name gt-c-content-color-first">
@@ -105,127 +105,49 @@
     }
 </script>
 
-    <div class="post-container">
-        <div class="post-detail gt-bg-theme-color-second">
-            <article class="gt-post-content">
-                <h2 class="post-title">
-                    动态规划基础
-                </h2>
-                <div class="post-info">
-                    <time class="post-time gt-c-content-color-first">
-                        · 2021-11-29 ·
-                    </time>
-                    
-                        <a href="https://gujinli.github.io/tag/bPNlkdeeR/" class="post-tags">
-                            # 学习笔记
-                        </a>
-                    
-                </div>
-                <div class="post-content">
-                    <h1 id="线性dp">线性dp：</h1>
-<ul>
-<li><strong>LIS：</strong></li>
-</ul>
-<blockquote>
-<p>严格上升：*lower_bound(f+1,f+1+n,a[i]) = a[i];</p>
-</blockquote>
-<blockquote>
-<p>非严格上升：*upper_bound(f+1,f+1+n,a[i]) = a[i];</p>
-</blockquote>
-<ul>
-<li><strong>LCS:</strong> 最长公共子序列</li>
-</ul>
-<h1 id="背包dp">背包dp:</h1>
-<ul>
-<li>
-<p>01背包：每种物品只能取一件</p>
-</li>
-<li>
-<p>完全背包：每种物品可以取无数件</p>
-</li>
-<li>
-<p>多重背包：每种物品有固定件数。</p>
-</li>
-</ul>
-<blockquote>
-<p>可进行二进制拆分优化。</p>
-</blockquote>
-<ul>
-<li>分组背包：对不同组做背包就可以了。</li>
-</ul>
-<h1 id="区间dp">区间dp:</h1>
-<ul>
-<li>
-<p>枚举区间长度</p>
-</li>
-<li>
-<p>枚举区间起点</p>
-</li>
-<li>
-<p>枚举区间断点</p>
-</li>
-</ul>
-<h1 id="树形dp">树形dp:</h1>
-<ul>
-<li><span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>f</mi><mo>[</mo><mi>i</mi><mo>]</mo><mo>[</mo><mi>j</mi><mo>]</mo></mrow><annotation encoding="application/x-tex">f[i][j]</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathdefault" style="margin-right:0.10764em;">f</span><span class="mopen">[</span><span class="mord mathdefault">i</span><span class="mclose">]</span><span class="mopen">[</span><span class="mord mathdefault" style="margin-right:0.05724em;">j</span><span class="mclose">]</span></span></span></span> 中的 i 用来表示结点， j 用来表示状态信息。</li>
-</ul>
-<h1 id="状压dp">状压dp：</h1>
-<h1 id="数位dp">数位dp：</h1>
-<h1 id="记忆化搜索">记忆化搜索</h1>
-<blockquote>
-<p>类似dp。先写出dp方程然后在搜索中利用记忆化数组记录最优解。（剪枝？）</p>
-</blockquote>
 
-                </div>
-            </article>
-        </div>
-
+        <div class="post-list-container">
+    <div class="post-inner">
         
-            <div class="next-post">
-                <div class="next gt-c-content-color-first">下一篇</div>
-                <a href="https://gujinli.github.io/post/ji-chu-shu-ju-jie-gou/" class="post-title gt-a-link">
-                    基础数据结构
-                </a>
+            <div class="post gt-bg-theme-color-second">
+                <div class="post-left">
+                    <div>
+                        
+                        <a href="https://gujinli.github.io/post/suan-fa-ji-chu/">
+                            <span class="post-title gt-c-content-color-first">算法基础</span>
+                        </a>
+                    </div>
+                    <div class="gt-post-content post-abstract gt-c-content-color-second">
+                        
+                    </div>
+                    <div class="post-info">
+                        <time class="post-time gt-c-content-color-first">
+                            发布于 · 2021-11-29 ·
+                        </time>
+                        
+                            <a href="https://gujinli.github.io/tag/bPNlkdeeR/" class="post-tag">
+                                # 学习笔记
+                            </a>
+                        
+                    </div>
+                </div>
+                
+                    <a href="https://gujinli.github.io/post/suan-fa-ji-chu/" class="post-feature-image"
+                       style="background-image: url('https://gujinli.github.io/post-images/suan-fa-ji-chu.jpg')">
+                    </a>
+                
             </div>
         
+    </div>
+</div>
 
-        
-            <span id="/post/dong-tai-gui-hua-ji-chu/" class="leancloud_visitors" data-flag-title="动态规划基础">
-                <em class="post-meta-item-text">阅读量 </em>
-                <i class="leancloud-visitors-count">0</i>
-            </span>
-        
+        <div class="pagination-container">
+    
+        <a href="https://gujinli.github.io/" class="prev-page gt-a-link">上一页</a>
+    
+    
+</div>
 
-        
-
-        
-            <script src='https://cdn.jsdelivr.net/npm/valine/dist/Valine.min.js'></script>
-
-<style>
-	div#vcomments{
-		width:100%;
-		max-width: 1000px;
-		padding: 2.5%
-	}
-</style>
-
-
-	<div id="vcomments"></div>
-
-<script>
-	new Valine({
-		el: '#vcomments',
-		appId: '',
-		appKey: '',
-		avatar: '',
-		pageSize: 5,
-		recordIp: true,
-		placeholder: 'Just Go Go',
-		visitor: true,
-	});
-</script>
-
-        
 
         <div class="site-footer gt-c-content-color-first">
     <div class="slogan gt-c-content-color-first">ACM打铁/异地恋中——</div>
