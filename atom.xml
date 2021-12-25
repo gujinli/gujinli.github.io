@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://gujinli.github.io</id>
     <title>瑾离不是锦鲤的小窝</title>
-    <updated>2021-12-25T07:24:24.703Z</updated>
+    <updated>2021-12-25T07:29:16.535Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://gujinli.github.io"/>
     <link rel="self" href="https://gujinli.github.io/atom.xml"/>
@@ -16,7 +16,7 @@
         <link href="https://gujinli.github.io/post/cf-1615-global-sai-hou-ti-jie/">
         </link>
         <updated>2021-12-25T07:23:51.000Z</updated>
-        <content type="html"><![CDATA[<p><a href="https://codeforces.com/contest/1615/problem/A">A - Closing The Gap</a></p>
+        <content type="html"><![CDATA[<h1 id="a-closing-the-gap"><a href="https://codeforces.com/contest/1615/problem/A">A - Closing The Gap</a></h1>
 <blockquote>
 <p>n个数。每次可以把一个-1，另一个+1。使<strong>最大值-最小值</strong> 最小。</p>
 </blockquote>
@@ -42,7 +42,7 @@ int main()
 	return 0;
 }
 </code></pre>
-<p><a href="https://codeforces.com/contest/1615/problem/B">B - And It's Non-Zero</a></p>
+<h1 id="b-and-its-non-zero"><a href="https://codeforces.com/contest/1615/problem/B">B - And It's Non-Zero</a></h1>
 <blockquote>
 <p>求l到r中最少删去几个数，使得l到r的**与&amp;**和不为0</p>
 </blockquote>
@@ -79,7 +79,7 @@ int main()
 	return 0;
 }
 </code></pre>
-<p><a href="https://codeforces.com/contest/1615/problem/C">C - Menorah</a></p>
+<h1 id="c-menorah"><a href="https://codeforces.com/contest/1615/problem/C">C - Menorah</a></h1>
 <blockquote>
 <p>两个01串s1和s2。求最少的操作数把s1变为s2，不能则为-1</p>
 <p>操作：固定一个1，其余位全部取反</p>
@@ -134,7 +134,7 @@ int main()
 	return 0;
 }
 </code></pre>
-<p><a href="https://codeforces.com/contest/1615/problem/E">E - Purple Crayon</a></p>
+<h1 id="e-purple-crayon"><a href="https://codeforces.com/contest/1615/problem/E">E - Purple Crayon</a></h1>
 <blockquote>
 <p>一个初始全部为空白节点的树。红（<strong>先手</strong>）蓝两方轮流对其染色：（注：以下操作可以进行任意次）</p>
 <ul>
