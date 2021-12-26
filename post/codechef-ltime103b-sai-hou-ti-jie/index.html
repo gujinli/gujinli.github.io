@@ -4,7 +4,7 @@
 <meta name="description" content="" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 
-<title>关于 | 瑾离不是锦鲤的小窝</title>
+<title>codechef LTIME103B 赛后题解 | 瑾离不是锦鲤的小窝</title>
 
 <link rel="shortcut icon" href="https://gujinli.github.io/favicon.ico?v=1640491886394">
 
@@ -109,49 +109,90 @@
         <div class="post-detail gt-bg-theme-color-second">
             <article class="gt-post-content">
                 <h2 class="post-title">
-                    关于
+                    codechef LTIME103B 赛后题解
                 </h2>
                 <div class="post-info">
                     <time class="post-time gt-c-content-color-first">
-                        · 2019-01-25 ·
+                        · 2021-12-26 ·
                     </time>
                     
                 </div>
                 <div class="post-content">
-                    <blockquote>
-<p>欢迎来到我的小站呀，很高兴遇见你！🤝</p>
-</blockquote>
-<h2 id="关于本站">🏠 关于本站</h2>
-<p>本站于2021/11/29建立。</p>
-<h2 id="博主是谁">👨‍💻 博主是谁</h2>
+                    <p><a href="https://www.codechef.com/LTIME103B">比赛链接</a></p>
+<h1 id="a-optimal-sorting">A. <a href="https://www.codechef.com/LTIME103B/problems/OPTSORT">Optimal Sorting</a><img src="https://www.codechef.com/sites/all/modules/codechef_tags/images/solved.png?v=1" alt="100/100" loading="lazy"></h1>
 <blockquote>
-<p>gujinli/koifish/chuxuan_557/huabaimo</p>
+<p>选择一段连续区间sort的代价是这段区间的最大值-最小值。求把整个数列sort的最小代价</p>
 </blockquote>
-<p>乱七八糟取得id一大堆。现役大一某双非一本ACMer打铁人🏋️‍♀️</p>
-<p>以及和自己的女朋友2000公里异地恋中👫</p>
-<h2 id="兴趣爱好">⛹ 兴趣爱好</h2>
-<p>游戏：独立/音乐节奏/街机/步行模拟器/基建/apex/雀魂......etc.</p>
-<p>音乐：旋律说唱/future bass/lofi/jazz hiphop/日语</p>
-<p>B站：偶尔看点vtuber/美食纪录片/生活vlog/有趣的游戏实况</p>
-<h2 id="联系我呀">📬 联系我呀</h2>
-<blockquote>
-<p>QQ：1825932656<br>
-CF_ID: chuxuan_557 (欢迎大佬来看我丢人🤦‍♂)<br>
-<img src="https://gujinli.github.io/post-images/1638228315899.png" alt="" loading="lazy"></p>
-</blockquote>
-<blockquote>
-<p>Steam: 935067720<br>
-<img src="https://gujinli.github.io/post-images/1638228670974.png" alt="" loading="lazy"></p>
-</blockquote>
+<p>一整段区间分开sort更优 当且仅当 后面所有数的最小值 &gt; 当前最大值。即产生了一段<strong>空隙</strong></p>
+<p>因为当前最大值如果大于后面所有数的最小值的话，必然要合并在一起sort。</p>
+<p>维护后缀最小值从前向后枚举即可。复杂度 O(n)</p>
+<pre><code class="language-c++">#include &lt;bits/stdc++.h&gt;
+#define ll long long
+#define mp make_pair
+#define fi first
+#define se second
+#define pb push_back
+#define vi vector&lt;int&gt;
+#define pi pair&lt;int, int&gt;
+#define fr(a) freopen(a, &quot;r&quot;, stdin)
+#define fo(a) freopen(a, &quot;w&quot;, stdout);
+#define mod 998244353
+template&lt;typename T&gt; bool chkmin(T &amp;a, T b){return (b &lt; a) ? a = b, 1 : 0;}
+template&lt;typename T&gt; bool chkmax(T &amp;a, T b){return (b &gt; a) ? a = b, 1 : 0;}
+ll ksm(ll a, ll b) {if (b == 0) return 1; ll ns = ksm(a, b &gt;&gt; 1); ns = ns * ns % mod; if (b &amp; 1) ns = ns * a % mod; return ns;}
+using namespace std;
+const int maxn = 200005;
+/**/
+int t, n, a[maxn], mi[maxn];
+/**/
+int main()
+{
+	// fr(&quot;test.in&quot;);
+	ios::sync_with_stdio(0);cin.tie(0);
+	cin &gt;&gt; t;
+	while(t--) {
+		cin &gt;&gt; n;
+		for(int i = 1; i &lt;= n; i++) {
+			cin &gt;&gt; a[i];
+		}
+		mi[n] = a[n];
+		for(int i = n - 1; i &gt;= 1; i--) {
+			mi[i] = min(mi[i + 1], a[i]);
+		}
+		int ans = 0, maxnum = 0, minnum = 0x3f3f3f3f;
+		mi[n + 1] = INT_MAX;
+		for(int i = 1; i &lt;= n; i++) {
+			maxnum = max(maxnum, a[i]);
+			minnum = min(minnum, a[i]);
+			if(mi[i + 1] &gt; maxnum) {
+				ans += maxnum - minnum;
+				maxnum = 0;
+				minnum = 0x3f3f3f3f;
+			}
+		}
+		cout &lt;&lt; ans &lt;&lt; '\n';
+	}
+	return 0;
+}
+</code></pre>
+<h1 id="bsleep-technique">B.<a href="https://www.codechef.com/LTIME103B/problems/SLEEPTECH">Sleep Technique</a></h1>
+<blockquote></blockquote>
 
                 </div>
             </article>
         </div>
 
         
+            <div class="next-post">
+                <div class="next gt-c-content-color-first">下一篇</div>
+                <a href="https://gujinli.github.io/post/codechef-infi21b-sai-hou-ti-jie/" class="post-title gt-a-link">
+                    codechef INFI21B 赛后题解
+                </a>
+            </div>
+        
 
         
-            <span id="/post/about/" class="leancloud_visitors" data-flag-title="关于">
+            <span id="/post/codechef-ltime103b-sai-hou-ti-jie/" class="leancloud_visitors" data-flag-title="codechef LTIME103B 赛后题解">
                 <em class="post-meta-item-text">阅读量 </em>
                 <i class="leancloud-visitors-count">0</i>
             </span>

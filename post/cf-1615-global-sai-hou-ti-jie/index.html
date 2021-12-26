@@ -6,7 +6,7 @@
 
 <title>CF 1615 global 赛后题解 | 瑾离不是锦鲤的小窝</title>
 
-<link rel="shortcut icon" href="https://gujinli.github.io/favicon.ico?v=1640429732087">
+<link rel="shortcut icon" href="https://gujinli.github.io/favicon.ico?v=1640491886394">
 
 <link href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css" rel="stylesheet">
 <link rel="stylesheet" href="https://gujinli.github.io/styles/main.css">
@@ -85,7 +85,7 @@
             
         </div>
         <div style="text-align: center">
-            <form id="gridea-search-form" style="position: relative" data-update="1640429732087"
+            <form id="gridea-search-form" style="position: relative" data-update="1640491886394"
                 action="/search/">
                 <input class="search-input" autocomplete="off" spellcheck="false" name="q" placeholder="搜索文章" />
                 <i class="fas fa-search gt-c-content-color-first" style="position: absolute; top: 9px; left: 10px;"></i>
@@ -118,70 +118,7 @@
                     
                 </div>
                 <div class="post-content">
-                    <h1 id="a-closing-the-gap"><a href="https://codeforces.com/contest/1615/problem/A">A - Closing The Gap</a></h1>
-<blockquote>
-<p>n个数。每次可以把一个-1，另一个+1。使<strong>最大值-最小值</strong> 最小。</p>
-</blockquote>
-<p>只需要让sum均摊到n个数上，sum%n==0则答案为0，否则为1</p>
-<pre><code class="language-c++">#include &lt;bits/stdc++.h&gt;
-using namespace std;
-inline void read(int &amp;a) {a=0;int c=getchar(),b=1; while(c&gt;'9'||c&lt;'0') {if(c=='-')b=-1;c=getchar();} while(c&gt;='0'&amp;&amp;c&lt;='9') a=(a&lt;&lt;3)+(a&lt;&lt;1)+c-48,c=getchar();a*=b; }
-/**/
-const int N = 105;
-int t, n, a[N], sum;
-/**/
-int main()
-{
-	read(t);
-	while(t--)
-	{
-		sum = 0;
-		read(n);
-		for(int i = 1; i &lt;= n; i++) read(a[i]), sum += a[i];
-		if(sum % n) puts(&quot;1&quot;);
-		else puts(&quot;0&quot;);
-	}
-	return 0;
-}
-</code></pre>
-<h1 id="b-and-its-non-zero"><a href="https://codeforces.com/contest/1615/problem/B">B - And It's Non-Zero</a></h1>
-<blockquote>
-<p>求l到r中最少删去几个数，使得l到r的**与&amp;**和不为0</p>
-</blockquote>
-<p>按位统计每位为1的数的个数。找到0的个数最少的位即可</p>
-<pre><code class="language-c++">#include &lt;bits/stdc++.h&gt;
-using namespace std;
-inline void read(int &amp;a) {a=0;int c=getchar(),b=1; while(c&gt;'9'||c&lt;'0') {if(c=='-')b=-1;c=getchar();} while(c&gt;='0'&amp;&amp;c&lt;='9') a=(a&lt;&lt;3)+(a&lt;&lt;1)+c-48,c=getchar();a*=b; }
-/**/
-const int N = 2e5 + 5, inf = 0x3f3f3f3f;
-int t, l, r, sum[N][25], ans;
-/**/
-int main()
-{
-	for(int i = 1; i &lt;= 2e5; i++)
-	{
-		for(int j = 20; j &gt;= 0; j--)
-		{
-			sum[i][j] = sum[i - 1][j];
-			if(i &amp; (1&lt;&lt;j)) sum[i][j]++;
-		}
-	}
-	read(t);
-	while(t--)
-	{
-		read(l); read(r);
-		ans = inf;
-		for(int i = 20; i &gt;= 0; i--)
-		{
-			int x = sum[r][i] - sum[l - 1][i];
-			ans = min(ans, r - l + 1 - x);
-		}
-		cout &lt;&lt; ans &lt;&lt; '\n';
-	}
-	return 0;
-}
-</code></pre>
-<h1 id="c-menorah"><a href="https://codeforces.com/contest/1615/problem/C">C - Menorah</a></h1>
+                    <h1 id="c-menorah"><a href="https://codeforces.com/contest/1615/problem/C">C - Menorah</a></h1>
 <blockquote>
 <p>两个01串s1和s2。求最少的操作数把s1变为s2，不能则为-1</p>
 <p>操作：固定一个1，其余位全部取反</p>
@@ -232,6 +169,106 @@ int main()
 		if(sc1 == sc0 + 1) ans = min(ans, sc1 + sc0);
 		if(ans == 0x3f3f3f3f) cout &lt;&lt; -1 &lt;&lt; '\n';
 		else cout &lt;&lt; ans &lt;&lt; '\n';
+	}
+	return 0;
+}
+</code></pre>
+<h1 id="d-xor-mas-tree"><a href="https://codeforces.com/contest/1615/problem/D">D - X(or)-mas Tree</a></h1>
+<blockquote>
+<p>给定一个树，边权为-1表示未知。给定m个节点间路径异或和二进制1个数的奇偶性，判断能否构造一个合法的树满足条件</p>
+</blockquote>
+<ul>
+<li>一个性质：设两个数为x,y。二进制下x有a个1，y有b个1。则：
+<ul>
+<li>a ^ b = num_1(x ^ y) % 2</li>
+</ul>
+</li>
+</ul>
+<p>所以对于每个边权，我们只需要考虑其1的个数的奇偶性。把m条边加上后一起遍历判断，不确定的边利用异或的性质输出边权即可</p>
+<p>注意这里用了内置的位运算函数，简单介绍一下</p>
+<p>__builtin_ffs (unsigned int x)返回x的最后一位1的是从后向前第几位，比如7368（1110011001000）返回4</p>
+<p>__builtin_clz (unsigned int x)返回前导的0的个数。</p>
+<p>__builtin_ctz (unsigned int x) 返回后面的0个个数，和; builtin_clz相对。</p>
+<p>__ builtin_popcount (unsigned int x) 返回二进制表示中1的个数。</p>
+<p>__builtin_parity (unsigned int x) 返回x的奇偶校验位，也就是x的1的个数模2的结果。</p>
+<pre><code class="language-c++">#include &lt;bits/stdc++.h&gt;
+#define ll long long
+#define mp make_pair
+#define fi first
+#define se second
+#define pb push_back
+#define vi vector&lt;int&gt;
+#define pi pair&lt;int, int&gt;
+#define fr(a) freopen(a, &quot;r&quot;, stdin)
+#define fo(a) freopen(a, &quot;w&quot;, stdout);
+#define mod 998244353
+template&lt;typename T&gt; bool chkmin(T &amp;a, T b){return (b &lt; a) ? a = b, 1 : 0;}
+template&lt;typename T&gt; bool chkmax(T &amp;a, T b){return (b &gt; a) ? a = b, 1 : 0;}
+ll ksm(ll a, ll b) {if (b == 0) return 1; ll ns = ksm(a, b &gt;&gt; 1); ns = ns * ns % mod; if (b &amp; 1) ns = ns * a % mod; return ns;}
+using namespace std;
+const int maxn = 200005;
+/**/
+int t, n, m, err;
+int dis[maxn], vis[maxn];
+vector&lt;pi&gt;g[maxn];
+/**/
+void dfs(int u) {
+	if(err) return;
+	for(auto i:g[u]) {
+		int v = i.fi, w = i.se;
+		if(dis[v] == -1) {
+			dis[v] = dis[u] ^ w;
+			dfs(v);
+		}
+		else if(dis[v] != (dis[u] ^ w)) {
+			err = 1;
+			return;
+		}
+	}
+}
+void solve() {
+	err = 0;
+	vector&lt; array&lt;int, 3&gt; &gt;ed;
+	cin &gt;&gt; n &gt;&gt; m;
+	for(int i = 1; i &lt;= n; i++) {
+		g[i].clear();
+		dis[i] = -1;
+	}
+	for(int i = 1; i &lt; n; i++) {
+		int u, v, w;
+		cin &gt;&gt; u &gt;&gt; v &gt;&gt; w;
+		ed.pb({u, v, w});
+		if(w == -1) continue;
+		w = __builtin_parity(w);
+		g[u].pb({v, w});
+		g[v].pb({u, w});
+	}
+	for(int i = 1; i &lt;= m; i++) {
+		int u, v, w;
+		cin &gt;&gt; u &gt;&gt; v &gt;&gt; w;
+		g[u].pb({v, w});
+		g[v].pb({u, w});
+	}
+	for(int i = 1; i &lt;= n; i++) {
+		if(dis[i] == -1) dis[i] = 0, dfs(i);
+	}
+	if(err) {puts(&quot;NO&quot;); return;}
+	puts(&quot;YES&quot;);
+	for(auto i: ed) {
+		int u = i[0], v = i[1], w = i[2];
+		if(w == -1) w = dis[u] ^ dis[v];
+		printf(&quot;%d %d %d\n&quot;, u, v, w);
+	}
+}
+int main()
+{
+	// fr(&quot;test.in&quot;);
+	// fo(&quot;test.out&quot;);
+	ios::sync_with_stdio(0);cin.tie(0);
+	int T;
+	cin &gt;&gt; T;
+	while(T--) {
+		solve();
 	}
 	return 0;
 }
@@ -337,7 +374,7 @@ int main()
             <div class="next-post">
                 <div class="next gt-c-content-color-first">下一篇</div>
                 <a href="https://gujinli.github.io/post/cf-762-div3-sai-hou-ti-jie/" class="post-title gt-a-link">
-                    CF 762 Div.3 赛后题解
+                    CF 1619 div3 赛后题解
                 </a>
             </div>
         

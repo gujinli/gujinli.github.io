@@ -4,7 +4,7 @@
 <meta name="description" content="" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 
-<title>关于 | 瑾离不是锦鲤的小窝</title>
+<title>CF 1620 div2 赛后题解 | 瑾离不是锦鲤的小窝</title>
 
 <link rel="shortcut icon" href="https://gujinli.github.io/favicon.ico?v=1640491886394">
 
@@ -109,49 +109,128 @@
         <div class="post-detail gt-bg-theme-color-second">
             <article class="gt-post-content">
                 <h2 class="post-title">
-                    关于
+                    CF 1620 div2 赛后题解
                 </h2>
                 <div class="post-info">
                     <time class="post-time gt-c-content-color-first">
-                        · 2019-01-25 ·
+                        · 2021-12-26 ·
                     </time>
                     
                 </div>
                 <div class="post-content">
-                    <blockquote>
-<p>欢迎来到我的小站呀，很高兴遇见你！🤝</p>
-</blockquote>
-<h2 id="关于本站">🏠 关于本站</h2>
-<p>本站于2021/11/29建立。</p>
-<h2 id="博主是谁">👨‍💻 博主是谁</h2>
-<blockquote>
-<p>gujinli/koifish/chuxuan_557/huabaimo</p>
-</blockquote>
-<p>乱七八糟取得id一大堆。现役大一某双非一本ACMer打铁人🏋️‍♀️</p>
-<p>以及和自己的女朋友2000公里异地恋中👫</p>
-<h2 id="兴趣爱好">⛹ 兴趣爱好</h2>
-<p>游戏：独立/音乐节奏/街机/步行模拟器/基建/apex/雀魂......etc.</p>
-<p>音乐：旋律说唱/future bass/lofi/jazz hiphop/日语</p>
-<p>B站：偶尔看点vtuber/美食纪录片/生活vlog/有趣的游戏实况</p>
-<h2 id="联系我呀">📬 联系我呀</h2>
-<blockquote>
-<p>QQ：1825932656<br>
-CF_ID: chuxuan_557 (欢迎大佬来看我丢人🤦‍♂)<br>
-<img src="https://gujinli.github.io/post-images/1638228315899.png" alt="" loading="lazy"></p>
-</blockquote>
-<blockquote>
-<p>Steam: 935067720<br>
-<img src="https://gujinli.github.io/post-images/1638228670974.png" alt="" loading="lazy"></p>
-</blockquote>
+                    <h1 id="d-exact-change"><a href="https://codeforces.com/contest/1620/problem/D">D - Exact Change</a></h1>
+<p><strong>题意：</strong> n个价值为ai的物品。有1、2、3三种硬币，能表示出每个ai的价格最少需要多少枚硬币</p>
+<p><strong>Solution：</strong> 首先1和2的个数都不可能超过3个，因为3个的话显然用面额3表示价格更大。因此枚举使用的1和2的数量，再判断3的数量即可。</p>
+<pre><code class="language-c++">#include &lt;bits/stdc++.h&gt;
+using namespace std;
+inline void read(int &amp;a) {a=0;int c=getchar(),b=1; while(c&gt;'9'||c&lt;'0') {if(c=='-')b=-1;c=getchar();} while(c&gt;='0'&amp;&amp;c&lt;='9') a=(a&lt;&lt;3)+(a&lt;&lt;1)+c-48,c=getchar();a*=b; }
+/**/
+const int N = 105;
+int t, n, a[N], ans;
+/**/
+int main()
+{
+    read(t);
+    while(t--)
+    {
+        read(n);
+        for(int i = 1; i &lt;= n; i++) read(a[i]);
+        ans = 0x7f7f7f7f;
+        for(int one = 0; one &lt;= 2; one++)
+        {
+            for(int two = 0; two &lt;= 2; two++)
+            {
+                int three = 0;
+                for(int i = 1; i &lt;= n; i++)
+                {
+                    int minnum = 0x7f7f7f7f;
+                    for(int use1 = 0; use1 &lt;= one; use1++)
+                    {
+                        for(int use2 = 0; use2 &lt;= two; use2++)
+                        {
+                            int res = a[i] - use1 - use2 * 2;
+                            if(res &gt;= 0 &amp;&amp; res % 3 == 0)
+                            {
+                                minnum = min(minnum, res / 3);
+                            }
+                        }
+                    }
+                    three = max(three, minnum);
+                }
+                ans = min(ans, three + one + two);
+            }
+        }
+        cout &lt;&lt; ans &lt;&lt; '\n';
+    }
+    return 0;
+}
+</code></pre>
+<h1 id="e-replace-the-numbers"><a href="https://codeforces.com/contest/1620/problem/E">E - Replace the Numbers</a></h1>
+<p><strong>题意：</strong> 现在有q次操作，</p>
+<ul>
+<li>&quot;1 x&quot; — 在序列末尾添加一个x</li>
+<li>&quot;2 x y&quot; — 将序列中所有的x替换成y</li>
+</ul>
+<p>输出这q次操作执行后的序列</p>
+<p><strong>Solution：</strong> 并查集瞎搞。注意x==y的时候特判continue掉就好了。</p>
+<pre><code class="language-c++">#include &lt;bits/stdc++.h&gt;
+using namespace std;
+inline void read(int &amp;a) {a=0;int c=getchar(),b=1; while(c&gt;'9'||c&lt;'0') {if(c=='-')b=-1;c=getchar();} while(c&gt;='0'&amp;&amp;c&lt;='9') a=(a&lt;&lt;3)+(a&lt;&lt;1)+c-48,c=getchar();a*=b; }
+/**/
+const int N = 5e5 + 5;
+int t, opt, x, y, n, fa[N], rec[N], a[N];
+/**/
+inline int find(int x){return x == fa[x] ? x : fa[x] = find(fa[x]);}
+int main()
+{
+	read(t);
+	while(t--)
+	{
+		read(opt);
+		if(opt == 1)
+		{
+			read(x);
+			++n;
+			if(rec[x]) fa[n] = fa[rec[x]];
+			else fa[n] = n, rec[x] = n, a[n] = x;
+		}
+		else
+		{
+			read(x); read(y);
+			if(!rec[x] || x == y) continue;
+			if(rec[y]) fa[find(rec[x])] = rec[y], rec[x] = 0;
+			else
+			{
+				int f2 = find(rec[x]);
+				rec[y] = f2;
+				a[f2] = y;
+				rec[x] = 0;
+			}
+		}
+	}
+	for(int i = 1; i &lt;= n; i++)
+	{
+		cout &lt;&lt; a[find(i)] &lt;&lt; ' ';
+	}
+	return 0;
+}
+</code></pre>
 
                 </div>
             </article>
         </div>
 
         
+            <div class="next-post">
+                <div class="next gt-c-content-color-first">下一篇</div>
+                <a href="https://gujinli.github.io/post/abc-232-sai-hou-ti-jie/" class="post-title gt-a-link">
+                    ABC 232 赛后题解
+                </a>
+            </div>
+        
 
         
-            <span id="/post/about/" class="leancloud_visitors" data-flag-title="关于">
+            <span id="/post/cf-1620-div2-sai-hou-ti-jie/" class="leancloud_visitors" data-flag-title="CF 1620 div2 赛后题解">
                 <em class="post-meta-item-text">阅读量 </em>
                 <i class="leancloud-visitors-count">0</i>
             </span>
