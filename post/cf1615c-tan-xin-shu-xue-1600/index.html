@@ -4,9 +4,9 @@
 <meta name="description" content="" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 
-<title>CF 1620 div2 赛后题解 | 瑾离不是锦鲤的小窝</title>
+<title>cf1615C 贪心/数学/1600 | 瑾离不是锦鲤的小窝</title>
 
-<link rel="shortcut icon" href="https://gujinli.github.io/favicon.ico?v=1640491886394">
+<link rel="shortcut icon" href="https://gujinli.github.io/favicon.ico?v=1640598302088">
 
 <link href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css" rel="stylesheet">
 <link rel="stylesheet" href="https://gujinli.github.io/styles/main.css">
@@ -85,7 +85,7 @@
             
         </div>
         <div style="text-align: center">
-            <form id="gridea-search-form" style="position: relative" data-update="1640491886394"
+            <form id="gridea-search-form" style="position: relative" data-update="1640598302088"
                 action="/search/">
                 <input class="search-input" autocomplete="off" spellcheck="false" name="q" placeholder="搜索文章" />
                 <i class="fas fa-search gt-c-content-color-first" style="position: absolute; top: 9px; left: 10px;"></i>
@@ -109,108 +109,82 @@
         <div class="post-detail gt-bg-theme-color-second">
             <article class="gt-post-content">
                 <h2 class="post-title">
-                    CF 1620 div2 赛后题解
+                    cf1615C 贪心/数学/1600
                 </h2>
                 <div class="post-info">
                     <time class="post-time gt-c-content-color-first">
-                        · 2021-12-26 ·
+                        · 2021-12-27 ·
                     </time>
+                    
+                        <a href="https://gujinli.github.io/tag/K6TBAFIG1/" class="post-tags">
+                            # cf
+                        </a>
+                    
+                        <a href="https://gujinli.github.io/tag/o4qWjWOMm/" class="post-tags">
+                            # 贪心
+                        </a>
+                    
+                        <a href="https://gujinli.github.io/tag/D4RcmZr4gA/" class="post-tags">
+                            # 数学
+                        </a>
+                    
+                        <a href="https://gujinli.github.io/tag/U4re7KQvhY/" class="post-tags">
+                            # 1600
+                        </a>
                     
                 </div>
                 <div class="post-content">
-                    <h1 id="d-exact-change"><a href="https://codeforces.com/contest/1620/problem/D">D - Exact Change</a></h1>
-<p><strong>题意：</strong> n个价值为ai的物品。有1、2、3三种硬币，能表示出每个ai的价格最少需要多少枚硬币</p>
-<p><strong>Solution：</strong> 首先1和2的个数都不可能超过3个，因为3个的话显然用面额3表示价格更大。因此枚举使用的1和2的数量，再判断3的数量即可。</p>
-<pre><code class="language-c++">#include &lt;bits/stdc++.h&gt;
-using namespace std;
-inline void read(int &amp;a) {a=0;int c=getchar(),b=1; while(c&gt;'9'||c&lt;'0') {if(c=='-')b=-1;c=getchar();} while(c&gt;='0'&amp;&amp;c&lt;='9') a=(a&lt;&lt;3)+(a&lt;&lt;1)+c-48,c=getchar();a*=b; }
-/**/
-const int N = 105;
-int t, n, a[N], ans;
-/**/
-int main()
-{
-    read(t);
-    while(t--)
-    {
-        read(n);
-        for(int i = 1; i &lt;= n; i++) read(a[i]);
-        ans = 0x7f7f7f7f;
-        for(int one = 0; one &lt;= 2; one++)
-        {
-            for(int two = 0; two &lt;= 2; two++)
-            {
-                int three = 0;
-                for(int i = 1; i &lt;= n; i++)
-                {
-                    int minnum = 0x7f7f7f7f;
-                    for(int use1 = 0; use1 &lt;= one; use1++)
-                    {
-                        for(int use2 = 0; use2 &lt;= two; use2++)
-                        {
-                            int res = a[i] - use1 - use2 * 2;
-                            if(res &gt;= 0 &amp;&amp; res % 3 == 0)
-                            {
-                                minnum = min(minnum, res / 3);
-                            }
-                        }
-                    }
-                    three = max(three, minnum);
-                }
-                ans = min(ans, three + one + two);
-            }
-        }
-        cout &lt;&lt; ans &lt;&lt; '\n';
-    }
-    return 0;
-}
-</code></pre>
-<h1 id="e-replace-the-numbers"><a href="https://codeforces.com/contest/1620/problem/E">E - Replace the Numbers</a></h1>
-<p><strong>题意：</strong> 现在有q次操作，</p>
+                    <h1 id="c-menorah"><a href="https://codeforces.com/contest/1615/problem/C">C - Menorah</a></h1>
+<blockquote>
+<p>两个01串s1和s2。求最少的操作数把s1变为s2，不能则为-1</p>
+<p>操作：固定一个1，其余位全部取反</p>
+</blockquote>
+<p>我们的目标是让所有的位置变得相同。</p>
+<p>考虑两个字符串相同的0**(00)<strong>和1</strong>(11)<strong>的数量，以及不同的0</strong>(01)<strong>和1</strong>(10)**的数量。</p>
+<p>一个位置点两次是没有意义的，而连续点两个位置相当于交换了两个位置。（1和0）</p>
+<p>所以对于当前不同的，<strong>即01，10</strong>：我们有两种策略：</p>
 <ul>
-<li>&quot;1 x&quot; — 在序列末尾添加一个x</li>
-<li>&quot;2 x y&quot; — 将序列中所有的x替换成y</li>
+<li>点不同的位置。如果不同的位置的1和0数量相等，即可全部交换。因为点了偶数次所以对初始相等的不造成影响</li>
+<li>点相同的位置。相同的位置点奇数次，即可让不同的位置变成相同，那么问题转换成了如何点奇数次使得相同的位置不变。
+<ul>
+<li>我们只需要让1的数量比0的数量多1，即可在偶数次交换01后使有一个11，而其他的全部不同。</li>
 </ul>
-<p>输出这q次操作执行后的序列</p>
-<p><strong>Solution：</strong> 并查集瞎搞。注意x==y的时候特判continue掉就好了。</p>
+</li>
+</ul>
 <pre><code class="language-c++">#include &lt;bits/stdc++.h&gt;
 using namespace std;
 inline void read(int &amp;a) {a=0;int c=getchar(),b=1; while(c&gt;'9'||c&lt;'0') {if(c=='-')b=-1;c=getchar();} while(c&gt;='0'&amp;&amp;c&lt;='9') a=(a&lt;&lt;3)+(a&lt;&lt;1)+c-48,c=getchar();a*=b; }
 /**/
-const int N = 5e5 + 5;
-int t, opt, x, y, n, fa[N], rec[N], a[N];
+const int N = 1e5 + 5;
+int t, n, sc1, sc0, dc1, dc0;
+char s1[N], s2[N];
 /**/
-inline int find(int x){return x == fa[x] ? x : fa[x] = find(fa[x]);}
 int main()
 {
 	read(t);
 	while(t--)
 	{
-		read(opt);
-		if(opt == 1)
+		read(n);
+		scanf(&quot;%s%s&quot;, s1 + 1, s2 + 1);
+		sc1 = sc0 = dc1 = dc0 = 0;
+		for(int i = 1; i &lt;= n; i++)
 		{
-			read(x);
-			++n;
-			if(rec[x]) fa[n] = fa[rec[x]];
-			else fa[n] = n, rec[x] = n, a[n] = x;
-		}
-		else
-		{
-			read(x); read(y);
-			if(!rec[x] || x == y) continue;
-			if(rec[y]) fa[find(rec[x])] = rec[y], rec[x] = 0;
+			if(s1[i] == s2[i])
+			{
+				if(s1[i] == '1') sc1++;
+				else sc0++;
+			}
 			else
 			{
-				int f2 = find(rec[x]);
-				rec[y] = f2;
-				a[f2] = y;
-				rec[x] = 0;
+				if(s1[i] == '1') dc1++;
+				else dc0++;
 			}
 		}
-	}
-	for(int i = 1; i &lt;= n; i++)
-	{
-		cout &lt;&lt; a[find(i)] &lt;&lt; ' ';
+		int ans = 0x3f3f3f3f;
+		if(dc0 == dc1) ans = min(ans, dc0 + dc1);
+		if(sc1 == sc0 + 1) ans = min(ans, sc1 + sc0);
+		if(ans == 0x3f3f3f3f) cout &lt;&lt; -1 &lt;&lt; '\n';
+		else cout &lt;&lt; ans &lt;&lt; '\n';
 	}
 	return 0;
 }
@@ -223,14 +197,14 @@ int main()
         
             <div class="next-post">
                 <div class="next gt-c-content-color-first">下一篇</div>
-                <a href="https://gujinli.github.io/post/abc-232-sai-hou-ti-jie/" class="post-title gt-a-link">
-                    ABC 232 赛后题解
+                <a href="https://gujinli.github.io/post/cf1591d-ni-xu-dui-1900/" class="post-title gt-a-link">
+                    cf1591D 逆序对/1900
                 </a>
             </div>
         
 
         
-            <span id="/post/cf-1620-div2-sai-hou-ti-jie/" class="leancloud_visitors" data-flag-title="CF 1620 div2 赛后题解">
+            <span id="/post/cf1615c-tan-xin-shu-xue-1600/" class="leancloud_visitors" data-flag-title="cf1615C 贪心/数学/1600">
                 <em class="post-meta-item-text">阅读量 </em>
                 <i class="leancloud-visitors-count">0</i>
             </span>

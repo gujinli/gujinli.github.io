@@ -4,9 +4,9 @@
 <meta name="description" content="" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 
-<title>CF 1615 global 赛后题解 | 瑾离不是锦鲤的小窝</title>
+<title>cf1615E 博弈/构造/树/2400 | 瑾离不是锦鲤的小窝</title>
 
-<link rel="shortcut icon" href="https://gujinli.github.io/favicon.ico?v=1640491886394">
+<link rel="shortcut icon" href="https://gujinli.github.io/favicon.ico?v=1640598302088">
 
 <link href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css" rel="stylesheet">
 <link rel="stylesheet" href="https://gujinli.github.io/styles/main.css">
@@ -85,7 +85,7 @@
             
         </div>
         <div style="text-align: center">
-            <form id="gridea-search-form" style="position: relative" data-update="1640491886394"
+            <form id="gridea-search-form" style="position: relative" data-update="1640598302088"
                 action="/search/">
                 <input class="search-input" autocomplete="off" spellcheck="false" name="q" placeholder="搜索文章" />
                 <i class="fas fa-search gt-c-content-color-first" style="position: absolute; top: 9px; left: 10px;"></i>
@@ -109,171 +109,36 @@
         <div class="post-detail gt-bg-theme-color-second">
             <article class="gt-post-content">
                 <h2 class="post-title">
-                    CF 1615 global 赛后题解
+                    cf1615E 博弈/构造/树/2400
                 </h2>
                 <div class="post-info">
                     <time class="post-time gt-c-content-color-first">
-                        · 2021-12-25 ·
+                        · 2021-12-27 ·
                     </time>
+                    
+                        <a href="https://gujinli.github.io/tag/K6TBAFIG1/" class="post-tags">
+                            # cf
+                        </a>
+                    
+                        <a href="https://gujinli.github.io/tag/_nMVM4BCw/" class="post-tags">
+                            # 博弈
+                        </a>
+                    
+                        <a href="https://gujinli.github.io/tag/_Q28XnDpGJ/" class="post-tags">
+                            # 树
+                        </a>
+                    
+                        <a href="https://gujinli.github.io/tag/qr091o437I/" class="post-tags">
+                            # 2400
+                        </a>
+                    
+                        <a href="https://gujinli.github.io/tag/IB_qng7mzA/" class="post-tags">
+                            # 构造
+                        </a>
                     
                 </div>
                 <div class="post-content">
-                    <h1 id="c-menorah"><a href="https://codeforces.com/contest/1615/problem/C">C - Menorah</a></h1>
-<blockquote>
-<p>两个01串s1和s2。求最少的操作数把s1变为s2，不能则为-1</p>
-<p>操作：固定一个1，其余位全部取反</p>
-</blockquote>
-<p>我们的目标是让所有的位置变得相同。</p>
-<p>考虑两个字符串相同的0**(00)<strong>和1</strong>(11)<strong>的数量，以及不同的0</strong>(01)<strong>和1</strong>(10)**的数量。</p>
-<p>一个位置点两次是没有意义的，而连续点两个位置相当于交换了两个位置。（1和0）</p>
-<p>所以对于当前不同的，<strong>即01，10</strong>：我们有两种策略：</p>
-<ul>
-<li>点不同的位置。如果不同的位置的1和0数量相等，即可全部交换。因为点了偶数次所以对初始相等的不造成影响</li>
-<li>点相同的位置。相同的位置点奇数次，即可让不同的位置变成相同，那么问题转换成了如何点奇数次使得相同的位置不变。
-<ul>
-<li>我们只需要让1的数量比0的数量多1，即可在偶数次交换01后使有一个11，而其他的全部不同。</li>
-</ul>
-</li>
-</ul>
-<pre><code class="language-c++">#include &lt;bits/stdc++.h&gt;
-using namespace std;
-inline void read(int &amp;a) {a=0;int c=getchar(),b=1; while(c&gt;'9'||c&lt;'0') {if(c=='-')b=-1;c=getchar();} while(c&gt;='0'&amp;&amp;c&lt;='9') a=(a&lt;&lt;3)+(a&lt;&lt;1)+c-48,c=getchar();a*=b; }
-/**/
-const int N = 1e5 + 5;
-int t, n, sc1, sc0, dc1, dc0;
-char s1[N], s2[N];
-/**/
-int main()
-{
-	read(t);
-	while(t--)
-	{
-		read(n);
-		scanf(&quot;%s%s&quot;, s1 + 1, s2 + 1);
-		sc1 = sc0 = dc1 = dc0 = 0;
-		for(int i = 1; i &lt;= n; i++)
-		{
-			if(s1[i] == s2[i])
-			{
-				if(s1[i] == '1') sc1++;
-				else sc0++;
-			}
-			else
-			{
-				if(s1[i] == '1') dc1++;
-				else dc0++;
-			}
-		}
-		int ans = 0x3f3f3f3f;
-		if(dc0 == dc1) ans = min(ans, dc0 + dc1);
-		if(sc1 == sc0 + 1) ans = min(ans, sc1 + sc0);
-		if(ans == 0x3f3f3f3f) cout &lt;&lt; -1 &lt;&lt; '\n';
-		else cout &lt;&lt; ans &lt;&lt; '\n';
-	}
-	return 0;
-}
-</code></pre>
-<h1 id="d-xor-mas-tree"><a href="https://codeforces.com/contest/1615/problem/D">D - X(or)-mas Tree</a></h1>
-<blockquote>
-<p>给定一个树，边权为-1表示未知。给定m个节点间路径异或和二进制1个数的奇偶性，判断能否构造一个合法的树满足条件</p>
-</blockquote>
-<ul>
-<li>一个性质：设两个数为x,y。二进制下x有a个1，y有b个1。则：
-<ul>
-<li>a ^ b = num_1(x ^ y) % 2</li>
-</ul>
-</li>
-</ul>
-<p>所以对于每个边权，我们只需要考虑其1的个数的奇偶性。把m条边加上后一起遍历判断，不确定的边利用异或的性质输出边权即可</p>
-<p>注意这里用了内置的位运算函数，简单介绍一下</p>
-<p>__builtin_ffs (unsigned int x)返回x的最后一位1的是从后向前第几位，比如7368（1110011001000）返回4</p>
-<p>__builtin_clz (unsigned int x)返回前导的0的个数。</p>
-<p>__builtin_ctz (unsigned int x) 返回后面的0个个数，和; builtin_clz相对。</p>
-<p>__ builtin_popcount (unsigned int x) 返回二进制表示中1的个数。</p>
-<p>__builtin_parity (unsigned int x) 返回x的奇偶校验位，也就是x的1的个数模2的结果。</p>
-<pre><code class="language-c++">#include &lt;bits/stdc++.h&gt;
-#define ll long long
-#define mp make_pair
-#define fi first
-#define se second
-#define pb push_back
-#define vi vector&lt;int&gt;
-#define pi pair&lt;int, int&gt;
-#define fr(a) freopen(a, &quot;r&quot;, stdin)
-#define fo(a) freopen(a, &quot;w&quot;, stdout);
-#define mod 998244353
-template&lt;typename T&gt; bool chkmin(T &amp;a, T b){return (b &lt; a) ? a = b, 1 : 0;}
-template&lt;typename T&gt; bool chkmax(T &amp;a, T b){return (b &gt; a) ? a = b, 1 : 0;}
-ll ksm(ll a, ll b) {if (b == 0) return 1; ll ns = ksm(a, b &gt;&gt; 1); ns = ns * ns % mod; if (b &amp; 1) ns = ns * a % mod; return ns;}
-using namespace std;
-const int maxn = 200005;
-/**/
-int t, n, m, err;
-int dis[maxn], vis[maxn];
-vector&lt;pi&gt;g[maxn];
-/**/
-void dfs(int u) {
-	if(err) return;
-	for(auto i:g[u]) {
-		int v = i.fi, w = i.se;
-		if(dis[v] == -1) {
-			dis[v] = dis[u] ^ w;
-			dfs(v);
-		}
-		else if(dis[v] != (dis[u] ^ w)) {
-			err = 1;
-			return;
-		}
-	}
-}
-void solve() {
-	err = 0;
-	vector&lt; array&lt;int, 3&gt; &gt;ed;
-	cin &gt;&gt; n &gt;&gt; m;
-	for(int i = 1; i &lt;= n; i++) {
-		g[i].clear();
-		dis[i] = -1;
-	}
-	for(int i = 1; i &lt; n; i++) {
-		int u, v, w;
-		cin &gt;&gt; u &gt;&gt; v &gt;&gt; w;
-		ed.pb({u, v, w});
-		if(w == -1) continue;
-		w = __builtin_parity(w);
-		g[u].pb({v, w});
-		g[v].pb({u, w});
-	}
-	for(int i = 1; i &lt;= m; i++) {
-		int u, v, w;
-		cin &gt;&gt; u &gt;&gt; v &gt;&gt; w;
-		g[u].pb({v, w});
-		g[v].pb({u, w});
-	}
-	for(int i = 1; i &lt;= n; i++) {
-		if(dis[i] == -1) dis[i] = 0, dfs(i);
-	}
-	if(err) {puts(&quot;NO&quot;); return;}
-	puts(&quot;YES&quot;);
-	for(auto i: ed) {
-		int u = i[0], v = i[1], w = i[2];
-		if(w == -1) w = dis[u] ^ dis[v];
-		printf(&quot;%d %d %d\n&quot;, u, v, w);
-	}
-}
-int main()
-{
-	// fr(&quot;test.in&quot;);
-	// fo(&quot;test.out&quot;);
-	ios::sync_with_stdio(0);cin.tie(0);
-	int T;
-	cin &gt;&gt; T;
-	while(T--) {
-		solve();
-	}
-	return 0;
-}
-</code></pre>
-<h1 id="e-purple-crayon"><a href="https://codeforces.com/contest/1615/problem/E">E - Purple Crayon</a></h1>
+                    <h1 id="e-purple-crayon"><a href="https://codeforces.com/contest/1615/problem/E">E - Purple Crayon</a></h1>
 <blockquote>
 <p>一个初始全部为空白节点的树。红（<strong>先手</strong>）蓝两方轮流对其染色：（注：以下操作可以进行任意次）</p>
 <ul>
@@ -373,14 +238,14 @@ int main()
         
             <div class="next-post">
                 <div class="next gt-c-content-color-first">下一篇</div>
-                <a href="https://gujinli.github.io/post/cf-762-div3-sai-hou-ti-jie/" class="post-title gt-a-link">
-                    CF 1619 div3 赛后题解
+                <a href="https://gujinli.github.io/post/cf1615d-shu-yi-huo-2200/" class="post-title gt-a-link">
+                    cf1615D 树/异或/2200
                 </a>
             </div>
         
 
         
-            <span id="/post/cf-1615-global-sai-hou-ti-jie/" class="leancloud_visitors" data-flag-title="CF 1615 global 赛后题解">
+            <span id="/post/cf1615e-bo-yi-gou-zao-shu-2400/" class="leancloud_visitors" data-flag-title="cf1615E 博弈/构造/树/2400">
                 <em class="post-meta-item-text">阅读量 </em>
                 <i class="leancloud-visitors-count">0</i>
             </span>

@@ -1,0 +1,270 @@
+<html>
+<head>
+    <meta charset="utf-8" />
+<meta name="description" content="" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+
+<title>ccltime103b C 贪心 | 瑾离不是锦鲤的小窝</title>
+
+<link rel="shortcut icon" href="https://gujinli.github.io/favicon.ico?v=1640598302088">
+
+<link href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css" rel="stylesheet">
+<link rel="stylesheet" href="https://gujinli.github.io/styles/main.css">
+<!-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.0/dist/css/bootstrap.min.css"> -->
+
+<script src="https://cdn.jsdelivr.net/npm/@highlightjs/cdn-assets/highlight.min.js"></script>
+<script src="https://cdn.bootcss.com/highlight.js/9.15.10/languages/dockerfile.min.js"></script>
+<script src="https://cdn.bootcss.com/highlight.js/9.15.10/languages/dart.min.js"></script>
+
+<!-- <script src="https://cdn.jsdelivr.net/npm/moment@2.27.0/moment.min.js"></script> -->
+<!-- <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js"></script> -->
+<!-- <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script> -->
+<!-- <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.0/dist/js/bootstrap.min.js"></script> -->
+<!-- DEMO JS -->
+<!--<script src="media/scripts/index.js"></script>-->
+
+
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.css">
+</head>
+<body>
+<div class="main gt-bg-theme-color-first">
+    <nav class="navbar navbar-expand-lg">
+    <a class="navbar-brand" href="/">
+        <img class="user-avatar" src="/images/avatar.png" alt="头像">
+        <div class="site-name gt-c-content-color-first">
+            瑾离不是锦鲤的小窝
+        </div>
+    </a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+        aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation" id="changeNavbar">
+        <i class="fas fa-bars gt-c-content-color-first" style="font-size: 18px"></i>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <div class="navbar-nav mr-auto" style="text-align: center">
+            
+            <div class="nav-item">
+                
+                <a href="/" class="menu gt-a-link">
+                    首页
+                </a>
+                
+            </div>
+            
+            <div class="nav-item">
+                
+                <a href="/archives" class="menu gt-a-link">
+                    归档
+                </a>
+                
+            </div>
+            
+            <div class="nav-item">
+                
+                <a href="/tags" class="menu gt-a-link">
+                    标签
+                </a>
+                
+            </div>
+            
+            <div class="nav-item">
+                
+                <a href="/post/about" class="menu gt-a-link">
+                    关于
+                </a>
+                
+            </div>
+            
+            <div class="nav-item">
+                
+                <a href="/friends" class="menu gt-a-link">
+                    友链
+                </a>
+                
+            </div>
+            
+        </div>
+        <div style="text-align: center">
+            <form id="gridea-search-form" style="position: relative" data-update="1640598302088"
+                action="/search/">
+                <input class="search-input" autocomplete="off" spellcheck="false" name="q" placeholder="搜索文章" />
+                <i class="fas fa-search gt-c-content-color-first" style="position: absolute; top: 9px; left: 10px;"></i>
+            </form>
+        </div>
+    </div>
+</nav>
+<script>
+    /* 移动端导航栏展开/收起切换 */
+    document.getElementById('changeNavbar').onclick = () => {
+        var element = document.getElementById('navbarSupportedContent');
+        if (element.style.display === 'none' || element.style.display === '') {
+            element.style.display = 'block';
+        } else {
+            element.style.display = 'none';
+        }
+    }
+</script>
+
+    <div class="post-container">
+        <div class="post-detail gt-bg-theme-color-second">
+            <article class="gt-post-content">
+                <h2 class="post-title">
+                    ccltime103b C 贪心
+                </h2>
+                <div class="post-info">
+                    <time class="post-time gt-c-content-color-first">
+                        · 2021-12-27 ·
+                    </time>
+                    
+                        <a href="https://gujinli.github.io/tag/ue23NdhmP/" class="post-tags">
+                            # cc
+                        </a>
+                    
+                        <a href="https://gujinli.github.io/tag/o4qWjWOMm/" class="post-tags">
+                            # 贪心
+                        </a>
+                    
+                </div>
+                <div class="post-content">
+                    <h1 id="coptimal-sorting"><a href="https://www.codechef.com/LTIME103B/problems/OPTSORT">C.Optimal Sorting</a><img src="https://www.codechef.com/sites/all/modules/codechef_tags/images/solved.png?v=1" alt="100/100" loading="lazy"></h1>
+<blockquote>
+<p>选择一段连续区间sort的代价是这段区间的最大值-最小值。求把整个数列sort的最小代价</p>
+</blockquote>
+<p>一整段区间分开sort更优 当且仅当 后面所有数的最小值 &gt; 当前最大值。即产生了一段<strong>空隙</strong></p>
+<p>因为当前最大值如果大于后面所有数的最小值的话，必然要合并在一起sort。</p>
+<p>维护后缀最小值从前向后枚举即可。复杂度 O(n)</p>
+<pre><code class="language-c++">#include &lt;bits/stdc++.h&gt;
+#define ll long long
+#define mp make_pair
+#define fi first
+#define se second
+#define pb push_back
+#define vi vector&lt;int&gt;
+#define pi pair&lt;int, int&gt;
+#define fr(a) freopen(a, &quot;r&quot;, stdin)
+#define fo(a) freopen(a, &quot;w&quot;, stdout);
+#define mod 998244353
+template&lt;typename T&gt; bool chkmin(T &amp;a, T b){return (b &lt; a) ? a = b, 1 : 0;}
+template&lt;typename T&gt; bool chkmax(T &amp;a, T b){return (b &gt; a) ? a = b, 1 : 0;}
+ll ksm(ll a, ll b) {if (b == 0) return 1; ll ns = ksm(a, b &gt;&gt; 1); ns = ns * ns % mod; if (b &amp; 1) ns = ns * a % mod; return ns;}
+using namespace std;
+const int maxn = 200005;
+/**/
+int t, n, a[maxn], mi[maxn];
+/**/
+int main()
+{
+	// fr(&quot;test.in&quot;);
+	ios::sync_with_stdio(0);cin.tie(0);
+	cin &gt;&gt; t;
+	while(t--) {
+		cin &gt;&gt; n;
+		for(int i = 1; i &lt;= n; i++) {
+			cin &gt;&gt; a[i];
+		}
+		mi[n] = a[n];
+		for(int i = n - 1; i &gt;= 1; i--) {
+			mi[i] = min(mi[i + 1], a[i]);
+		}
+		int ans = 0, maxnum = 0, minnum = 0x3f3f3f3f;
+		mi[n + 1] = INT_MAX;
+		for(int i = 1; i &lt;= n; i++) {
+			maxnum = max(maxnum, a[i]);
+			minnum = min(minnum, a[i]);
+			if(mi[i + 1] &gt; maxnum) {
+				ans += maxnum - minnum;
+				maxnum = 0;
+				minnum = 0x3f3f3f3f;
+			}
+		}
+		cout &lt;&lt; ans &lt;&lt; '\n';
+	}
+	return 0;
+}
+</code></pre>
+
+                </div>
+            </article>
+        </div>
+
+        
+            <div class="next-post">
+                <div class="next gt-c-content-color-first">下一篇</div>
+                <a href="https://gujinli.github.io/post/ccinfi21c-gou-zao/" class="post-title gt-a-link">
+                    ccinfi21C 构造
+                </a>
+            </div>
+        
+
+        
+            <span id="/post/ccltime103b-c-tan-xin/" class="leancloud_visitors" data-flag-title="ccltime103b C 贪心">
+                <em class="post-meta-item-text">阅读量 </em>
+                <i class="leancloud-visitors-count">0</i>
+            </span>
+        
+
+        
+
+        
+            <script src='https://cdn.jsdelivr.net/npm/valine/dist/Valine.min.js'></script>
+
+<style>
+	div#vcomments{
+		width:100%;
+		max-width: 1000px;
+		padding: 2.5%
+	}
+</style>
+
+
+	<div id="vcomments"></div>
+
+<script>
+	new Valine({
+		el: '#vcomments',
+		appId: '',
+		appKey: '',
+		avatar: '',
+		pageSize: 5,
+		recordIp: true,
+		placeholder: 'Just Go Go',
+		visitor: true,
+	});
+</script>
+
+        
+
+        <div class="site-footer gt-c-content-color-first">
+    <div class="slogan gt-c-content-color-first">ACM打铁/异地恋中——</div>
+    <div class="social-container">
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+    </div>
+    <div class="footer-info">
+        Powered by <a href="https://github.com/getgridea/gridea" target="_blank">Gridea</a>
+    </div>
+    <div>
+        Theme by <a href="https://imhanjie.com/" target="_blank">imhanjie</a>, Powered by <a
+                href="https://github.com/getgridea/gridea" target="_blank">Gridea | <a href="https://gujinli.github.io/atom.xml" target="_blank">RSS</a></a>
+    </div>
+</div>
+
+<script>
+  hljs.highlightAll()
+</script>
+
+    </div>
+</div>
+</body>
+</html>
