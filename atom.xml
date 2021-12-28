@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://gujinli.github.io</id>
     <title>瑾离不是锦鲤的小窝</title>
-    <updated>2021-12-27T09:49:49.791Z</updated>
+    <updated>2021-12-28T08:46:14.055Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://gujinli.github.io"/>
     <link rel="self" href="https://gujinli.github.io/atom.xml"/>
@@ -10,6 +10,103 @@
     <logo>https://gujinli.github.io/images/avatar.png</logo>
     <icon>https://gujinli.github.io/favicon.ico</icon>
     <rights>All rights reserved 2021, 瑾离不是锦鲤的小窝</rights>
+    <entry>
+        <title type="html"><![CDATA[cf1622D 组合数/容斥]]></title>
+        <id>https://gujinli.github.io/post/cf1622d-zu-he-shu-rong-chi/</id>
+        <link href="https://gujinli.github.io/post/cf1622d-zu-he-shu-rong-chi/">
+        </link>
+        <updated>2021-12-28T08:43:56.000Z</updated>
+        <content type="html"><![CDATA[<h1 id="d-shuffle"><a href="https://codeforces.com/contest/1622/problem/D">D - Shuffle</a></h1>
+<blockquote>
+<p>长度为n的01串，可以选择一段恰好含m个1的子串shuffle（重排），求一共能得到几个不一样的串</p>
+</blockquote>
+<p>首先这种问题要么dp要么组合数，dp无解于是先n^2傻瓜预处理一个组合数。</p>
+<p>考虑以 i 为左端点的最大合法区间，i点只有1和0两种情况</p>
+<p>我们采取容斥的思想，计算到 以 i 为左端点时，我们只计算 i 取反的情况。因为 i 相同的情况显然会在 &gt; i 的区间中计算到。</p>
+<p>那么有个疑问点，我们只考虑 区间中恰好含 1 数量为 m 的时候会出现一个问题：</p>
+<ul>
+<li>
+<p>例如： 1100 (m==2) 。我们先计算了 i = 1, j = 4。让 i取反为 0， 则后面三位可以填2个1，C(3,2) = 3。</p>
+<p>但是 i 为 1 的情况怎么计算呢？我们对于 k(当前1的数量) &lt; m 且 j 已经到达边界的区间同样这样考虑即可。</p>
+<p>i = 2, j = 4 时令 第2位取反为0，后面两位填1个1， C(2, 1) = 2。</p>
+<p>答案加上原始区间就是 6。</p>
+</li>
+</ul>
+<p>问题就这样成功容斥解决了！</p>
+<p>简单来说就是：<strong>保证左指针变化然后右边随便组合</strong></p>
+<pre><code class="language-c++">/*******************************
+| Author:  koifish
+| Problem: D. Shuffle
+| Contest: Educational Codeforces Round 120 (Rated for Div. 2)
+| URL:     https://codeforces.com/contest/1622/problem/E
+| When:    2021-12-27 22:35:29
+| 
+| Memory:  256 MB
+| Time:    2000 ms
+*******************************/
+#include &lt;bits/stdc++.h&gt;
+#define ll long long
+#define int ll
+#define mp make_pair
+#define fi first
+#define se second
+#define pb push_back
+#define vi vector&lt;int&gt;
+#define pi pair&lt;int, int&gt;
+#define vpii vector&lt;pi&gt;
+#define il inline
+#define ri register
+#define all(a) a.begin(), a.end()
+#define fr(a) freopen(a, &quot;r&quot;, stdin)
+#define fo(a) freopen(a, &quot;w&quot;, stdout);
+#define mod 998244353
+#define debug puts(&quot;------------------------&quot;)
+#define lowbit(x) (x&amp;-x)
+template&lt;typename T&gt; bool chkmin(T &amp;a, T b){return (b &lt; a) ? a = b, 1 : 0;}
+template&lt;typename T&gt; bool chkmax(T &amp;a, T b){return (b &gt; a) ? a = b, 1 : 0;}
+ll ksm(ll a, ll b) {if (b == 0) return 1; ll ns = ksm(a, b &gt;&gt; 1); ns = ns * ns % mod; if (b &amp; 1) ns = ns * a % mod; return ns;}
+void Read(int &amp;a) {a=0;int c=getchar(),b=1; while(c&gt;'9'||c&lt;'0') {if(c=='-')b=-1;c=getchar();} while(c&gt;='0'&amp;&amp;c&lt;='9') a=(a&lt;&lt;3)+(a&lt;&lt;1)+c-48,c=getchar();a*=b; }
+int  read() {int a=0,c=getchar(),b=1; while(c&gt;'9'||c&lt;'0') {if(c=='-')b=-1;c=getchar();} while(c&gt;='0'&amp;&amp;c&lt;='9') a=(a&lt;&lt;3)+(a&lt;&lt;1)+c-48,c=getchar();return a*=b; }
+void write(int x) {if(x&gt;9)write(x/10);putchar('0'+x%10);}
+void W(int x) {if(x&lt;0){putchar('-'),x=-x;}write(x);}
+#define LOCAL
+using namespace std;
+const int maxn = 5005;
+/**/
+int n, m, sum[maxn], c[maxn][maxn];
+char s[maxn];
+/**/
+il int calc(int i, int j) {
+	return (i &lt; 0 || j &lt; 0 || i &lt; j) ? 0 : c[i][j];
+}
+signed main()
+{
+	n = read(); m = read();
+	for(int i = 0; i &lt;= n; i++) c[i][0] = 1;
+	for(int i = 1; i &lt;= n; i++) {
+		for(int j = 1; j &lt;= i; j++) {
+			c[i][j] = (c[i - 1][j] + c[i - 1][j - 1]) % mod;
+		}
+	}
+	scanf(&quot;%s&quot;, s + 1);
+	int ans = 1;
+	for(int i = 1; i &lt;= n; i++) sum[i] = sum[i - 1] + (s[i] == '1');
+	if(sum[n] &lt; m) {
+		puts(&quot;1&quot;);
+		return 0;
+	}
+	for(int i = 1, j  = 0; i &lt;= n; i++) {
+		while(j &lt;= n &amp;&amp; sum[j] - sum[i - 1] &lt;= m) j++;
+		int len = (j-1) - i + 1;
+		int k = sum[j - 1] - sum[i - 1] - (s[i] == '0'); 
+		ans = (ans + calc(len - 1, k)) % mod;
+	}
+	cout &lt;&lt; ans &lt;&lt; '\n';
+	return 0;
+}
+</code></pre>
+]]></content>
+    </entry>
     <entry>
         <title type="html"><![CDATA[ccltime103b C 贪心]]></title>
         <id>https://gujinli.github.io/post/ccltime103b-c-tan-xin/</id>
@@ -142,7 +239,7 @@ signed main()
 ]]></content>
     </entry>
     <entry>
-        <title type="html"><![CDATA[ccinfi21b 数学/构造]]></title>
+        <title type="html"><![CDATA[ccinfi21B 数学/构造]]></title>
         <id>https://gujinli.github.io/post/ccinfi21b-shu-xue-gou-zao/</id>
         <link href="https://gujinli.github.io/post/ccinfi21b-shu-xue-gou-zao/">
         </link>
@@ -605,69 +702,6 @@ int main()
 	cin &gt;&gt; T;
 	while(T--) {
 		solve();
-	}
-	return 0;
-}
-</code></pre>
-]]></content>
-    </entry>
-    <entry>
-        <title type="html"><![CDATA[cf1615C 贪心/数学/1600]]></title>
-        <id>https://gujinli.github.io/post/cf1615c-tan-xin-shu-xue-1600/</id>
-        <link href="https://gujinli.github.io/post/cf1615c-tan-xin-shu-xue-1600/">
-        </link>
-        <updated>2021-12-27T09:37:32.000Z</updated>
-        <content type="html"><![CDATA[<h1 id="c-menorah"><a href="https://codeforces.com/contest/1615/problem/C">C - Menorah</a></h1>
-<blockquote>
-<p>两个01串s1和s2。求最少的操作数把s1变为s2，不能则为-1</p>
-<p>操作：固定一个1，其余位全部取反</p>
-</blockquote>
-<p>我们的目标是让所有的位置变得相同。</p>
-<p>考虑两个字符串相同的0**(00)<strong>和1</strong>(11)<strong>的数量，以及不同的0</strong>(01)<strong>和1</strong>(10)**的数量。</p>
-<p>一个位置点两次是没有意义的，而连续点两个位置相当于交换了两个位置。（1和0）</p>
-<p>所以对于当前不同的，<strong>即01，10</strong>：我们有两种策略：</p>
-<ul>
-<li>点不同的位置。如果不同的位置的1和0数量相等，即可全部交换。因为点了偶数次所以对初始相等的不造成影响</li>
-<li>点相同的位置。相同的位置点奇数次，即可让不同的位置变成相同，那么问题转换成了如何点奇数次使得相同的位置不变。
-<ul>
-<li>我们只需要让1的数量比0的数量多1，即可在偶数次交换01后使有一个11，而其他的全部不同。</li>
-</ul>
-</li>
-</ul>
-<pre><code class="language-c++">#include &lt;bits/stdc++.h&gt;
-using namespace std;
-inline void read(int &amp;a) {a=0;int c=getchar(),b=1; while(c&gt;'9'||c&lt;'0') {if(c=='-')b=-1;c=getchar();} while(c&gt;='0'&amp;&amp;c&lt;='9') a=(a&lt;&lt;3)+(a&lt;&lt;1)+c-48,c=getchar();a*=b; }
-/**/
-const int N = 1e5 + 5;
-int t, n, sc1, sc0, dc1, dc0;
-char s1[N], s2[N];
-/**/
-int main()
-{
-	read(t);
-	while(t--)
-	{
-		read(n);
-		scanf(&quot;%s%s&quot;, s1 + 1, s2 + 1);
-		sc1 = sc0 = dc1 = dc0 = 0;
-		for(int i = 1; i &lt;= n; i++)
-		{
-			if(s1[i] == s2[i])
-			{
-				if(s1[i] == '1') sc1++;
-				else sc0++;
-			}
-			else
-			{
-				if(s1[i] == '1') dc1++;
-				else dc0++;
-			}
-		}
-		int ans = 0x3f3f3f3f;
-		if(dc0 == dc1) ans = min(ans, dc0 + dc1);
-		if(sc1 == sc0 + 1) ans = min(ans, sc1 + sc0);
-		if(ans == 0x3f3f3f3f) cout &lt;&lt; -1 &lt;&lt; '\n';
-		else cout &lt;&lt; ans &lt;&lt; '\n';
 	}
 	return 0;
 }

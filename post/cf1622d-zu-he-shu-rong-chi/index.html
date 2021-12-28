@@ -4,7 +4,7 @@
 <meta name="description" content="" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 
-<title>关于 | 瑾离不是锦鲤的小窝</title>
+<title>cf1622D 组合数/容斥 | 瑾离不是锦鲤的小窝</title>
 
 <link rel="shortcut icon" href="https://gujinli.github.io/favicon.ico?v=1640681082289">
 
@@ -109,49 +109,132 @@
         <div class="post-detail gt-bg-theme-color-second">
             <article class="gt-post-content">
                 <h2 class="post-title">
-                    关于
+                    cf1622D 组合数/容斥
                 </h2>
                 <div class="post-info">
                     <time class="post-time gt-c-content-color-first">
-                        · 2019-01-25 ·
+                        · 2021-12-28 ·
                     </time>
+                    
+                        <a href="https://gujinli.github.io/tag/q71awi3Sd/" class="post-tags">
+                            # 组合数
+                        </a>
+                    
+                        <a href="https://gujinli.github.io/tag/uUpYk4THRO/" class="post-tags">
+                            # 容斥
+                        </a>
+                    
+                        <a href="https://gujinli.github.io/tag/K6TBAFIG1/" class="post-tags">
+                            # cf
+                        </a>
                     
                 </div>
                 <div class="post-content">
-                    <blockquote>
-<p>欢迎来到我的小站呀，很高兴遇见你！🤝</p>
-</blockquote>
-<h2 id="关于本站">🏠 关于本站</h2>
-<p>本站于2021/11/29建立。</p>
-<h2 id="博主是谁">👨‍💻 博主是谁</h2>
+                    <h1 id="d-shuffle"><a href="https://codeforces.com/contest/1622/problem/D">D - Shuffle</a></h1>
 <blockquote>
-<p>gujinli/koifish/chuxuan_557/huabaimo</p>
+<p>长度为n的01串，可以选择一段恰好含m个1的子串shuffle（重排），求一共能得到几个不一样的串</p>
 </blockquote>
-<p>乱七八糟取得id一大堆。现役大一某双非一本ACMer打铁人🏋️‍♀️</p>
-<p>以及和自己的女朋友2000公里异地恋中👫</p>
-<h2 id="兴趣爱好">⛹ 兴趣爱好</h2>
-<p>游戏：独立/音乐节奏/街机/步行模拟器/基建/apex/雀魂......etc.</p>
-<p>音乐：旋律说唱/future bass/lofi/jazz hiphop/日语</p>
-<p>B站：偶尔看点vtuber/美食纪录片/生活vlog/有趣的游戏实况</p>
-<h2 id="联系我呀">📬 联系我呀</h2>
-<blockquote>
-<p>QQ：1825932656<br>
-CF_ID: chuxuan_557 (欢迎大佬来看我丢人🤦‍♂)<br>
-<img src="https://gujinli.github.io/post-images/1638228315899.png" alt="" loading="lazy"></p>
-</blockquote>
-<blockquote>
-<p>Steam: 935067720<br>
-<img src="https://gujinli.github.io/post-images/1638228670974.png" alt="" loading="lazy"></p>
-</blockquote>
+<p>首先这种问题要么dp要么组合数，dp无解于是先n^2傻瓜预处理一个组合数。</p>
+<p>考虑以 i 为左端点的最大合法区间，i点只有1和0两种情况</p>
+<p>我们采取容斥的思想，计算到 以 i 为左端点时，我们只计算 i 取反的情况。因为 i 相同的情况显然会在 &gt; i 的区间中计算到。</p>
+<p>那么有个疑问点，我们只考虑 区间中恰好含 1 数量为 m 的时候会出现一个问题：</p>
+<ul>
+<li>
+<p>例如： 1100 (m==2) 。我们先计算了 i = 1, j = 4。让 i取反为 0， 则后面三位可以填2个1，C(3,2) = 3。</p>
+<p>但是 i 为 1 的情况怎么计算呢？我们对于 k(当前1的数量) &lt; m 且 j 已经到达边界的区间同样这样考虑即可。</p>
+<p>i = 2, j = 4 时令 第2位取反为0，后面两位填1个1， C(2, 1) = 2。</p>
+<p>答案加上原始区间就是 6。</p>
+</li>
+</ul>
+<p>问题就这样成功容斥解决了！</p>
+<p>简单来说就是：<strong>保证左指针变化然后右边随便组合</strong></p>
+<pre><code class="language-c++">/*******************************
+| Author:  koifish
+| Problem: D. Shuffle
+| Contest: Educational Codeforces Round 120 (Rated for Div. 2)
+| URL:     https://codeforces.com/contest/1622/problem/E
+| When:    2021-12-27 22:35:29
+| 
+| Memory:  256 MB
+| Time:    2000 ms
+*******************************/
+#include &lt;bits/stdc++.h&gt;
+#define ll long long
+#define int ll
+#define mp make_pair
+#define fi first
+#define se second
+#define pb push_back
+#define vi vector&lt;int&gt;
+#define pi pair&lt;int, int&gt;
+#define vpii vector&lt;pi&gt;
+#define il inline
+#define ri register
+#define all(a) a.begin(), a.end()
+#define fr(a) freopen(a, &quot;r&quot;, stdin)
+#define fo(a) freopen(a, &quot;w&quot;, stdout);
+#define mod 998244353
+#define debug puts(&quot;------------------------&quot;)
+#define lowbit(x) (x&amp;-x)
+template&lt;typename T&gt; bool chkmin(T &amp;a, T b){return (b &lt; a) ? a = b, 1 : 0;}
+template&lt;typename T&gt; bool chkmax(T &amp;a, T b){return (b &gt; a) ? a = b, 1 : 0;}
+ll ksm(ll a, ll b) {if (b == 0) return 1; ll ns = ksm(a, b &gt;&gt; 1); ns = ns * ns % mod; if (b &amp; 1) ns = ns * a % mod; return ns;}
+void Read(int &amp;a) {a=0;int c=getchar(),b=1; while(c&gt;'9'||c&lt;'0') {if(c=='-')b=-1;c=getchar();} while(c&gt;='0'&amp;&amp;c&lt;='9') a=(a&lt;&lt;3)+(a&lt;&lt;1)+c-48,c=getchar();a*=b; }
+int  read() {int a=0,c=getchar(),b=1; while(c&gt;'9'||c&lt;'0') {if(c=='-')b=-1;c=getchar();} while(c&gt;='0'&amp;&amp;c&lt;='9') a=(a&lt;&lt;3)+(a&lt;&lt;1)+c-48,c=getchar();return a*=b; }
+void write(int x) {if(x&gt;9)write(x/10);putchar('0'+x%10);}
+void W(int x) {if(x&lt;0){putchar('-'),x=-x;}write(x);}
+#define LOCAL
+using namespace std;
+const int maxn = 5005;
+/**/
+int n, m, sum[maxn], c[maxn][maxn];
+char s[maxn];
+/**/
+il int calc(int i, int j) {
+	return (i &lt; 0 || j &lt; 0 || i &lt; j) ? 0 : c[i][j];
+}
+signed main()
+{
+	n = read(); m = read();
+	for(int i = 0; i &lt;= n; i++) c[i][0] = 1;
+	for(int i = 1; i &lt;= n; i++) {
+		for(int j = 1; j &lt;= i; j++) {
+			c[i][j] = (c[i - 1][j] + c[i - 1][j - 1]) % mod;
+		}
+	}
+	scanf(&quot;%s&quot;, s + 1);
+	int ans = 1;
+	for(int i = 1; i &lt;= n; i++) sum[i] = sum[i - 1] + (s[i] == '1');
+	if(sum[n] &lt; m) {
+		puts(&quot;1&quot;);
+		return 0;
+	}
+	for(int i = 1, j  = 0; i &lt;= n; i++) {
+		while(j &lt;= n &amp;&amp; sum[j] - sum[i - 1] &lt;= m) j++;
+		int len = (j-1) - i + 1;
+		int k = sum[j - 1] - sum[i - 1] - (s[i] == '0'); 
+		ans = (ans + calc(len - 1, k)) % mod;
+	}
+	cout &lt;&lt; ans &lt;&lt; '\n';
+	return 0;
+}
+</code></pre>
 
                 </div>
             </article>
         </div>
 
         
+            <div class="next-post">
+                <div class="next gt-c-content-color-first">下一篇</div>
+                <a href="https://gujinli.github.io/post/ccltime103b-c-tan-xin/" class="post-title gt-a-link">
+                    ccltime103b C 贪心
+                </a>
+            </div>
+        
 
         
-            <span id="/post/about/" class="leancloud_visitors" data-flag-title="关于">
+            <span id="/post/cf1622d-zu-he-shu-rong-chi/" class="leancloud_visitors" data-flag-title="cf1622D 组合数/容斥">
                 <em class="post-meta-item-text">阅读量 </em>
                 <i class="leancloud-visitors-count">0</i>
             </span>
