@@ -4,7 +4,7 @@
 <meta name="description" content="" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 
-<title>cf1622D 组合数/容斥 | 瑾离不是锦鲤的小窝</title>
+<title>线段树学习笔记 | 瑾离不是锦鲤的小窝</title>
 
 <link rel="shortcut icon" href="https://gujinli.github.io/favicon.ico?v=1650253978736">
 
@@ -109,120 +109,65 @@
         <div class="post-detail gt-bg-theme-color-second">
             <article class="gt-post-content">
                 <h2 class="post-title">
-                    cf1622D 组合数/容斥
+                    线段树学习笔记
                 </h2>
                 <div class="post-info">
                     <time class="post-time gt-c-content-color-first">
-                        · 2021-12-28 ·
+                        · 2022-04-18 ·
                     </time>
-                    
-                        <a href="https://gujinli.github.io/tag/q71awi3Sd/" class="post-tags">
-                            # 组合数
-                        </a>
-                    
-                        <a href="https://gujinli.github.io/tag/uUpYk4THRO/" class="post-tags">
-                            # 容斥
-                        </a>
-                    
-                        <a href="https://gujinli.github.io/tag/K6TBAFIG1/" class="post-tags">
-                            # cf
-                        </a>
-                    
-                        <a href="https://gujinli.github.io/tag/SJOKhcCvC/" class="post-tags">
-                            # 2000
-                        </a>
                     
                 </div>
                 <div class="post-content">
-                    <h1 id="d-shuffle"><a href="https://codeforces.com/contest/1622/problem/D">D - Shuffle</a></h1>
-<blockquote>
-<p>长度为n的01串，可以选择一段恰好含m个1的子串shuffle（重排），求一共能得到几个不一样的串</p>
-</blockquote>
-<p>首先这种问题要么dp要么组合数，dp无解于是先n^2傻瓜预处理一个组合数。</p>
-<p>考虑以 i 为左端点的最大合法区间，i点只有1和0两种情况</p>
-<p>我们采取容斥的思想，计算到 以 i 为左端点时，我们只计算 i 取反的情况。因为 i 相同的情况显然会在 &gt; i 的区间中计算到。</p>
-<p>那么有个疑问点，我们只考虑 区间中恰好含 1 数量为 m 的时候会出现一个问题：</p>
+                    <h3 id="结构">结构：</h3>
 <ul>
 <li>
-<p>例如： 1100 (m==2) 。我们先计算了 i = 1, j = 4。让 i取反为 0， 则后面三位可以填2个1，C(3,2) = 3。</p>
-<p>但是 i 为 1 的情况怎么计算呢？我们对于 k(当前1的数量) &lt; m 且 j 已经到达边界的区间同样这样考虑即可。</p>
-<p>i = 2, j = 4 时令 第2位取反为0，后面两位填1个1， C(2, 1) = 2。</p>
-<p>答案加上原始区间就是 6。</p>
+<p>lazy_tag：</p>
+<p>为了方便（统一），区间修改只改tag，在pushdown时分成三步：</p>
+<ul>
+<li>计算当前节点信息</li>
+<li>下传tag</li>
+<li>清空当前节点tag</li>
+</ul>
+<p>另外，在查询和修改操作最前面pushdown。</p>
+<p><strong>pushup时也要先pushdown子节点，保证子节点信息正确</strong></p>
+</li>
+<li>
+<p><strong>关于lazytag的使用：2022/3/22改</strong></p>
+<p>看情况。有时其实仍然是修改时保证父节点信息正确，有tag只表示下传并计算出子节点值更好。</p>
 </li>
 </ul>
-<p>问题就这样成功容斥解决了！</p>
-<p>简单来说就是：<strong>保证左指针变化然后右边随便组合</strong></p>
-<pre><code class="language-c++">/*******************************
-| Author:  koifish
-| Problem: D. Shuffle
-| Contest: Educational Codeforces Round 120 (Rated for Div. 2)
-| URL:     https://codeforces.com/contest/1622/problem/E
-| When:    2021-12-27 22:35:29
-| 
-| Memory:  256 MB
-| Time:    2000 ms
-*******************************/
-#include &lt;bits/stdc++.h&gt;
-#define ll long long
-#define int ll
-#define mp make_pair
-#define fi first
-#define se second
-#define pb push_back
-#define vi vector&lt;int&gt;
-#define pi pair&lt;int, int&gt;
-#define vpii vector&lt;pi&gt;
-#define il inline
-#define ri register
-#define all(a) a.begin(), a.end()
-#define fr(a) freopen(a, &quot;r&quot;, stdin)
-#define fo(a) freopen(a, &quot;w&quot;, stdout);
-#define mod 998244353
-#define debug puts(&quot;------------------------&quot;)
-#define lowbit(x) (x&amp;-x)
-template&lt;typename T&gt; bool chkmin(T &amp;a, T b){return (b &lt; a) ? a = b, 1 : 0;}
-template&lt;typename T&gt; bool chkmax(T &amp;a, T b){return (b &gt; a) ? a = b, 1 : 0;}
-ll ksm(ll a, ll b) {if (b == 0) return 1; ll ns = ksm(a, b &gt;&gt; 1); ns = ns * ns % mod; if (b &amp; 1) ns = ns * a % mod; return ns;}
-void Read(int &amp;a) {a=0;int c=getchar(),b=1; while(c&gt;'9'||c&lt;'0') {if(c=='-')b=-1;c=getchar();} while(c&gt;='0'&amp;&amp;c&lt;='9') a=(a&lt;&lt;3)+(a&lt;&lt;1)+c-48,c=getchar();a*=b; }
-int  read() {int a=0,c=getchar(),b=1; while(c&gt;'9'||c&lt;'0') {if(c=='-')b=-1;c=getchar();} while(c&gt;='0'&amp;&amp;c&lt;='9') a=(a&lt;&lt;3)+(a&lt;&lt;1)+c-48,c=getchar();return a*=b; }
-void write(int x) {if(x&gt;9)write(x/10);putchar('0'+x%10);}
-void W(int x) {if(x&lt;0){putchar('-'),x=-x;}write(x);}
-#define LOCAL
-using namespace std;
-const int maxn = 5005;
-/**/
-int n, m, sum[maxn], c[maxn][maxn];
-char s[maxn];
-/**/
-il int calc(int i, int j) {
-	return (i &lt; 0 || j &lt; 0 || i &lt; j) ? 0 : c[i][j];
-}
-signed main()
-{
-	n = read(); m = read();
-	for(int i = 0; i &lt;= n; i++) c[i][0] = 1;
-	for(int i = 1; i &lt;= n; i++) {
-		for(int j = 1; j &lt;= i; j++) {
-			c[i][j] = (c[i - 1][j] + c[i - 1][j - 1]) % mod;
-		}
-	}
-	scanf(&quot;%s&quot;, s + 1);
-	int ans = 1;
-	for(int i = 1; i &lt;= n; i++) sum[i] = sum[i - 1] + (s[i] == '1');
-	if(sum[n] &lt; m) {
-		puts(&quot;1&quot;);
-		return 0;
-	}
-	for(int i = 1, j  = 0; i &lt;= n; i++) {
-		while(j &lt;= n &amp;&amp; sum[j] - sum[i - 1] &lt;= m) j++;
-		int len = (j-1) - i + 1;
-		int k = sum[j - 1] - sum[i - 1] - (s[i] == '0'); 
-		ans = (ans + calc(len - 1, k)) % mod;
-	}
-	cout &lt;&lt; ans &lt;&lt; '\n';
-	return 0;
-}
-</code></pre>
+<h3 id="应用">应用：</h3>
+<ul>
+<li>
+<p>加乘tag的下传计算 -&gt; 算清楚就好了</p>
+</li>
+<li>
+<p>区间加等差数列 -&gt; 维护差分数组，前缀和单点查询</p>
+</li>
+<li>
+<p>区间加平方数列 -&gt; 高阶前缀和求</p>
+</li>
+<li>
+<p><strong>维护区间mex：<a href="https://ac.nowcoder.com/acm/contest/19684/F">F-little w and Discretization_牛客竞赛数据结构专题班树状数组、线段树练习题 (nowcoder.com)</a></strong></p>
+<p>叶节点维护 ：数字 <strong>i</strong> 最后一次出现的位置（没出现过自然就是0）</p>
+<p>区间维护：一段区间最左边位置的点（即叶节点的最小值）</p>
+<p>对查询的区间离线，按 右端点 从小到大排序。</p>
+<p>query(pos) 表示查询第一个权值小于pos的叶节点编号，</p>
+<p>一个区间 <strong>[l,r]</strong> 的答案就是 query(q[i].l)，在查询一段区间时，如果左子树权值 &gt;= pos，就说明 l~mid 的所有值全部在 pos 之后出现了，不可能成为mex值，因此就到右边去找。否则就可以在左子树中寻找。</p>
+</li>
+<li>
+<p><strong>维护区间历史最大值：（带区间修改+赋值）</strong><a href="https://www.luogu.com.cn/problem/solution/P4314?page=1">P4314 CPU 监控 - 洛谷 | 计算机科学教育新生态 (luogu.com.cn)</a></p>
+<p>对于这种问题，由于我们的lazytag会在pushdown时进行修改，所以会导致难以将正确的<strong>历史最值</strong>更新到叶节点</p>
+<p>我们不对lazytag进行合并操作，想象成 一段操作序列（队列）。每次pushdown就把整段序列添加到左右儿子的队列尾，并清空当前节点的队列。</p>
+<p>显然这样可以根据队列的信息，计算出在哪个节点达到了<strong>最大值</strong>，即历史最值。</p>
+<p>但同时这样是不可行的，于是我们寻找一种方法：<strong>记录（维护）一个队列的标记对当前节点的影响</strong></p>
+<p>即额外维护两个类似<strong>tag</strong>的信息：历史区间最大加和，历史区间最大赋值</p>
+<p>这样的话，在pushdown中进行详细的分类讨论，就可以解决这个问题。</p>
+</li>
+<li>
+<p><strong>线段树合并分裂应用于区间排序问题：</strong> <a href="https://www.luogu.com.cn/problem/P2824">P2824 [HEOI2016/TJOI2016]排序</a></p>
+</li>
+</ul>
 
                 </div>
             </article>
@@ -231,8 +176,8 @@ signed main()
         
             <div class="next-post">
                 <div class="next gt-c-content-color-first">下一篇</div>
-                <a href="https://gujinli.github.io/post/ccltime103b-c-tan-xin/" class="post-title gt-a-link">
-                    ccltime103b C 贪心
+                <a href="https://gujinli.github.io/post/dp-lian-xi-ji-lu/" class="post-title gt-a-link">
+                    动态规划学习笔记
                 </a>
             </div>
         
